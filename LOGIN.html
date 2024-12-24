@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In with Google</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <h1>Welcome to Our Platform</h1>
+
+  <!-- Google Sign-In Button -->
+  <div id="g_id_onload"
+       data-client_id="730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com"
+       data-context="signin"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+  <div class="g_id_signin"
+       data-type="standard"
+       data-shape="rectangular"
+       data-theme="outline"
+       data-text="signin_with"
+       data-size="large">
+  </div>
+
+  <!-- Result Section -->
+  <div id="result" style="margin-top: 20px;"></div>
+
+  <script>
+    // Callback function when the user signs in
+    async function handleCredentialResponse(response) {
+      const idToken = response.credential;
+
+      // Display token for testing purposes (can be removed in production)
+      console.log("ID Token: ", idToken);
+
+      // Send the token to the server for processing
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = "Processing your data...";
+
+      try {
+        const res = await fetch('https://gibbon-whole-hagfish.ngrok-free.app/store-user-data', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id_token: idToken }),
+        });
+
+        if (!res.ok) {
+          throw new Error("Failed to store user data.");
+        }
+
+        const data = await res.json();
+        resultDiv.innerHTML = `<p>Welcome, ${data.email}! Your data file has been created.</p>`;
+        console.log("Server response:", data);
+      } catch (error) {
+        console.error("Error:", error);
+        resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
