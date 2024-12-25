@@ -165,9 +165,9 @@
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
 
-      // Save idToken to localStorage
-      localStorage.setItem('idToken', idToken);
-      console.log('Token saved:', idToken);
+      // Save openid to localStorage
+      localStorage.setItem('openid', payload.sub);
+      console.log('OpenID saved:', payload.sub);
 
       // Decode the JWT token to get user information
       const payload = JSON.parse(atob(idToken.split('.')[1]));
