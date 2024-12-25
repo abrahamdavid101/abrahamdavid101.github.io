@@ -14,7 +14,8 @@
        data-client_id="730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com"
        data-context="signin"
        data-callback="handleCredentialResponse"
-       data-auto_prompt="false">
+       data-auto_prompt="false"
+       data-ux_mode="popup">
   </div>
   <div class="g_id_signin"
        data-type="standard"
@@ -32,8 +33,17 @@
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
 
+      // Decode the JWT token to get user information
+      const payload = JSON.parse(atob(idToken.split('.')[1]));
+      const userData = {
+        id_token: idToken,
+        email: payload.email,
+        name: payload.name,
+        sub: payload.sub // This is the OpenID
+      };
+
       // Display token for testing purposes (can be removed in production)
-      console.log("ID Token: ", idToken);
+      console.log("User Data: ", userData);
 
       // Send the token to the server for processing
       const resultDiv = document.getElementById('result');
@@ -45,7 +55,7 @@
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ id_token: idToken }),
+          body: JSON.stringify(userData),
         });
 
         if (!res.ok) {
@@ -53,7 +63,7 @@
         }
 
         const data = await res.json();
-        resultDiv.innerHTML = `<p>Welcome, ${data.email}! Your data file has been created.</p>`;
+        resultDiv.innerHTML = `<p>Welcome, ${payload.name}! Your data file has been created.</p>`;
         console.log("Server response:", data);
       } catch (error) {
         console.error("Error:", error);
