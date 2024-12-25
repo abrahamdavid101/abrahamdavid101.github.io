@@ -165,6 +165,10 @@
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
 
+      // Save idToken to localStorage
+      localStorage.setItem('idToken', idToken);
+      console.log('Token saved:', idToken);
+
       // Decode the JWT token to get user information
       const payload = JSON.parse(atob(idToken.split('.')[1]));
       const userData = {
@@ -197,6 +201,10 @@
         const data = await res.json();
         resultDiv.innerHTML = `<p>Welcome, ${payload.name}! Your data file has been created.</p>`;
         console.log("Server response:", data);
+        
+        // Redirect to dashboard after successful login
+        window.location.href = '/dashboard';
+        
       } catch (error) {
         console.error("Error:", error);
         resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
