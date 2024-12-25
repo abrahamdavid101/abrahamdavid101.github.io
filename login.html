@@ -165,10 +165,6 @@
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
 
-      // Save openid to localStorage
-      localStorage.setItem('openid', payload.sub);
-      console.log('OpenID saved:', payload.sub);
-
       // Decode the JWT token to get user information
       const payload = JSON.parse(atob(idToken.split('.')[1]));
       const userData = {
@@ -177,7 +173,11 @@
         name: payload.name,
         sub: payload.sub // This is the OpenID
       };
-
+      
+      // Save openid to localStorage
+      localStorage.setItem('openid', payload.sub);
+      console.log('OpenID saved:', payload.sub);
+      
       // Display token for testing purposes (can be removed in production)
       console.log("User Data: ", userData);
 
