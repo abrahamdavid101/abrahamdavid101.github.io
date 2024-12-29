@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in/ Log in</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     body {
       display: flex;
@@ -59,6 +58,7 @@
       border-radius: 5px;
       width: 100%;
       margin: 10px 0;
+      font-family: 'Montserrat', sans-serif;
       font-size: clamp(0.9rem, 3vw, 1rem);
       border: 1px solid #ddd;
       cursor: pointer;
@@ -174,6 +174,15 @@
          data-logo_alignment="left">
     </div>
     
+    <!-- Disabled Google Button -->
+<button class="auth-button google-btn" disabled
+        style="cursor: not-allowed; font-family: 'Montserrat', sans-serif; opacity: 0.6;">
+  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+       alt="Google Logo" 
+       style="width: 20px; height: 20px; margin-right: 10px;">
+  Continue with Google
+</button>
+    
     <button class="auth-button facebook-btn disabled" disabled>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook Logo">
       Facebook
@@ -221,9 +230,9 @@
       }
 
       // Show loading spinner
-      const submitButton = document.querySelector('.email-btn');
-      submitButton.innerHTML = '<div class="spinner"></div>';
-      submitButton.disabled = true;
+  const submitButton = document.querySelector('.email-btn');
+  submitButton.innerHTML = '<div class="spinner"></div>';
+  submitButton.disabled = true;
 
       try {
         // Send request to server to send login link
@@ -286,7 +295,7 @@
       console.log('Google credential:', credential);
 
       // Handle login with the received credential (send to your server for verification)
-      fetch('https://swifttech-server.onrender.com/store-user-data', {
+      fetch('/google-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
