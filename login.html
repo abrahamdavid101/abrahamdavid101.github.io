@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in/ Log in</title>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" as="style">
-  <link rel="preload" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" as="image">
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     body {
       display: flex;
@@ -18,34 +17,30 @@
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       min-height: 100vh;
       margin: 0;
-      overflow: hidden;
     }
     .logo {
       width: 120px;
       height: 120px;
       object-fit: contain;
-      margin-bottom: 0px;
+      margin-bottom: 10px;
     }
     .container {
       background: white;
-      padding: clamp(15px, 4vw, 30px);
+      padding: 25px;
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       width: min(90%, 400px);
-      margin: 3px auto 0 auto;
-      position: sticky;
-      top: 3px;
     }
     h2 {
-      font-size: clamp(1.2rem, 4vw, 1.5rem);
-      margin: 0px 0;
+      font-size: 1.5rem;
+      margin: 10px 0;
       color: #666;
     }
     .signup-link {
-      margin: 15px 0 25px 0;
+      margin: 10px 0 20px 0;
       color: #666;
-      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-size: 1rem;
     }
     .signup-link a {
       color: #6b9fed;
@@ -55,24 +50,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: white;
-      color: #666;
       padding: 12px;
       border-radius: 5px;
       width: 100%;
       margin: 10px 0;
-      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-size: 1rem;
+      font-family: 'Montserrat', sans-serif;
       border: 1px solid #ddd;
       cursor: pointer;
-      font-family: 'Montserrat', sans-serif;
+      transition: all 0.2s;
     }
     .auth-button img {
       width: 24px;
       height: 24px;
       margin-right: 10px;
     }
+    .auth-button:hover {
+      background: #f0f0f0;
+    }
     .cool-pattern {
-      margin-top: 30px;
+      margin-top: 20px;
       height: 5px;
       width: 100%;
       background: linear-gradient(90deg, #6b9fed, #7fb587, #f3d485, #e88e85);
@@ -82,14 +79,17 @@
       background: white;
       border: 1px solid #ddd;
     }
-    .facebook-btn.disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
+    .email-btn {
+      background: #6b9fed;
+      color: white;
+      border: none;
+    }
+    .email-btn:hover {
+      background: #5a8ed1;
     }
     #result {
-      margin-top: 20px;
-      font-size: clamp(0.9rem, 3vw, 1rem);
-      word-break: break-word;
+      margin-top: 15px;
+      font-size: 1rem;
       color: #666;
     }
     .terms-privacy {
@@ -101,30 +101,13 @@
       color: #6b9fed;
       text-decoration: none;
     }
-    .divider {
-      display: flex;
-      align-items: center;
-      text-align: center;
-      margin: 20px 0;
-    }
-    .divider::before,
-    .divider::after {
-      content: '';
-      flex: 1;
-      border-bottom: 1px solid #ddd;
-    }
-    .divider span {
-      padding: 0 10px;
-      color: #666;
-      font-size: 14px;
-    }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="VN HUB_20241226_133020_0000.png" alt="Logo" class="logo">
     <h2>Log into your account</h2>
-    <p class="signup-link">Don't have an account? <a href="#" onclick="document.getElementById('email').focus(); return false;">Sign up</a></p>
+    <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
 
     <!-- Google Sign-in -->
     <div id="g_id_onload"
@@ -141,18 +124,14 @@
     </div>
 
     <!-- Facebook button -->
-    <button class="auth-button facebook-btn disabled" disabled>
+    <button class="auth-button facebook-btn" disabled>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook Logo">
-      Facebook
+      Facebook (Coming Soon)
     </button>    
-
-    <div class="divider">
-      <span>Or continue with email</span>
-    </div>
 
     <!-- Email Login -->
     <form id="emailLoginForm" class="auth-form">
-      <input type="email" id="email" placeholder="Email address" class="auth-input" required>
+      <input type="email" id="email" placeholder="Email address" class="auth-button" required>
       <button type="submit" class="auth-button email-btn" onclick="handleEmailLogin(event)">
         Send Login Link
       </button>
@@ -166,6 +145,15 @@
   </div>
 
   <script>
+    // Check login state on page load
+    async function checkLoginState() {
+      const res = await fetch('https://swifttech-server.onrender.com/check-login-state');
+      const data = await res.json();
+      if (data.loggedIn) {
+        window.location.href = '/dashboard';
+      }
+    }
+
     // Google Login
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
@@ -174,10 +162,11 @@
       const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id_token: idToken, email: payload.email, name: payload.name || 'User' })
+        body: JSON.stringify({ id_token: idToken, email: payload.email })
       });
 
       if (res.ok) {
+        localStorage.setItem('loginState', 'true'); // Save login state
         window.location.href = '/dashboard';
       } else {
         document.getElementById('result').innerHTML = 'Login failed. Try again.';
@@ -188,20 +177,16 @@
     async function handleEmailLogin(e) {
       e.preventDefault();
       const email = document.getElementById('email').value;
-      const resultDiv = document.getElementById('result');
-
       const res = await fetch('https://swifttech-server.onrender.com/send-login-link', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
-
-      if (res.ok) {
-        resultDiv.innerHTML = 'Login link sent! Check your email.';
-      } else {
-        resultDiv.innerHTML = 'Failed to send login link.';
-      }
+      document.getElementById('result').innerText = res.ok ? 'Login link sent!' : 'Failed to send login link.';
     }
+
+    // Run login state check on load
+    checkLoginState();
   </script>
 </body>
 </html>
