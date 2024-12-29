@@ -87,7 +87,7 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
-    
+
     #result {
       margin-top: 20px;
       font-size: clamp(0.9rem, 3vw, 1rem);
@@ -148,7 +148,7 @@
          data-shape="rectangular"
          data-logo_alignment="left">
     </div>
-    
+
     <button class="auth-button facebook-btn disabled" disabled>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook Logo">
       Facebook
@@ -167,140 +167,6 @@
           </button>
         </form>
 
-        <script>
-          async function handleEmailLogin(e) {
-            e.preventDefault();
-            const emailInput = document.getElementById('email');
-            const email = emailInput.value;
-            
-            // Email validation
-            if (!email) {
-              document.getElementById('result').innerHTML = 'Please enter an email address';
-              return;
-            }
-
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-              document.getElementById('result').innerHTML = 'Please enter a valid email address';
-              return;
-            }
-
-            // Show loading spinner
-            const submitButton = document.querySelector('.email-btn');
-            const originalContent = submitButton.innerHTML;
-            submitButton.innerHTML = '<div class="spinner"></div>';
-            submitButton.disabled = true;
-
-            // Add CSS for spinner if not already present
-            if (!document.querySelector('style#spinner-style')) {
-              const style = document.createElement('style');
-              style.id = 'spinner-style';
-              style.textContent = `
-                .spinner {
-                  width: 20px;
-                  height: 20px;
-                  border: 2px solid #ffffff;
-                  border-radius: 50%;
-                  border-top-color: transparent;
-                  animation: spin 1s linear infinite;
-                }
-                @keyframes spin {
-                  to {transform: rotate(360deg);}
-                }
-              `;
-              document.head.appendChild(style);
-            }
-            try {
-              // Send request to server
-              const response = await fetch('https://swifttech-server.onrender.com/send-login-link', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                },
-                              body: JSON.stringify({ email }),
-                            });
-                            localStorage.setItem('userEmail', email);
-                            console.log('Email saved:', email);
-
-              if (response.ok) {
-                // Show success message
-                document.getElementById('result').innerHTML = 'Login link sent! Please check your email.';
-   
-    checkLoginState(); // Start checking login state
-    } else {
-      throw new Error('Failed to send login link');
-    }
-  } catch (error) {
-    resultDiv.innerHTML = `Error: ${error.message}`;
-  }
-}
-
-// Function to check login state
-async function checkLoginState() {
-  const email = localStorage.getItem('userEmail'); // Get email from localStorage
-
-  if (!email) {
-    console.error('No email found');
-    return;
-  }
-
-  const resultDiv = document.getElementById('result');
-
-  try {
-    const response = await fetch('https://swifttech-server.onrender.com/check-login-state', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await response.json();
-
-    if (data.loginState === true) {
-      // Redirect if login is successful
-      window.location.href = 'dashboard.html';
-    } else {
-      // Retry after 3 seconds if loginState is false
-      setTimeout(checkLoginState, 3000);
-    }
-  } catch (error) {
-    resultDiv.innerHTML = `Error: ${error.message}`;
-  }
-}
-        </script>    
-        <style>
-        .auth-form {
-          width: 100%;
-          margin: 10px 0;
-        }
-        .auth-input {
-          width: 100%;
-          padding: 12px;
-          margin: 8px 0;
-          border: 1px solid #ddd;
-          border-radius: 4px;
-          font-size: 16px;
-          box-sizing: border-box;
-        }
-        .email-btn {
-          background-color: #2196F3;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          margin: 10px 0;
-        }
-        .email-btn:hover {
-          background-color: #1976D2;
-        }
-        </style>
-    
-
-    <!-- Result Section -->
     <div id="result"></div>
 
     <div class="cool-pattern"></div>
@@ -311,87 +177,76 @@ async function checkLoginState() {
   </div>
 
   <script>
-    // Callback function when the user signs in
+    // Callback function when the user signs in via Google
     async function handleCredentialResponse(response) {
-    const idToken = response.credential;
+      const idToken = response.credential;
 
-    // Decode the JWT token to get user information
-    const payload = JSON.parse(atob(idToken.split('.')[1]));
-    const userData = {
-      id_token: idToken,
-      email: payload.email,
-      name: payload.name || 'User' // Default to 'User' if name is not provided
-    };
+      // Decode the JWT token to get user information
+      const payload = JSON.parse(atob(idToken.split('.')[1]));
+      const userData = {
+        id_token: idToken,
+        email: payload.email,
+        name: payload.name || 'User'
+      };
 
-    // Save email to localStorage
-    localStorage.setItem('email', payload.email);
-    console.log('Email saved:', payload.email);
+      // Save email to localStorage
+      localStorage.setItem('email', payload.email);
 
-    // Display token for testing purposes (can be removed in production)
-    console.log("User Data: ", userData);
+      // Display token for testing purposes (can be removed in production)
+      console.log("User Data: ", userData);
 
-    // Reference to result display div
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = "Processing your data...";
+      // Reference to result display div
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = "Processing your data...";
 
-    // Function to process user data
-    const processUserData = async () => {
-      try {
-        // Send user data to the server for further processing
-        const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-        });
+      // Function to process user data
+      const processUserData = async () => {
+        try {
+          // Send user data to the server for further processing
+          const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
 
-        // Handle non-OK response
-        if (!res.ok) {
-          throw new Error("Unable to sign you in at this time.");
-        }
-
-        // Parse server response
-        const data = await res.json();
-
-        // Handle success cases
-        if (data.status === 'success') {
-          // Case 1: New user created
-          if (data.message.includes('Welcome')) {
-            resultDiv.innerHTML = `<p>Welcome to SwiftTech, ${payload.name}!</p>`;
-          }
-          // Case 2: Existing user verified
-          else if (data.message.includes('Signing in')) {
-            resultDiv.innerHTML = `<p>${data.message}</p>`;
+          // Handle non-OK response
+          if (!res.ok) {
+            throw new Error("Unable to sign you in at this time.");
           }
 
-          // Redirect to dashboard after 2 seconds
-          setTimeout(() => {
-            window.location.href = data.redirect;
-          }, 2000);
-        } else {
-          // Case 3: Error response
-          throw new Error(data.message || 'Unable to sign you in at this time.');
+          // Parse server response
+          const data = await res.json();
+
+          // Handle success cases
+          if (data.status === 'success') {
+            if (data.message.includes('Welcome')) {
+              resultDiv.innerHTML = `<p>Welcome to SwiftTech, ${payload.name}!</p>`;
+            }
+            else if (data.message.includes('Signing in')) {
+              resultDiv.innerHTML = `<p>${data.message}</p>`;
+            }
+
+            // Redirect to dashboard after 2 seconds
+            setTimeout(() => {
+              window.location.href = data.redirect;
+            }, 2000);
+          } else {
+            // Error handling
+            throw new Error(data.message || 'Unable to sign you in at this time.');
+          }
+        } catch (error) {
+          // Handle errors gracefully
+          console.error("Error:", error);
+          resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
         }
-      } catch (error) {
-        // Handle errors gracefully
-        console.error("Error:", error);
-        resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
-      }
-    };
+      };
 
-    // Call the function to process user data
-    processUserData();
-  }
-  
-  window.onload = function () {
-    google.accounts.id.initialize({
-      client_id: "730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com",
-      callback: handleCredentialResponse
-    });
+      // Call the function to process user data
+      processUserData();
+    }
 
-    google.accounts.id.prompt(); // Show the Google sign-in prompt
-  };
-  </script>
-</body>
-</html>
+    // Initialize Google sign-in
+    window.onload = function () {
+      google
