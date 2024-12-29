@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In with Google</title>
+  <title>Sign in/ Log in</title>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" as="style">
   <link rel="preload" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" as="image">
-  <link rel="preload" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" as="image">
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -22,8 +21,10 @@
       overflow: hidden;
     }
     .logo {
-      width: min(150px, 40vw);
-      margin-bottom: 20px;
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 0px;
     }
     .container {
       background: white;
@@ -32,11 +33,13 @@
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       width: min(90%, 400px);
-      margin: 10px auto auto auto;
+      margin: 3px auto 0 auto;
+      position: sticky;
+      top: 3px;
     }
     h2 {
       font-size: clamp(1.2rem, 4vw, 1.5rem);
-      margin: 10px 0;
+      margin: 0px 0;
       color: #666;
     }
     .signup-link {
@@ -68,6 +71,14 @@
       height: 24px;
       margin-right: 10px;
     }
+    .cool-pattern {
+      margin-top: 30px;
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(90deg, #6b9fed, #7fb587, #f3d485, #e88e85);
+      border-radius: 5px;
+    }
+
     .facebook-btn {
       background: white;
       border: 1px solid #ddd;
@@ -76,23 +87,12 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
-    .cool-pattern {
-      margin-top: 30px;
-      height: 5px;
-      width: 100%;
-      background: linear-gradient(90deg, #6b9fed, #7fb587, #f3d485, #e88e85);
-      border-radius: 5px;
-    }
+    
     #result {
       margin-top: 20px;
       font-size: clamp(0.9rem, 3vw, 1rem);
       word-break: break-word;
       color: #666;
-    }
-    .fingerprint-btn {
-      background: #6b9fed;
-      color: white;
-      border: none;
     }
     .terms-privacy {
       margin-top: 15px;
@@ -102,6 +102,23 @@
     .terms-privacy a {
       color: #6b9fed;
       text-decoration: none;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+    .divider span {
+      padding: 0 10px;
+      color: #666;
+      font-size: 14px;
     }
     @media screen and (max-width: 320px) {
       body {
@@ -117,7 +134,7 @@
   <div class="container">
     <img src="VN HUB_20241226_133020_0000.png" alt="Logo" class="logo">
     <h2>Log into your account</h2>
-    <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+    <p class="signup-link">Don't have an account? <a href="#" onclick="document.getElementById('email').focus(); return false;">Sign up</a></p>
 
     <div id="g_id_onload"
          data-client_id="730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com"
@@ -131,23 +148,157 @@
          data-shape="rectangular"
          data-logo_alignment="left">
     </div>
-
-    <button class="auth-button fingerprint-btn" onclick="authenticateWithFingerprint()">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.81 4.47c-.08 0-.16-.02-.23-.06C15.66 3.42 14 3 12.01 3c-1.98 0-3.86.47-5.57 1.41-.24.13-.54.04-.68-.2-.13-.24-.04-.54.2-.68C7.82 2.52 9.86 2 12.01 2c2.13 0 3.99.47 6.03 1.52.25.13.34.43.21.67-.09.18-.26.28-.44.28zM3.5 9.72c-.1 0-.2-.03-.29-.09-.23-.16-.28-.47-.12-.7.99-1.4 2.25-2.5 3.75-3.27C9.98 4.04 14 4.03 17.15 5.65c1.5.77 2.76 1.86 3.75 3.25.16.22.11.54-.12.7-.23.16-.54.11-.7-.12-.9-1.26-2.04-2.25-3.39-2.94-2.87-1.47-6.54-1.47-9.4.01-1.36.7-2.5 1.7-3.4 2.96-.08.14-.23.21-.39.21zm6.25 12.07c-.13 0-.26-.05-.35-.15-.87-.87-1.34-1.43-2.01-2.64-.69-1.23-1.05-2.73-1.05-4.34 0-2.97 2.54-5.39 5.66-5.39s5.66 2.42 5.66 5.39c0 .28-.22.5-.5.5s-.5-.22-.5-.5c0-2.42-2.09-4.39-4.66-4.39-2.57 0-4.66 1.97-4.66 4.39 0 1.44.32 2.77.93 3.85.64 1.15 1.08 1.64 1.85 2.42.19.2.19.51 0 .71-.11.1-.24.15-.37.15zm7.17-1.85c-1.19 0-2.24-.3-3.1-.89-1.49-1.01-2.38-2.65-2.38-4.39 0-.28.22-.5.5-.5s.5.22.5.5c0 1.41.72 2.74 1.94 3.56.71.48 1.54.71 2.54.71.24 0 .64-.03 1.04-.1.27-.05.53.13.58.41.05.27-.13.53-.41.58-.57.11-1.07.12-1.21.12zM14.91 22c-.04 0-.09-.01-.13-.02-1.59-.44-2.63-1.03-3.72-2.1-1.4-1.39-2.17-3.24-2.17-5.22 0-1.62 1.38-2.94 3.08-2.94 1.7 0 3.08 1.32 3.08 2.94 0 1.07.93 1.94 2.08 1.94s2.08-.87 2.08-1.94c0-3.77-3.25-6.83-7.25-6.83-2.84 0-5.44 1.58-6.61 4.03-.39.81-.59 1.76-.59 2.8 0 .78.07 2.01.67 3.61.1.26-.03.55-.29.64-.26.1-.55-.04-.64-.29-.49-1.31-.73-2.61-.73-3.96 0-1.2.23-2.29.68-3.24 1.33-2.79 4.28-4.6 7.51-4.6 4.55 0 8.25 3.51 8.25 7.83 0 1.62-1.38 2.94-3.08 2.94s-3.08-1.32-3.08-2.94c0-1.07-.93-1.94-2.08-1.94s-2.08.87-2.08 1.94c0 1.71.66 3.31 1.87 4.51.95.94 1.86 1.46 3.27 1.85.27.07.42.35.35.61-.05.23-.26.38-.47.38z"/>
-      </svg>
-      Sign in with Fingerprint
-    </button>
-
+    
     <button class="auth-button facebook-btn disabled" disabled>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook Logo">
       Facebook
-    </button>
+    </button>    
 
-    <button class="auth-button facebook-btn disabled" disabled>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" alt="Twitter Logo">
-      Twitter
-    </button>
+    <div class="divider">
+      <span>Or continue with email</span>
+    </div>
+    <form id="emailLoginForm" class="auth-form">
+          <input type="email" id="email" placeholder="Email address" class="auth-input" style="font-family: 'Montserrat', sans-serif;" required>
+          <button type="submit" class="auth-button email-btn" onclick="handleEmailLogin(event)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            Send Login Link
+          </button>
+        </form>
+
+        <script>
+          async function handleEmailLogin(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
+            
+            // Email validation
+            if (!email) {
+              document.getElementById('result').innerHTML = 'Please enter an email address';
+              return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              document.getElementById('result').innerHTML = 'Please enter a valid email address';
+              return;
+            }
+
+            // Show loading spinner
+            const submitButton = document.querySelector('.email-btn');
+            const originalContent = submitButton.innerHTML;
+            submitButton.innerHTML = '<div class="spinner"></div>';
+            submitButton.disabled = true;
+
+            // Add CSS for spinner if not already present
+            if (!document.querySelector('style#spinner-style')) {
+              const style = document.createElement('style');
+              style.id = 'spinner-style';
+              style.textContent = `
+                .spinner {
+                  width: 20px;
+                  height: 20px;
+                  border: 2px solid #ffffff;
+                  border-radius: 50%;
+                  border-top-color: transparent;
+                  animation: spin 1s linear infinite;
+                }
+                @keyframes spin {
+                  to {transform: rotate(360deg);}
+                }
+              `;
+              document.head.appendChild(style);
+            }
+            try {
+              // Send request to server
+              const response = await fetch('https://swifttech-server.onrender.com/send-login-link', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+                },
+                              body: JSON.stringify({ email }),
+                            });
+                            localStorage.setItem('userEmail', email);
+                            console.log('Email saved:', email);
+
+              if (response.ok) {
+                // Show success message
+                document.getElementById('result').innerHTML = 'Login link sent! Please check your email.';
+   
+    checkLoginState(); // Start checking login state
+    } else {
+      throw new Error('Failed to send login link');
+    }
+  } catch (error) {
+    resultDiv.innerHTML = `Error: ${error.message}`;
+  }
+}
+
+// Function to check login state
+async function checkLoginState() {
+  const email = localStorage.getItem('userEmail'); // Get email from localStorage
+
+  if (!email) {
+    console.error('No email found');
+    return;
+  }
+
+  const resultDiv = document.getElementById('result');
+
+  try {
+    const response = await fetch('https://swifttech-server.onrender.com/check-login-state', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+
+    if (data.loginState === true) {
+      // Redirect if login is successful
+      window.location.href = 'dashboard.html';
+    } else {
+      // Retry after 3 seconds if loginState is false
+      setTimeout(checkLoginState, 3000);
+    }
+  } catch (error) {
+    resultDiv.innerHTML = `Error: ${error.message}`;
+  }
+}
+        </script>    
+        <style>
+        .auth-form {
+          width: 100%;
+          margin: 10px 0;
+        }
+        .auth-input {
+          width: 100%;
+          padding: 12px;
+          margin: 8px 0;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          box-sizing: border-box;
+        }
+        .email-btn {
+          background-color: #2196F3;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin: 10px 0;
+        }
+        .email-btn:hover {
+          background-color: #1976D2;
+        }
+        </style>
+    
 
     <!-- Result Section -->
     <div id="result"></div>
@@ -164,19 +315,18 @@
     async function handleCredentialResponse(response) {
       const idToken = response.credential;
 
-      // Decode the JWT token to get user information
-      const payload = JSON.parse(atob(idToken.split('.')[1]));
-      const userData = {
-        id_token: idToken,
-        email: payload.email,
-        name: payload.name,
-        sub: payload.sub // This is the OpenID
-      };
-      
-      // Save openid to localStorage
-      localStorage.setItem('openid', payload.sub);
-      console.log('OpenID saved:', payload.sub);
-      
+
+  // Decode the JWT token to get user information
+  const payload = JSON.parse(atob(idToken.split('.')[1]));
+  const userData = {
+    id_token: idToken,
+    email: payload.email
+  };
+
+      // Save email to localStorage
+      localStorage.setItem('email', payload.email);
+      console.log('Email saved:', payload.email);
+
       // Display token for testing purposes (can be removed in production)
       console.log("User Data: ", userData);
 
@@ -185,7 +335,7 @@
       resultDiv.innerHTML = "Processing your data...";
 
       try {
-        const res = await fetch('https://gibbon-whole-hagfish.ngrok-free.app/store-user-data', {
+        const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -194,46 +344,37 @@
         });
 
         if (!res.ok) {
-          throw new Error("Failed to store user data.");
+          throw new Error("Failed to process request. Please try again.");
         }
 
         const data = await res.json();
-        resultDiv.innerHTML = `<p>Welcome, ${payload.name}! Your data file has been created.</p>`;
+        resultDiv.innerHTML = `<p>Welcome, ${payload.name}! Your account has been created.</p>`;
         console.log("Server response:", data);
         
-        // Redirect to dashboard after successful login
-        window.location.href = '/dashboard';
-        
+              const checkLoginState = async () => {
+                try {
+                  const stateRes = await fetch('https://swifttech-server.onrender.com/check-login-state', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: payload.email }),
+                  });
+                  const stateData = await stateRes.json();
+                  if (stateData.loginState) {
+                    window.location.href = '/dashboard';
+                  } else {
+                    setTimeout(checkLoginState, 5000);
+                  }
+                } catch (error) {
+                  setTimeout(checkLoginState, 5000);
+                }
+              };
+              checkLoginState();
       } catch (error) {
         console.error("Error:", error);
         resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
       }
     }
-
-    async function authenticateWithFingerprint() {
-      try {
-        const available = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
-        if (!available) {
-          alert('Fingerprint authentication is not available on this device');
-          return;
-        }
-
-        const credential = await navigator.credentials.get({
-          publicKey: {
-            challenge: new Uint8Array(32),
-            rpId: window.location.hostname,
-            userVerification: "required",
-          }
-        });
-
-        if (credential) {
-          document.getElementById('result').innerHTML = "Fingerprint authentication successful!";
-        }
-      } catch (error) {
-        console.error('Fingerprint authentication error:', error);
-        document.getElementById('result').innerHTML = "Fingerprint authentication failed. Please try another method.";
-      }
-    }
-  </script>
-</body>
+  </script></body>
 </html>
