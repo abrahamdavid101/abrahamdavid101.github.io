@@ -317,64 +317,72 @@ async function checkLoginState() {
 
 
   // Decode the JWT token to get user information
-  const payload = JSON.parse(atob(idToken.split('.')[1]));
-  const userData = {
-    id_token: idToken,
-    email: payload.email
-  };
+const payload = JSON.parse(atob(idToken.split('.')[1]));
+const userData = {
+  id_token: idToken,
+  email: payload.email,
+  name: payload.name || 'User' // Default to 'User' if name is not provided
+};
 
-      // Save email to localStorage
-      localStorage.setItem('email', payload.email);
-      console.log('Email saved:', payload.email);
+// Save email to localStorage
+localStorage.setItem('email', payload.email);
+console.log('Email saved:', payload.email);
 
-      // Display token for testing purposes (can be removed in production)
-      console.log("User Data: ", userData);
+// Display token for testing purposes (can be removed in production)
+console.log("User Data: ", userData);
 
-      // Send the token to the server for processing
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = "Processing your data...";
+// Reference to result display div
+const resultDiv = document.getElementById('result');
+resultDiv.innerHTML = "Processing your data...";
 
-      try {
-        const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(userData),
-        });
+// Function to process user data
+const processUserData = async () => {
+  try {
+    // Send user data to the server
+    const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
 
-        if (!res.ok) {
-          throw new Error("Failed to process request. Please try again.");
-        }
-
-        const data = await res.json();
-        resultDiv.innerHTML = `<p>Welcome, ${payload.name}! Your account has been created.</p>`;
-        console.log("Server response:", data);
-        
-              const checkLoginState = async () => {
-                try {
-                  const stateRes = await fetch('https://swifttech-server.onrender.com/check-login-state', {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email: payload.email }),
-                  });
-                  const stateData = await stateRes.json();
-                  if (stateData.loginState) {
-                    window.location.href = '/dashboard';
-                  } else {
-                    setTimeout(checkLoginState, 5000);
-                  }
-                } catch (error) {
-                  setTimeout(checkLoginState, 5000);
-                }
-              };
-              checkLoginState();
-      } catch (error) {
-        console.error("Error:", error);
-        resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
-      }
+    // Handle non-OK response
+    if (!res.ok) {
+      throw new Error("Unable to sign you in at this time.");
     }
-  </script></body>
+
+    // Parse server response
+    const data = await res.json();
+
+    // Handle success cases
+    if (data.status === 'success') {
+      // Case 1: New user created
+      if (data.message.includes('Welcome')) {
+        resultDiv.innerHTML = `<p>Welcome to SwiftTech, ${payload.name}!</p>`;
+      }
+      // Case 2: Existing user verified
+      else if (data.message.includes('Signing in')) {
+        resultDiv.innerHTML = `<p>${data.message}</p>`;
+      }
+
+      // Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        window.location.href = data.redirect;
+      }, 2000);
+    } else {
+      // Case 3: Error response
+      throw new Error(data.message || 'Unable to sign you in at this time.');
+    }
+  } catch (error) {
+    // Handle errors gracefully
+    console.error("Error:", error);
+    resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
+};
+
+// Call the function to process user data
+processUserData();
+  </script>
+</body>
 </html>
