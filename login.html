@@ -286,7 +286,7 @@
       console.log('Google credential:', credential);
 
       // Handle login with the received credential (send to your server for verification)
-      fetch('/google-login', {
+      fetch('https://swifttech-server.onrender.com/store-user-data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
