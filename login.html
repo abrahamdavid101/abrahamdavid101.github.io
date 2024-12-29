@@ -222,7 +222,7 @@
           // Handle success cases
           if (data.status === 'success') {
             if (data.message.includes('Welcome')) {
-              resultDiv.innerHTML = `<p>Welcome to SwiftTech, ${payload.name}!</p>`;
+              resultDiv.innerHTML = `<p>Welcome back, ${payload.name}!</p>`;
             }
             else if (data.message.includes('Signing in')) {
               resultDiv.innerHTML = `<p>${data.message}</p>`;
@@ -233,8 +233,15 @@
               window.location.href = data.redirect;
             }, 2000);
           } else {
-            // Error handling
-            throw new Error(data.message || 'Unable to sign you in at this time.');
+            // Handle user already existing error
+            if (data.message === 'User already exists') {
+              resultDiv.innerHTML = `<p>User already exists. Redirecting you...</p>`;
+              setTimeout(() => {
+                window.location.href = data.redirect;
+              }, 2000);
+            } else {
+              throw new Error(data.message || 'Unable to sign you in at this time.');
+            }
           }
         } catch (error) {
           // Handle errors gracefully
@@ -249,4 +256,15 @@
 
     // Initialize Google sign-in
     window.onload = function () {
-      google
+      google.accounts.id.initialize({
+        client_id: "730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com",
+        callback: handleCredentialResponse
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("g_id_onload"),
+        { theme: "outline", size: "large" }
+      );
+    };
+  </script>
+</body>
+</html>
