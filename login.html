@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log in</title>
+  <title>Sign in/ Log in</title>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" as="style">
+  <link rel="preload" href="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" as="image">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -15,126 +18,310 @@
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       min-height: 100vh;
       margin: 0;
+      overflow: hidden;
     }
-
+    .logo {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-bottom: 0px;
+    }
     .container {
       background: white;
-      padding: 25px;
+      padding: clamp(15px, 4vw, 30px);
       border-radius: 10px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       width: min(90%, 400px);
+      margin: 3px auto 0 auto;
+      position: sticky;
+      top: 3px;
     }
-
     h2 {
-      font-size: 1.5rem;
-      margin: 10px 0;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      margin: 0px 0;
       color: #666;
     }
-
     .signup-link {
-      margin: 10px 0 20px 0;
+      margin: 15px 0 25px 0;
       color: #666;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 3vw, 1rem);
     }
-
     .signup-link a {
       color: #6b9fed;
       text-decoration: none;
     }
-
-    input[type="email"] {
+    .auth-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      color: #666;
       padding: 12px;
-      width: calc(100% - 24px);
-      margin: 10px 0;
-      font-size: 1rem;
       border-radius: 5px;
+      width: 100%;
+      margin: 10px 0;
+      font-size: clamp(0.9rem, 3vw, 1rem);
       border: 1px solid #ddd;
-      box-sizing: border-box;
-      outline: none;
+      cursor: pointer;
       font-family: 'Montserrat', sans-serif;
     }
-
-    input[type="email"]:focus {
-      border-color: #6b9fed;
-      box-shadow: 0 0 5px rgba(107, 159, 237, 0.5);
+    .auth-button img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
     }
-
-    .auth-button {
-      background: #6b9fed;
-      color: white;
-      padding: 12px;
-      border-radius: 5px;
-      width: 100%;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .auth-button:hover {
-      background: #5a8ed1;
-    }
-
-    .google-button {
-      margin-top: 15px;
-      background: #fff;
-      color: #666;
-      padding: 12px;
-      border-radius: 5px;
-      width: 100%;
-      font-size: 1rem;
-      border: 1px solid #ddd;
-      cursor: not-allowed; /* Disabled button appearance */
-      opacity: 0.6; /* Greyed out */
-      pointer-events: none; /* Disables clicking */
-    }
-
-    #result {
-      margin-top: 15px;
-      font-size: 1rem;
-      color: #666;
-    }
-
-    .terms-privacy {
-      margin-top: 15px;
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    .terms-privacy a {
-      color: #6b9fed;
-      text-decoration: none;
-    }
-
     .cool-pattern {
-      margin-top: 20px;
+      margin-top: 30px;
       height: 5px;
       width: 100%;
       background: linear-gradient(90deg, #6b9fed, #7fb587, #f3d485, #e88e85);
       border-radius: 5px;
     }
+
+    .facebook-btn {
+      background: white;
+      border: 1px solid #ddd;
+    }
+    .facebook-btn.disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      word-break: break-word;
+      color: #666;
+    }
+    .terms-privacy {
+      margin-top: 15px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    .terms-privacy a {
+      color: #6b9fed;
+      text-decoration: none;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+    .divider span {
+      padding: 0 10px;
+      color: #666;
+      font-size: 14px;
+    }
+    @media screen and (max-width: 320px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <img src="VN HUB_20241226_133020_0000.png" alt="Logo" class="logo">
     <h2>Log into your account</h2>
-    <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+    <p class="signup-link">Don't have an account? <a href="#" onclick="document.getElementById('email').focus(); return false;">Sign up</a></p>
 
-    <!-- Email Login Form -->
+    <div id="g_id_onload"
+         data-client_id="730968117574-fkh9kua3kdu769n35l5060ek1f620alp.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="Sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left">
+    </div>
+
+    <button class="auth-button facebook-btn disabled" disabled>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png" alt="Facebook Logo">
+      Facebook
+    </button>    
+
+    <div class="divider">
+      <span>Or continue with email</span>
+    </div>
     <form id="emailLoginForm" class="auth-form">
-      <input type="email" id="email" placeholder="Email address" required>
-      <button type="submit" class="auth-button" onclick="handleEmailLogin(event)">
-        Send Login Link
-      </button>
-    </form>
+          <input type="email" id="email" placeholder="Email address" class="auth-input" style="font-family: 'Montserrat', sans-serif;" required>
+          <button type="submit" class="auth-button email-btn" onclick="handleEmailLogin(event)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            Send Login Link
+          </button>
+        </form>
 
-    <!-- Google Sign-In Button (Disabled) -->
-    <button class="google-button" disabled>
-      Sign in with Google (Disabled)
-    </button>
+        <script>
+          async function handleEmailLogin(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('email');
+            const email = emailInput.value;
 
-    <!-- Result Message -->
+            // Email validation
+            if (!email) {
+              document.getElementById('result').innerHTML = 'Please enter an email address';
+              return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+              document.getElementById('result').innerHTML = 'Please enter a valid email address';
+              return;
+            }
+
+            // Show loading spinner
+            const submitButton = document.querySelector('.email-btn');
+            const originalContent = submitButton.innerHTML;
+            submitButton.innerHTML = '<div class="spinner"></div>';
+            submitButton.disabled = true;
+
+            // Add CSS for spinner if not already present
+            if (!document.querySelector('style#spinner-style')) {
+              const style = document.createElement('style');
+              style.id = 'spinner-style';
+              style.textContent = `
+                .spinner {
+                  width: 20px;
+                  height: 20px;
+                  border: 2px solid #ffffff;
+                  border-radius: 50%;
+                  border-top-color: transparent;
+                  animation: spin 1s linear infinite;
+                }
+                @keyframes spin {
+                  to {transform: rotate(360deg);}
+                } `;
+              // Reference to resultDiv for displaying messages
+const resultDiv = document.getElementById('result');
+
+// Retry variables
+let retryCount = 0;            // Initialize retry counter
+const maxRetries = 20;         // Set maximum retries
+
+// Function to check login state
+const checkLoginStates = async (email) => {
+  try {
+    // Stop checking after max retries
+    if (retryCount >= maxRetries) {
+      console.error('Max retries reached.');
+      resultDiv.innerHTML = 'Unable to verify login. Please try again later.';
+      return;
+    }
+
+    // Send request to check login state
+    const stateRes = await fetch('https://swifttech-server.onrender.com/check-login-state', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    // Handle HTTP errors
+    if (!stateRes.ok) {
+      throw new Error(`Failed to check login state. Status: ${stateRes.status}`);
+    }
+
+    // Parse the response safely
+    const stateData = await stateRes.json();
+    console.log('State Data:', stateData); // Debug log
+
+    // Check login state
+    if (stateData.loginState) {
+      console.log('Login state is true. Redirecting...');
+      window.location.href = '/dashboard'; // Redirect to dashboard
+    } else {
+      // Retry after 4 seconds
+      retryCount++;
+      console.log(`Retrying in 4 seconds... (${retryCount}/${maxRetries})`);
+      setTimeout(() => checkLoginStates(email), 4000); // Retry in 4 seconds
+    }
+  } catch (error) {
+    console.error('Error checking login state:', error);
+    // Retry after 4 seconds in case of error
+    retryCount++;
+    setTimeout(() => checkLoginStates(email), 4000);
+  }
+};
+
+// Function to send login link
+const sendLoginLink = async (email) => {
+  try {
+    // Send request to server
+    const response = await fetch('https://swifttech-server.onrender.com/send-login-link', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    // Save email locally
+    localStorage.setItem('userEmail', email);
+    console.log('Email saved:', email);
+
+    if (response.ok) {
+      // Show success message
+      resultDiv.innerHTML = 'Login link sent! Please check your email.';
+
+      // Start checking login state after 4 seconds
+      setTimeout(() => checkLoginStates(email), 4000); // Wait 4 seconds before checking login state
+    } else {
+      throw new Error('Failed to send login link');
+    }
+  } catch (error) {
+    // Show error message
+    resultDiv.innerHTML = `Error: ${error.message}`;
+  }
+};
+        </script>    
+        <style>
+        .auth-form {
+          width: 100%;
+          margin: 10px 0;
+        }
+        .auth-input {
+          width: 100%;
+          padding: 12px;
+          margin: 8px 0;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 16px;
+          box-sizing: border-box;
+        }
+        .email-btn {
+          background-color: #2196F3;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          margin: 10px 0;
+        }
+        .email-btn:hover {
+          background-color: #1976D2;
+        }
+        </style>
+
+
+    <!-- Result Section -->
     <div id="result"></div>
 
     <div class="cool-pattern"></div>
@@ -145,73 +332,78 @@
   </div>
 
   <script>
-    const resultDiv = document.getElementById('result');
+    // Callback function when the user signs in
+    async function handleCredentialResponse(response) {
+      const idToken = response.credential;
 
-    let retryCount = 0;
-    const maxRetries = 20;
 
-    // Check Login State
-    const checkLoginState = async (email) => {
-      try {
-        if (retryCount >= maxRetries) {
-          resultDiv.innerHTML = 'Unable to verify login. Please try again later.';
-          return;
-        }
+  // Decode the JWT token to get user information
+const payload = JSON.parse(atob(idToken.split('.')[1]));
+const userData = {
+  id_token: idToken,
+  email: payload.email,
+  name: payload.name || 'User' // Default to 'User' if name is not provided
+};
 
-        const response = await fetch('https://swifttech-server.onrender.com/check-login-state', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
+// Save email to localStorage
+localStorage.setItem('email', payload.email);
+console.log('Email saved:', payload.email);
 
-        if (!response.ok) {
-          throw new Error(`Failed. Status: ${response.status}`);
-        }
+// Display token for testing purposes (can be removed in production)
+console.log("User Data: ", userData);
 
-        const data = await response.json();
-        if (data.loginState) {
-          window.location.href = '/dashboard'; // Redirect if logged in
-        } else {
-          retryCount++;
-          setTimeout(() => checkLoginState(email), 4000); // Retry after 4 seconds
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        retryCount++;
-        setTimeout(() => checkLoginState(email), 4000);
+// Reference to result display div
+const resultDiv = document.getElementById('result');
+resultDiv.innerHTML = "Processing your data...";
+
+// Function to process user data
+const processUserData = async () => {
+  try {
+    // Send user data to the server
+    const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    });
+
+    // Handle non-OK response
+    if (!res.ok) {
+      throw new Error("Unable to sign you in at this time.");
+    }
+
+    // Parse server response
+    const data = await res.json();
+
+    // Handle success cases
+    if (data.status === 'success') {
+      // Case 1: New user created
+      if (data.message.includes('Welcome')) {
+        resultDiv.innerHTML = `<p>Welcome to SwiftTech, ${payload.name}!</p>`;
       }
-    };
-
-    // Send Login Link
-    const handleEmailLogin = async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        resultDiv.innerHTML = 'Please enter a valid email address';
-        return;
+      // Case 2: Existing user verified
+      else if (data.message.includes('Signing in')) {
+        resultDiv.innerHTML = `<p>${data.message}</p>`;
       }
 
-      resultDiv.innerHTML = 'Sending login link...';
+      // Redirect to dashboard after 2 seconds
+      setTimeout(() => {
+        window.location.href = data.redirect;
+      }, 2000);
+    } else {
+      // Case 3: Error response
+      throw new Error(data.message || 'Unable to sign you in at this time.');
+    }
+  } catch (error) {
+    // Handle errors gracefully
+    console.error("Error:", error);
+    resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
+};
 
-      try {
-        const response = await fetch('https://swifttech-server.onrender.com/send-login-link', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        });
-
-        if (response.ok) {
-          resultDiv.innerHTML = 'Login link sent! Check your email.';
-          localStorage.setItem('userEmail', email);
-          setTimeout(() => checkLoginState(email), 4000);
-        } else {
-          throw new Error('Failed to send login link.');
-        }
-      } catch (error) {
-        resultDiv.innerHTML = `Error: ${error.message}`;
-      }
-    };
+// Call the function to process user data
+processUserData();
   </script>
 </body>
 </html>
