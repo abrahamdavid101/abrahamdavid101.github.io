@@ -212,7 +212,7 @@
             }
             try {
               // Send request to server
-              const response = await fetch('https://gibbon-whole-hagfish.ngrok-free.app/send-login-link', {
+              const response = await fetch('https://swifttech-server.onrender.com/send-login-link', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -301,7 +301,7 @@
       resultDiv.innerHTML = "Processing your data...";
 
       try {
-        const res = await fetch('https://gibbon-whole-hagfish.ngrok-free.app/store-user-data', {
+        const res = await fetch('https://swifttech-server.onrender.com/store-user-data', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -319,7 +319,7 @@
         
               const checkLoginState = async () => {
                 try {
-                  const stateRes = await fetch('https://gibbon-whole-hagfish.ngrok-free.app/check-login-state', {
+                  const stateRes = await fetch('https://swifttech-server.onrender.com/check-login-state', {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -342,5 +342,7 @@
         resultDiv.innerHTML = `<p>Error: ${error.message}</p>`;
       }
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
