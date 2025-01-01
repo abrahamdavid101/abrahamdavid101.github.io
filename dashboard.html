@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Dashboard</title>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" as="style">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  
+  <style>   
+    
+    
+      body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      padding: 20px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      margin: 0;
+
+    }
+    .header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px;
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+    .logo {
+
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+    }
+
+    .user-icon {
+      width: 40px;
+      height: 40px;
+      background: #6b9fed;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: none;
+      margin-right: 10px;
+
+    }
+
+    .user-email {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 10px 0;
+      display: none;
+      min-width: 200px;
+    }
+
+    .dropdown-menu.active {
+      display: block;
+    }
+
+    .dropdown-menus {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      border-radius: 8px 8px 0 0;
+      box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+      padding: 20px 0;
+      display: none;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .dropdown-menus.active {
+      display: block;
+    }
+
+    .menu-item {
+      padding: 10px 20px;
+      color: #666;
+      text-decoration: none;
+      display: block;
+      transition: background 0.3s;
+    }
+
+    .menu-item:hover {
+      background: #f5f7fa;
+    }
+
+    .container {
+      margin-top: 80px;
+      background: white;
+      padding: 30px;
+      padding-top: 5px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: min(90%, 1200px);
+    }
+
+    .cool-pattern {
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(90deg, #6b9fed, #7fb587, #f3d485, #e88e85);
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+  <script src="https://sdk.twilio.com/js/voice/latest/twilio.min.js"></script>
+</head>
+<body>
+
+  <header class="header">
+    <img src="VN HUB_20241226_133020_0000.png" alt="Logo" class="logo">
+
+    <div class="user-section">
+      <span class="user-email" id="userEmail"></span>
+      
+      <div class="notification-icon" onclick="toggleMenus()">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" style="color: rgb(10, 9, 9);">
+          <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"/>
+        </svg>
+      </div>
+                <div class="dropdown-menus" id="dropdownMenus">
+                        <h3 style="padding: 10px; margin: 0; color: #333; border-bottom: 1px solid #eee;">Notifications</h3>
+                        <div id="notifications-container">
+                      <!-- Notifications will be dynamically inserted here -->
+                    </div>
+            </div>
+            <script>
+              function fetchNotifications() {
+                const userEmail = localStorage.getItem('userEmail') || localStorage.getItem('email');
+                
+                fetch('https://swifttech-server.onrender.com/notifications', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    email: userEmail
+                  })
+                })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                  })
+                  .then(notifications => {
+                    const container = document.getElementById('notifications-container');
+                    container.innerHTML = '';
+                    notifications.forEach(notification => {
+                      const notificationDiv = document.createElement('div');
+                      notificationDiv.style.display = 'flex';
+                      notificationDiv.style.justifyContent = 'space-between';
+                      notificationDiv.style.padding = '10px';
+                      notificationDiv.style.borderBottom = '1px solid #eee';
+                
+                      const messageDiv = document.createElement('div');
+                      messageDiv.textContent = notification.message;
+                
+                      const timeDiv = document.createElement('div');
+                      const date = new Date(notification.timestamp);
+                      timeDiv.textContent = date.toLocaleString();
+                      timeDiv.style.color = '#666';
+                      timeDiv.style.fontSize = '0.9em';
+                
+                      notificationDiv.appendChild(messageDiv);
+                      notificationDiv.appendChild(timeDiv);
+                      container.appendChild(notificationDiv);
+                    });
+                  })
+                  .catch(error => {
+                    console.error('Error fetching notifications:', error);
+                    const container = document.getElementById('notifications-container');
+                    container.innerHTML = '<div style="padding: 10px; color: #666;">Failed to load notifications. Please try again later.</div>';
+                  });
+              }
+
+              // Fetch notifications immediately and then every minute
+              fetchNotifications();
+              setInterval(fetchNotifications, 10000);
+            </script>      <div class="user-icon" onclick="toggleMenu()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+      </div>
+      <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#" class="menu-item" onclick="showTab('dashboard')">Dashboard</a>
+        <a href="#" class="menu-item" onclick="showTab('dialer-app')">Phone</a>
+        <a href="#" class="menu-item" onclick="showTab('rent')">Rent a Number</a>
+        <a href="#" class="menu-item" onclick="showTab('public')">General Numbers</a>
+        <a href="#" class="menu-item" onclick="showTab('billing')">Billing</a>
+        <a href="#" class="menu-item" onclick="showTab('settings')">Settings</a>
+        <a href="#" class="menu-item" onclick="handleLogout()">Logout</a>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+  <div class="container">
+    <style>
+      .dashboard-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h3 {
+        color: #333;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+      }
+
+      .card .count {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #2563eb;
+        margin: 10px 0;
+      }
+
+      .card .description {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .number-list, .activity-list, .number-search, .pricing-info,
+      .public-numbers, .popular-numbers, .payment-list, .plan-details,
+      .usage-stats, .settings-form, .profile-settings {
+        margin-top: 15px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #444;
+      }
+
+      .form-group input[type="text"],
+      .form-group input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .form-group input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      .number-search input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+      }
+    </style>    
+    <div id="dashboard" class="tab-content active">
+      <h2 style="font-size: 18px;">Welcome to your Dashboard 👋</h2>
+      <div class="cool-pattern"></div>
+      <div class="dashboard-cards">
+
+        <div class="card">
+          <h3>Credits</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <p class="count">$0.00</p>
+              <p class="description">Available balance</p>
+            </div>
+            <button class="view-btn" style="background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-family: 'Montserrat', sans-serif; display: flex; align-items: center; gap: 8px;">
+              <span style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border: 2px solid white; border-radius: 50%;">+</span>
+              Top Up
+            </button>
+          </div>
+        </div>   
+
+        <div class="card">
+          <h3>Active Numbers</h3>
+          <p class="count">0</p>
+          <p class="description">Total active virtual numbers</p>
+          <button class="view-btn" style="background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-top: 10px; cursor: pointer; font-family: 'Montserrat', sans-serif;">View Numbers</button>
+        </div>
+               
+      </div>
+    </div>
+      
+    <div id="dialer-app" class="tab-content">
+  <div id="dialer-number-container">
+    <div id="input-wrapper">
+      <input id="dialer-input" type="text" placeholder="Enter number" />
+      <button id="clear-button">×</button>
+    </div>
+
+    <div id="dialer-keypad">
+      <!-- Keypad buttons (1-9, *, 0, #) -->
+      <div class="dialer-key">1</div>
+      <div class="dialer-key">2</div>
+      <div class="dialer-key">3</div>
+      <div class="dialer-key">4</div>
+      <div class="dialer-key">5</div>
+      <div class="dialer-key">6</div>
+      <div class="dialer-key">7</div>
+      <div class="dialer-key">8</div>
+      <div class="dialer-key">9</div>
+      <div class="dialer-key">*</div>
+      <div class="dialer-key">0</div>
+      <div class="dialer-key">+</div>
+    </div>
+    <button id="call-button"></button>
+
+    <!-- Call Status -->
+    <div id="call-status"></div>
+    <div id="call-duration"></div>
+    <button onclick="endCall()">End Call</button>
+
+  </div>
+</div>
+    
+    <style>
+  /* Your CSS for input fields, keypad, etc. */
+    /* Call Status */
+  #call-status {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #007bff;
+  }
+
+  /* Call Duration */
+  #call-duration {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #28a745;
+  }
+    
+    /* Global Font */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+        
+/* Input Number Field */
+#dialer-number-container {
+  
+  margin-top: 50px;
+  margin-bottom: 20px; /* Adjusted for 20px spacing */
+}
+
+#input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#dialer-input {
+  width: 80%;
+  font-size: 22px; /* Updated font size */
+  font-family: 'Montserrat', sans-serif;
+  padding: 10px 40px 10px 10px;
+  border-radius: 10px;
+  border: 1px solid #ffff;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Clear Button */
+#clear-button {
+  position: absolute;
+  right: 10px; /* Align to the right of the container */
+  top: 50%; /* Vertically center */
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  color: white; /* White icon color */
+  font-size: 2rem; /* Icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the icon */
+  cursor: none;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Shadow for a subtle 3D effect */
+    user-select: none; /* Prevent text selection */
+    margin-right: 15px;
+}
+
+
+/* Keypad */
+#dialer-keypad {
+  display: grid;
+    margin-left: 15px; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* Increased gap for spacing */
+  justify-content: center;
+  align-items: center;
+    user-select: none; /* Prevent text selection */
+    
+}
+
+.dialer-key {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  color: #333;
+  cursor: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.3s;
+  user-select: none; /* Prevent text selection */
+}
+
+.dialer-key:active {
+  transform: scale(0.9);
+  background-color: #007bff;
+  color: #fff;
+}
+
+
+/* Call Button */
+#call-button {
+  width: 70px;
+  height: 70px;
+  border: none;
+  border-radius: 50%;
+  background-color: #28a745; /* Green color */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24"%3E%3Cpath d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.3 11.3 0 003.54.56 1 1 0 011 1v3.85a1 1 0 01-1 1A19 19 0 015 4a1 1 0 011-1h3.86a1 1 0 011 1 11.3 11.3 0 00.55 3.54 1 1 0 01-.26 1.11z"%3E%3C/path%3E%3C/svg%3E');
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: none;
+  transition: transform 0.2s;
+  margin-top: 20px;
+  display: block; /* Make it block-level */
+  margin-left: auto; /* Center horizontally */
+  margin-right: auto; /* Center horizontally */
+    user-select: none; /* Prevent text selection */
+}
+
+#call-button:active {
+  transform: scale(0.9);
+}
+</style>
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  // All your code here
+});
+    
+    let device;
+    let callSid = null; // Track call SID for monitoring
+    let callStartTime;
+    let durationInterval;
+
+    // Fetch Twilio Token
+    async function fetchTwilioToken() {
+      try {
+        const response = await fetch('https://swifttech-server.onrender.com/token', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (!data.token) {
+          throw new Error('Token is missing in the response!');
+        }
+
+        console.log('Token fetched:', data.token); // Debugging log
+        initializeTwilioDevice(data.token); // Initialize Twilio device
+      } catch (error) {
+        console.error('Error fetching Twilio token:', error.message);
+        alert(`Unable to fetch Twilio token: ${error.message}`);
+      }
+    }
+
+    // Initialize Twilio Device
+    function initializeTwilioDevice(token) {
+      device = new Twilio.Device(token, {
+        logLevel: 1, // Enables debugging logs
+        closeProtection: true, // Prevents accidental disconnections
+      });
+
+      device.on('ready', () => {
+        console.log('Twilio Device is ready');
+        alert('Twilio is ready to make calls.');
+      });
+
+      device.on('error', (error) => {
+        console.error('Twilio Device Error:', error);
+        alert(`Twilio Device error: ${error.message}`);
+      });
+
+      device.on('incoming', (connection) => {
+        console.log('Incoming call...');
+        connection.accept();
+        alert('Incoming call accepted.');
+      });
+    }
+
+    // Monitor call status
+    function monitorCallStatus(callSid) {
+      const interval = setInterval(async () => {
+        const response = await fetch(`https://swifttech-server.onrender.com/call-status/${callSid}`);
+        const data = await response.json();
+
+        if (data.status) {
+          switch (data.status) {
+            case 'queued':
+              setCallStatus('Call queued, waiting to be connected.');
+              break;
+            case 'initiated':
+              setCallStatus('Call initiated, waiting to connect.');
+              break;
+            case 'in-progress':
+              setCallStatus('Call in progress...');
+              startCallTimer();
+              break;
+            case 'completed':
+              setCallStatus('Call ended.');
+              clearInterval(interval);
+              break;
+            case 'busy':
+              setCallStatus('Line is busy.');
+              clearInterval(interval);
+              break;
+            case 'failed':
+              setCallStatus('Call failed.');
+              clearInterval(interval);
+              break;
+            case 'no-answer':
+              setCallStatus('No answer.');
+              clearInterval(interval);
+              break;
+            default:
+              setCallStatus('Unknown status.');
+              break;
+          }
+        }
+      }, 2000); // Poll every 2 seconds
+    }
+
+    // Start call duration timer
+    function startCallTimer() {
+      callStartTime = Date.now();
+      durationInterval = setInterval(() => {
+        const duration = Math.floor((Date.now() - callStartTime) / 1000);
+        document.getElementById('call-duration').textContent = `Duration: ${duration}s`;
+      }, 1000);
+    }
+
+    // Set call status
+    function setCallStatus(status) {
+      document.getElementById('call-status').textContent = `Status: ${status}`;
+    }
+
+    // Event listeners for UI actions
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("dialer-input");
+      const keys = document.querySelectorAll(".dialer-key");
+      const callButton = document.getElementById("call-button");
+      const clearButton = document.getElementById("clear-button");
+
+      // Handle key presses
+      keys.forEach((key) => {
+        key.addEventListener("click", () => {
+          input.value += key.textContent;
+          const audio = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+          audio.play();
+        });
+      });
+
+      // Clear button
+      clearButton.addEventListener("click", () => {
+        input.value = input.value.slice(0, -1);
+      });
+
+      // Call button
+      callButton.addEventListener("click", async () => {
+        const number = input.value.trim();
+        if (!number) {
+          alert("Please enter a number!");
+          return;
+        }
+
+        try {
+          const response = await fetch("https://swifttech-server.onrender.com/call", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ number }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            callSid = data.callSid; // Store call SID
+            setCallStatus("Ringing...");
+            monitorCallStatus(callSid); // Monitor status
+          } else {
+            alert("Failed to initiate call.");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("An error occurred.");
+        }
+      });
+
+      // Fetch Twilio token on page load
+      fetchTwilioToken();
+    });
+  </script>
+    
+  <script>
+  const apiBase = "https://swifttech-server.onrender.com"; // Replace with your server's URL
+
+  async function endCall() {
+    const callSid = document.getElementById("callSid").value;
+    if (!callSid) {
+      alert("Call SID is required to end the call.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${apiBase}/end-call`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ callSid }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        updateStatus("Call ended successfully!");
+      } else {
+        updateStatus(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      updateStatus(`Error: ${error.message}`);
+    }
+  }
+
+  function updateStatus(message) {
+    const statusMessage = document.getElementById("statusMessage");
+    statusMessage.textContent = message;
+  }
+</script>
+
+
+
+  
+    
+
+      
+      
+      
+      
+      
+      
+      
+    <div id="rent" class="tab-content">
+      <h2 style="font-size: 18px;">Rent Numbers</h2>
+      <div class="dashboard-cards">
+        <div class="card">
+          <h3>Available Numbers</h3>
+          <div class="number-search">
+            <input type="text" placeholder="Search numbers...">
+          </div>
+          <div class="number-grid">
+            <!-- Numbers will be populated here -->
+          </div>
+        </div>
+        <div class="card">
+          <h3>Pricing</h3>
+          <div class="pricing-info">
+            <p>Starting from $5/month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="public" class="tab-content">
+      <h2 style="font-size: 18px;">General Numbers</h2>
+
+<style>
+.search-container {
+  margin: 5px 8px;
+  max-width: 250px;
+  position: relative;
+}
+
+.search-input {
+  max-width: 280px;
+  padding: 15px 50px 15px 20px;
+  border-radius: 30px;
+  border: 2px solid #e0e0e0;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  color: #495057;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 4px 15px rgba(76,175,80,0.2);
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #adb5bd;
+}
+
+.search-container:hover .search-input {
+  border-color: #4CAF50;
+}
+
+.search-container:hover .search-icon {
+  color: #4CAF50;
+}
+</style>
+
+<div class="search-container">
+  <input type="text" class="search-input" style="font-family: 'Montserrat', sans-serif;" placeholder="Country based search..." oninput="searchNumbers()">
+  <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+</div>
+<script>
+function searchNumbers() {
+  let input = document.querySelector('.search-input').value.toLowerCase();
+  let cards = document.querySelectorAll('.card');
+
+  cards.forEach(card => {
+    let country = card.getAttribute('data-country');
+    if (country && country.toLowerCase().includes(input)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+
+      <div class="dashboard-cards">
+        <div class="card" id="number-12184928380" data-country="united states">
+          <div class="number-header" style="display: flex; align-items: center; gap: 10px;">
+            <h3>+1 (218) 492-8380</h3>
+            <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('+12184928380')" title="Copy number" style="cursor: pointer;"></i>
+            <img src="https://flagcdn.com/w20/us.png" alt="US Flag" style="margin-left: 5px;">
+           </div>
+           <div class="number-info">
+            <p><i class="fa-solid fa-phone-alt"></i> US Virtual Number</p>
+            <p><i class="fa-solid fa-envelope"></i> Messages: <span id="message-count-12184928380">0</span></p>
+            <button class="view-messages-btn" onclick="toggleMessages('12184928380')">
+              <i class="fa-solid fa-comments"></i> View Messages
+            </button>
+          </div>
+          <div class="message-container" style="display: none;">
+            <div class="message-list">
+              <!-- Messages will be displayed here -->
+            </div>
+          </div>
+        </div>
+        <script>
+          let messageInterval;
+          
+          function toggleMessages(phoneNumber) {
+            const messageContainer = document.querySelector(`#number-${phoneNumber} .message-container`);
+            const viewBtn = document.querySelector(`#number-${phoneNumber} .view-messages-btn`);
+            const messageList = document.querySelector(`#number-${phoneNumber} .message-list`);
+            
+            if (messageContainer.style.display === 'none') {
+              messageContainer.style.display = 'block';
+              viewBtn.innerHTML = '<i class="fa-solid fa-times"></i> Close Messages';
+              
+              // Initial fetch
+              fetchMessages(phoneNumber, messageList);
+              
+              // Start interval for continuous updates
+              messageInterval = setInterval(() => {
+                fetchMessages(phoneNumber, messageList);
+              }, 5000);
+            } else {
+              messageContainer.style.display = 'none';
+              viewBtn.innerHTML = '<i class="fa-solid fa-comments"></i> View Messages';
+              
+              // Clear interval when closing messages
+              if (messageInterval) {
+                clearInterval(messageInterval);
+              }
+            }
+          }
+
+          function fetchMessages(phoneNumber, messageList) {
+              // Ensure the phone number starts with '+'
+    const formattedPhoneNumber = phoneNumber.startsWith('+') ? phoneNumber : `+${phoneNumber}`;
+    fetch(`https://swifttech-server.onrender.com/messages`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phoneNumber: formattedPhoneNumber }) // Use dynamic phoneNumber
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+              .then(data => {
+                let messageHtml = '';
+                data.messages.forEach(msg => {
+                  messageHtml += `
+                    <div class="message" style="font-size: 0.9em; background: #f5f5f5; padding: 12px; margin: 8px 0; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                      <div class="message-header" style="font-size: 0.85em; color: #666;">
+                        <span class="from"> From: ${msg.fromNumber}</span>
+                      </div>
+                      <div class="message-body" style="margin: 8px 0; padding: 8px 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+                        <i class="fa-solid fa-envelope"></i> ${msg.messageBody}
+                      </div>
+                      <div class="message-timestamp" style="font-size: 0.8em; color: #888;">
+                        ${new Date(msg.timestamp).toLocaleString()}
+                      </div>
+                    </div>`;
+                });
+                messageList.style.maxHeight = '120px';
+                messageList.style.overflowY = 'auto';
+                messageList.style.padding = '10px';
+                messageList.style.borderRadius = '12px';
+                messageList.style.background = '#fff';
+                messageList.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+                messageList.innerHTML = messageHtml || '<p class="no-messages" style="font-size: 0.9em;"><i class="fa-solid fa-inbox"></i> No messages found</p>';
+                messageList.scrollTop = messageList.scrollHeight;                
+                // Update message count
+                const messageCount = document.querySelector(`#message-count-${phoneNumber}`);
+                messageCount.textContent = data.messages.length;
+              })
+              .catch(error => {
+                messageList.innerHTML = '<p class="error-message" style="font-size: 0.9em;"><i class="fa-solid fa-exclamation-circle"></i> Error loading messages</p>';
+                console.error('Error:', error);
+              });
+          }          
+        
+          function copyToClipboard(number) {
+            navigator.clipboard.writeText(number).then(() => {
+              const copyIcon = document.querySelector(`#number-${number.substring(1)} .copy-icon`);
+              copyIcon.classList.remove('fa-copy');
+              copyIcon.classList.add('fa-check');
+              setTimeout(() => {
+                copyIcon.classList.remove('fa-check');
+                copyIcon.classList.add('fa-copy');
+              }, 1500);
+            });
+          }
+        </script>
+          
+          
+          <div class="dashboard-cards">
+        <div class="card" id="number-12316255370" data-country="united states">
+          <div class="number-header" style="display: flex; align-items: center; gap: 10px;">
+            <h3>+1 (231) 625-5370</h3>
+            <i class="fa-solid fa-copy copy-icon" onclick="copyToClipboard('+12316255370')" title="Copy number" style="cursor: pointer;"></i>
+            <img src="https://flagcdn.com/w20/us.png" alt="US Flag" style="margin-left: 5px;">
+           </div>
+           <div class="number-info">
+            <p><i class="fa-solid fa-phone-alt"></i> US Virtual Number</p>
+            <p><i class="fa-solid fa-envelope"></i> Messages: <span id="message-count-12316255370">0</span></p>
+            <button class="view-messages-btn" onclick="toggleMessages('12316255370')">
+              <i class="fa-solid fa-comments"></i> View Messages
+            </button>
+          </div>
+          <div class="message-container" style="display: none;">
+            <div class="message-list">
+              <!-- Messages will be displayed here -->
+            </div>
+          </div>
+        </div>
+        
+          
+          
+        
+      </div>
+    </div>
+
+    <div id="billing" class="tab-content">
+      <h2 style="font-size: 18px;">Billing</h2>
+      <div class="dashboard-cards">
+        <div class="card">
+          <h3>Payment History</h3>
+          <div class="payment-list">
+            <p>No payment history</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Current Plan</h3>
+          <div class="plan-details">
+            <p>No active plan</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Usage Summary</h3>
+          <div class="usage-stats">
+            <p>No usage data</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings" class="tab-content">
+      <h2 style="font-size: 18px;">Settings</h2>
+      <div class="dashboard-cards">
+        <div class="card">
+          <h3>Account Settings</h3>
+          <div class="settings-form">
+            <form>
+              <div class="form-group">
+                <label>Email Notifications</label>
+                <input type="checkbox">
+              </div>
+              <div class="form-group">
+                <label>Two-Factor Authentication</label>
+                <input type="checkbox">
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Profile</h3>
+          <div class="profile-settings">
+            <form>
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text">
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Add event listener when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initially hide all tabs except dashboard
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        if (tab.id !== 'dashboard') {
+          tab.style.display = 'none';
+        }
+      });
+    });
+
+    function showTab(tabId) {
+      // Hide all tabs
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.style.display = 'none';
+        tab.classList.remove('active');
+      });
+      
+      // Show selected tab
+      const selectedTab = document.getElementById(tabId);
+      if (selectedTab) {
+        selectedTab.style.display = 'block';
+        selectedTab.classList.add('active');
+      }
+      
+      // Close dropdown menu after selection
+      const menu = document.getElementById('dropdownMenu');
+      if (menu) {
+        menu.classList.remove('active');
+      }
+    }
+  </script>  <script>
+    // Display user email from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+      const email = localStorage.getItem('userEmail') || localStorage.getItem('email');
+      if (email) {
+        document.getElementById('userEmail').textContent = email;
+     // } else {
+       // window.location.href = 'login.html';
+      }
+    });
+
+        // Toggle dropdown menu
+        function toggleMenus() {
+      const menu = document.getElementById('dropdownMenus');
+      menu.classList.toggle('active');
+    }
+
+    // Toggle dropdown menu
+    function toggleMenu() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.classList.toggle('active');
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('dropdownMenu');
+      const userIcon = document.querySelector('.user-icon');
+      if (!userIcon.contains(event.target) && !menu.contains(event.target)) {
+        menu.classList.remove('active');
+      }
+    });
+
+    // Handle logout
+    async function handleLogout() {
+      try {
+        const email = localStorage.getItem('userEmail') || localStorage.getItem('email');
+        await fetch('https://swifttech-server.onrender.com/logout', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+        localStorage.clear();
+        window.location.href = 'login.html';
+      } catch (error) {
+        console.error('Logout failed:', error);
+        localStorage.clear();
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
+</body>
+</html>
