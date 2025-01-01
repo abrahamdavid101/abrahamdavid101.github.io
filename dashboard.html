@@ -8,7 +8,7 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <script src="https://media.twiliocdn.com/sdk/js/voice/latest/twilio-voice.min.js"></script>
+  
   
   <style>   
     
@@ -135,7 +135,7 @@
       margin-top: 20px;
     }
   </style>
- 
+ <script src="https://media.twiliocdn.com/sdk/js/voice/latest/twilio-voice.min.js"></script>
 </head>
 <body>
 
@@ -510,7 +510,7 @@ body {
     let durationInterval;
 
     // Fetch Twilio Token
-    async function fetchTwilioToken() {
+    async function fetchtwilioToken() {
       try {
         const response = await fetch('https://swifttech-server.onrender.com/token', {
           method: 'GET',
@@ -528,7 +528,7 @@ body {
         }
 
         console.log('Token fetched:', data.token); // Debugging log
-        initializeTwilioDevice(data.token); // Initialize Twilio device
+        initializetwilioDevice(data.token); // Initialize Twilio device
       } catch (error) {
         console.error('Error fetching Twilio token:', error.message);
         alert(`Unable to fetch Twilio token: ${error.message}`);
@@ -537,7 +537,7 @@ body {
 
     // Initialize Twilio Device
     function initializeTwilioDevice(token) {
-      device = new Twilio.Device(token, {
+      device = new twilio.Device(token, {
         logLevel: 1, // Enables debugging logs
         closeProtection: true, // Prevents accidental disconnections
       });
