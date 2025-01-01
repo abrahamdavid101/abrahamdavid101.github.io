@@ -510,7 +510,7 @@ body {
     let durationInterval;
 
     // Fetch Twilio Token
-    async function fetchtwilioToken() {
+    async function fetchTwilioToken() {
       try {
         const response = await fetch('https://swifttech-server.onrender.com/token', {
           method: 'GET',
@@ -528,7 +528,7 @@ body {
         }
 
         console.log('Token fetched:', data.token); // Debugging log
-        initializetwilioDevice(data.token); // Initialize Twilio device
+        initializeTwilioDevice(data.token); // Initialize Twilio device
       } catch (error) {
         console.error('Error fetching Twilio token:', error.message);
         alert(`Unable to fetch Twilio token: ${error.message}`);
@@ -537,7 +537,7 @@ body {
 
     // Initialize Twilio Device
     function initializeTwilioDevice(token) {
-      device = new twilio.Device(token, {
+      device = new Twilio.Device(token, {
         logLevel: 1, // Enables debugging logs
         closeProtection: true, // Prevents accidental disconnections
       });
