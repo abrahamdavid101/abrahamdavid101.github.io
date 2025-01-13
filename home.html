@@ -1,1 +1,435 @@
-HVNBVSDSBNSDVSD
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>SwiftTech - Your Tech Solutions Partner</title>
+      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: 'Montserrat', sans-serif;
+          }
+
+          @keyframes fadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+          }
+
+          @keyframes slideIn {
+              from { transform: translateY(20px); opacity: 0; }
+              to { transform: translateY(0); opacity: 1; }
+          }
+
+          @keyframes scaleIn {
+              from { transform: scale(0.95); opacity: 0; }
+              to { transform: scale(1); opacity: 1; }
+          }
+
+          @keyframes bounce {
+              0% { transform: translateY(0); }
+              50% { transform: translateY(-10px); }
+              100% { transform: translateY(0); }
+          }
+
+          /* Header Styles */
+          header {
+              padding: 1rem;
+              background: #ffffff;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              animation: fadeIn 0.5s ease-out;
+          }
+
+          .nav-container {
+              max-width: 1200px;
+              margin: 0 auto;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+
+          .logo {
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #1a73e8;
+              transition: transform 0.3s ease;
+              text-decoration: none;
+          }
+
+          .logo:hover {
+              transform: scale(1.05);
+          }
+
+          .nav-menu {
+              display: flex;
+              gap: 2rem;
+          }
+
+          .nav-menu a {
+              text-decoration: none;
+              color: #333;
+              transition: color 0.3s ease;
+          }
+
+          .nav-menu a:hover {
+              color: #1a73e8;
+              transform: translateY(-2px);
+          }
+
+          .cta-buttons {
+              display: flex;
+              gap: 1rem;
+          }
+
+          .cta-button {
+              padding: 0.5rem 1rem;
+              border-radius: 5px;
+              border: none;
+              cursor: pointer;
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          .cta-button:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          }
+
+          .primary-btn {
+              background: #1a73e8;
+              color: white;
+          }
+
+          .newsletter-form {
+              display: flex;
+              gap: 1rem;
+              margin-top: 1rem;
+          }
+
+          .newsletter-form input {
+              padding: 0.5rem;
+              border-radius: 5px;
+              border: 1px solid #ddd;
+          }
+
+          /* Hero Section */
+          .hero {
+              background: linear-gradient(135deg, #1a73e8, #1558b3);
+              color: white;
+              padding: 4rem 2rem;
+              text-align: center;
+              animation: fadeIn 1s ease-out;
+              position: relative;
+              overflow: hidden;
+          }
+
+          .hero::before {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: url('https://example.com/pattern.svg');
+              opacity: 0.1;
+              animation: slideIn 20s linear infinite;
+          }
+
+          .hero-content {
+              max-width: 800px;
+              margin: 0 auto;
+              position: relative;
+          }
+
+          .hero h1 {
+              animation: slideIn 0.8s ease-out;
+              font-size: 2.5rem;
+              margin-bottom: 1rem;
+          }
+
+          .hero p {
+              animation: slideIn 0.8s ease-out 0.2s backwards;
+              font-size: 1.2rem;
+              margin-bottom: 2rem;
+          }
+
+          .hero-buttons {
+              display: flex;
+              gap: 1rem;
+              justify-content: center;
+              margin-bottom: 2rem;
+          }
+
+          .hero img {
+              width: 100%;
+              max-width: 600px;
+              margin: 2rem 0;
+              border-radius: 10px;
+              animation: scaleIn 0.8s ease-out 0.4s backwards;
+          }
+
+          .features-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+              gap: 2rem;
+              margin-top: 3rem;
+          }
+
+          .feature-card {
+              background: rgba(255,255,255,0.1);
+              padding: 1.5rem;
+              border-radius: 10px;
+              transition: transform 0.3s ease;
+              animation: fadeIn 0.8s ease-out;
+          }
+
+          .feature-card:hover {
+              transform: translateY(-10px);
+          }
+
+          .feature-card img {
+              width: 80px;
+              height: 80px;
+              margin-bottom: 1rem;
+              animation: bounce 2s infinite;
+          }
+
+          /* Featured Section */
+          .featured {
+              padding: 4rem 2rem;
+              background: #f4f4f4;
+              animation: fadeIn 1s ease-out;
+          }
+
+          .resources-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 2rem;
+              max-width: 1200px;
+              margin: 0 auto;
+          }
+
+          .resource-card {
+              background: white;
+              padding: 1.5rem;
+              border-radius: 10px;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+              animation: scaleIn 0.8s ease-out;
+          }
+
+          .resource-card:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+          }
+
+          .resource-card img {
+              width: 100%;
+              height: 200px;
+              object-fit: cover;
+              border-radius: 5px;
+              margin-bottom: 1rem;
+              transition: transform 0.3s ease;
+          }
+
+          .resource-card img:hover {
+              transform: scale(1.03);
+          }
+
+          /* Testimonials Section */
+          .testimonials {
+              padding: 4rem 2rem;
+              background: white;
+              animation: fadeIn 1s ease-out;
+          }
+
+          .testimonial-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 2rem;
+              max-width: 1200px;
+              margin: 0 auto;
+          }
+
+          .testimonial-card {
+              background: #f4f4f4;
+              padding: 2rem;
+              border-radius: 10px;
+              transition: transform 0.3s ease;
+              animation: slideIn 0.8s ease-out;
+          }
+
+          .testimonial-card:hover {
+              transform: translateY(-5px);
+          }
+
+          /* Footer */
+          footer {
+              background: #1a73e8;
+              color: white;
+              padding: 3rem 2rem;
+              animation: fadeIn 1s ease-out;
+          }
+
+          .footer-content {
+              max-width: 1200px;
+              margin: 0 auto;
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+              gap: 2rem;
+          }
+
+          .social-links {
+              display: flex;
+              gap: 1rem;
+          }
+
+          .social-links img {
+              width: 30px;
+              height: 30px;
+              transition: transform 0.3s ease;
+          }
+
+          .social-links img:hover {
+              transform: scale(1.2);
+          }
+
+          /* Mobile Responsive */
+          @media (max-width: 768px) {
+              .nav-menu {
+                  display: none;
+              }
+
+              .cta-buttons {
+                  display: none;
+              }
+
+              .mobile-menu-btn {
+                  display: block;
+              }
+          }
+      </style>
+  </head>
+  <body>
+      <header>
+          <div class="nav-container">
+              <a href="/" class="logo">SwiftTech</a>
+              <nav class="nav-menu">
+                  <a href="/">Home</a>
+                  <a href="#templates">Templates</a>
+                  <a href="#snippets">Snippets</a>
+                  <a href="#courses">Courses</a>
+                  <a href="#freelancing">Freelancing</a>
+                  <a href="#contact">Contact</a>
+              </nav>
+              <div class="cta-buttons">
+                  <button class="cta-button">Login</button>
+                  <button class="cta-button primary-btn">Sign Up</button>
+              </div>
+          </div>
+      </header>
+
+      <section class="hero">
+          <div class="hero-content">
+              <h1>Learn, Build, and Hire the Best Coders</h1>
+              <p>Access premium resources, tools, and opportunities to accelerate your tech journey</p>
+              <div class="hero-buttons">
+                  <button class="cta-button primary-btn">Browse Templates</button>
+                  <button class="cta-button">Hire a Freelancer</button>
+              </div>
+              <img src="https://example.com/hero-image.jpg" alt="Tech Development">
+              <div class="features-grid">
+                  <div class="feature-card">
+                      <img src="https://example.com/template-icon.png" alt="Templates">
+                      <h3>Templates</h3>
+                      <p>Pre-designed websites ready to deploy</p>
+                  </div>
+                  <div class="feature-card">
+                      <img src="https://example.com/code-icon.png" alt="Code">
+                      <h3>Code Snippets</h3>
+                      <p>Reusable code blocks for faster development</p>
+                  </div>
+                  <div class="feature-card">
+                      <img src="https://example.com/course-icon.png" alt="Courses">
+                      <h3>Courses</h3>
+                      <p>Learn coding step by step with our experts</p>
+                  </div>
+                  <div class="feature-card">
+                      <img src="https://example.com/freelance-icon.png" alt="Freelancing">
+                      <h3>Freelancing</h3>
+                      <p>Hire skilled developers for your projects</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="featured">
+          <div class="resources-grid">
+              <div class="resource-card">
+                  <img src="https://example.com/ecommerce-template.jpg" alt="E-commerce Template">
+                  <h3>Most Popular Template</h3>
+                  <p>E-commerce Starter Kit with full functionality and modern design</p>
+                  <p class="price">$49.99</p>
+              </div>
+              <div class="resource-card">
+                  <img src="https://example.com/fullstack-course.jpg" alt="Full-Stack Course">
+                  <h3>Trending Course</h3>
+                  <p>Complete Full-Stack Development with latest technologies</p>
+                  <p class="price">$199.99</p>
+              </div>
+              <div class="resource-card">
+                  <img src="https://example.com/auth-system.jpg" alt="Authentication System">
+                  <h3>Top Snippet</h3>
+                  <p>Secure Authentication System with OAuth integration</p>
+                  <p class="price">$29.99</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="testimonials">
+          <div class="testimonial-grid">
+              <div class="testimonial-card">
+                  <img src="https://example.com/john-profile.jpg" alt="John Doe" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                  <h3>John Doe</h3>
+                  <p>"SwiftTech helped me land my dream job as a senior developer."</p>
+              </div>
+              <div class="testimonial-card">
+                  <img src="https://example.com/jane-profile.jpg" alt="Jane Smith" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                  <h3>Jane Smith</h3>
+                  <p>"The courses are comprehensive and up-to-date with industry standards."</p>
+              </div>
+              <div class="testimonial-card">
+                  <img src="https://example.com/mike-profile.jpg" alt="Mike Johnson" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem;">
+                  <h3>Mike Johnson</h3>
+                  <p>"The templates saved me countless hours of development time."</p>
+              </div>
+          </div>
+      </section>
+
+      <footer>
+          <div class="footer-content">
+              <div class="footer-section">
+                  <h3>Contact Us</h3>
+                  <p>Email: contact@swifttech.com</p>
+                  <p>Phone: (555) 123-4567</p>
+              </div>
+              <div class="footer-section">
+                  <h3>Legal</h3>
+                  <p>Terms of Service</p>
+                  <p>Privacy Policy</p>
+                  <p>FAQs</p>
+                  <p>About Us</p>
+              </div>
+              <div class="footer-section">
+                  <h3>Follow Us</h3>
+                  <div class="social-links">
+                      <a href="#"><img src="https://example.com/facebook-icon.png" alt="Facebook"></a>
+                      <a href="#"><img src="https://example.com/twitter-icon.png" alt="Twitter"></a>
+                      <a href="#"><img src="https://example.com/linkedin-icon.png" alt="LinkedIn"></a>
+                      <a href="#"><img src="https://example.com/github-icon.png" alt="GitHub"></a>
+                  </div>
+                  <form class="newsletter-form">
+                      <input type="email" placeholder="Enter your email">
+                      <button class="cta-button primary-btn">Subscribe</button>
+                
