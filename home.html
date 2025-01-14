@@ -443,14 +443,78 @@
       </section>
 
       <section class="featured-content">
-                <div class="image-container" style="display: flex; align-items: center; padding: 40px; flex-wrap: wrap;">
-                    <div class="text-content" style="flex: 1; padding-right: 40px; min-width: 300px;">
-                        <h2 style="color: #333; margin-bottom: 15px; font-size: 2.2rem;">Why Choose Our Snippets</h2>
-                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they’re essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
-                    </div>
-                    <img src="https://www.swifttech.me/snippets.png" alt="Featured Image" style="width: 100%; max-width: 700px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <div class="image-container">
+                <div class="image-wrapper">
+                    <img src="https://www.swifttech.me/snippets.png" alt="Featured Image">
                 </div>
-    </section>      
+                <div class="text-content">
+                    <h2>Why Choose Our Snippets</h2>
+                    <p>Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they're essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
+                </div>
+            </div>
+            <style>
+                .featured-content {
+                    padding: 40px;
+                }
+                
+                .image-container {
+                    display: flex;
+                    align-items: center;
+                    gap: 40px;
+                    flex-wrap: wrap;
+                }
+
+                .image-wrapper {
+                    flex: 1;
+                    min-width: 300px;
+                }
+
+                .image-wrapper img {
+                    width: 100%;
+                    max-width: 700px;
+                    height: auto;
+                    min-height: 100px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                }
+
+                .text-content {
+                    flex: 1;
+                    min-width: 300px;
+                }
+
+                .text-content h2 {
+                    color: #333;
+                    margin-bottom: 15px;
+                    font-size: 2.2rem;
+                }
+
+                .text-content p {
+                    color: #666;
+                    line-height: 1.6;
+                    font-size: 1.1rem;
+                }
+
+                @media (max-width: 768px) {
+                    .image-container {
+                        flex-direction: column;
+                        text-align: justify
+                    }
+
+                    .image-wrapper img {
+                        width: 100px;
+                        height: 100px !important;
+                        border-radius: 50%;
+                        margin: 0 0 1px 0;
+                    }
+
+                    .text-content {
+                        padding: 0;
+                    }
+                }            
+                </style>
+        </section>        
       <section class="featured">
           <div class="resources-grid">
               <div class="resource-card">
