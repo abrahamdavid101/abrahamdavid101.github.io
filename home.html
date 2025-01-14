@@ -78,6 +78,8 @@
           .nav-menu a:hover {
               color: #1a73e8;
               transform: translateY(-2px);
+              transition: all 0.2s ease-in-out;
+
           }
 
           .cta-buttons {
@@ -337,6 +339,34 @@
               }
           }
       </style>
+      <!-- Start of Async Drift Code -->
+<script>
+    "use strict";
+    
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+        t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }, t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }), t.load = function(t) {
+          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('teitr4vi599r');
+    </script>
+    <!-- End of Async Drift Code -->
   </head>
   <body>
       <header>
@@ -454,29 +484,29 @@
           </div>
       </section>
 
-     <footer>
+      <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h3 style="margin-bottom: 20px;">SwiftTech</h3>
-                <p style="margin-bottom: 15px;">Your Gateway to Tech Excellence</p>
+                <p style="margin-bottom: 15px;"><i>Swift solutions, Seamless experiences..</i></p>
                 <p style="margin-bottom: 10px;">123 Tech Street, Suite 100</p>
-                <p style="margin-bottom: 10px;">Silicon Valley, CA 94025</p>
+                <p style="margin-bottom: 25px;">Silicon Valley, CA 94025</p>
                 <p style="margin-bottom: 10px;">Email: support@swifttech.me</p>
-                <p style="margin-bottom: 20px;">Phone: (555) 123-4567</p>
+                <p style="margin-bottom: 5px;">Phone: (555) 123-4567</p>
             </div>
             <div class="footer-section">
                 <h3 style="margin-bottom: 20px;">Legal</h3>
                 <p style="margin-bottom: 10px;">Terms of Service</p>
                 <p style="margin-bottom: 10px;">Privacy Policy</p>
                 <p style="margin-bottom: 10px;">FAQs</p>
-                <p style="margin-bottom: 10px;">About Us</p>
+                <p style="margin-bottom: 5px;">About Us</p>
             </div>
             <div class="footer-section">
                 <h3 style="margin-bottom: 20px;">Blog</h3>
                 <p style="margin-bottom: 10px;">Tech News</p>
                 <p style="margin-bottom: 10px;">Developer Stories</p>
                 <p style="margin-bottom: 10px;">Industry Insights</p>
-                <p style="margin-bottom: 10px;">Tutorials</p>
+                <p style="margin-bottom: 5px;">Tutorials</p>
             </div>
             <div class="footer-section">
                 <h3 style="margin-bottom: 20px;">Follow Us</h3>
