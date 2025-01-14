@@ -41,6 +41,7 @@
               background: #ffffff;
               box-shadow: 0 2px 5px rgba(0,0,0,0.1);
               animation: fadeIn 0.5s ease-out;
+              position: relative;
           }
 
           .nav-container {
@@ -112,6 +113,21 @@
               padding: 0.5rem;
               border-radius: 5px;
               border: 1px solid #ddd;
+          }
+
+          .mobile-menu-btn {
+              display: none;
+              font-size: 1.5rem;
+              background: none;
+              border: none;
+              color: #1a73e8;
+              cursor: pointer;
+              transition: transform 0.3s ease;
+              z-index: 1000;
+          }
+
+          .mobile-menu-btn.active i {
+              transform: rotate(90deg);
           }
 
           /* Hero Section */
@@ -296,6 +312,20 @@
           @media (max-width: 768px) {
               .nav-menu {
                   display: none;
+                  position: fixed;
+                  top: 70px;
+                  left: 0;
+                  right: 0;
+                  background: white;
+                  flex-direction: column;
+                  padding: 1rem;
+                  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                  z-index: 999;
+                  animation: slideIn 0.3s ease-out;
+              }
+
+              .nav-menu.active {
+                  display: flex;
               }
 
               .cta-buttons {
@@ -312,6 +342,9 @@
       <header>
           <div class="nav-container">
               <a href="/" class="logo">SwiftTech</a>
+              <button class="mobile-menu-btn" id="menuBtn">
+                  <i class="fas fa-bars"></i>
+              </button>
               <nav class="nav-menu">
                   <a href="/">Home</a>
                   <a href="#templates">Templates</a>
@@ -319,13 +352,30 @@
                   <a href="#courses">Courses</a>
                   <a href="#freelancing">Freelancing</a>
                   <a href="#contact">Contact</a>
-              </nav>
+              </nav>              
               <div class="cta-buttons">
                   <button class="cta-button">Login</button>
                   <button class="cta-button primary-btn">Sign Up</button>
               </div>
           </div>
-      </header>
+      </header>      
+      <script>
+          const menuBtn = document.getElementById('menuBtn');
+          const navMenu = document.querySelector('.nav-menu');
+          
+          menuBtn.addEventListener('click', function() {
+              navMenu.classList.toggle('active');
+              menuBtn.classList.toggle('active');
+              const icon = menuBtn.querySelector('i');
+              if (navMenu.classList.contains('active')) {
+                  icon.classList.remove('fa-bars');
+                  icon.classList.add('fa-times');
+              } else {
+                  icon.classList.remove('fa-times');
+                  icon.classList.add('fa-bars');
+              }
+          });
+      </script>
 
       <section class="hero">
           <div class="hero-content">
@@ -405,28 +455,37 @@
       </section>
 
       <footer>
-          <div class="footer-content">
-              <div class="footer-section">
-                  <h3>Contact Us</h3>
-                  <p>Email: support@swifttech.me</p>
-                  <p>Phone: (555) 123-4567</p>
-              </div>
-              <div class="footer-section">
-                  <h3>Legal</h3>
-                  <p>Terms of Service</p>
-                  <p>Privacy Policy</p>
-                  <p>FAQs</p>
-                  <p>About Us</p>
-              </div>
-              <div class="footer-section">
-                  <h3>Follow Us</h3>
-                  <div class="social-links">
-                      <a href="#"><i class="fab fa-facebook"></i></a>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                      <a href="#"><i class="fab fa-linkedin"></i></a>
-                      <a href="#"><i class="fab fa-github"></i></a>
-                  </div>
-                  <form class="newsletter-form">
-                      <input type="email" placeholder="Enter your email">
-                      <button class="cta-button primary-btn">Subscribe</button>
-                
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3 style="margin-bottom: 20px;">SwiftTech</h3>
+                <p style="margin-bottom: 15px;">Your Gateway to Tech Excellence</p>
+                <p style="margin-bottom: 10px;">123 Tech Street, Suite 100</p>
+                <p style="margin-bottom: 10px;">Silicon Valley, CA 94025</p>
+                <p style="margin-bottom: 10px;">Email: support@swifttech.me</p>
+                <p style="margin-bottom: 20px;">Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section" style="margin-left: 40px;">
+                <h3 style="margin-bottom: 20px;">Legal</h3>
+                <p style="margin-bottom: 10px;">Terms of Service</p>
+                <p style="margin-bottom: 10px;">Privacy Policy</p>
+                <p style="margin-bottom: 10px;">FAQs</p>
+                <p style="margin-bottom: 10px;">About Us</p>
+            </div>
+            <div class="footer-section" style="margin-left: 40px;">
+                <h3 style="margin-bottom: 20px;">Blog</h3>
+                <p style="margin-bottom: 10px;">Tech News</p>
+                <p style="margin-bottom: 10px;">Developer Stories</p>
+                <p style="margin-bottom: 10px;">Industry Insights</p>
+                <p style="margin-bottom: 10px;">Tutorials</p>
+            </div>
+            <div class="footer-section" style="margin-left: 40px;">
+                <h3 style="margin-bottom: 20px;">Follow Us</h3>
+                <div class="social-links" style="margin-bottom: 20px;">
+                    <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="margin-right: 15px;"><i class="fab fa-github"></i></a>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" style="margin-bottom: 10px;">
+                    <button class="cta-button primary-btn">Subscribe</button>
