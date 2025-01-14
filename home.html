@@ -443,121 +443,128 @@
       </section>
 
       <section class="featured-content">
-            <div class="image-container">
-                <div class="image-wrapper">
-                    <img src="https://www.swifttech.me/snippets.png" alt="Featured Image">
+                <div class="image-container" style="display: flex; align-items: center; padding: 40px; flex-wrap: wrap;">
+                    <div class="text-content" style="flex: 1; padding-right: 40px; min-width: 300px;">
+                        <h2 style="color: #333; margin-bottom: 15px; font-size: 2.2rem;">Why Choose Our Snippets</h2>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they’re essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
+                    </div>
+                    <img src="https://www.swifttech.me/snippets.png" alt="Featured Image" style="width: 100%; max-width: 700px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>
-                <div class="text-content">
-                    <h2>Why Choose Our Snippets</h2>
-                    <p>Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they're essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
-                </div>
-            </div>
-            <style>
-                .featured-content {
-                    padding: 40px;
-                }
-                
-                .image-container {
-                    display: flex;
-                    align-items: center;
-                    gap: 40px;
-                    flex-wrap: wrap;
-                }
-
-                .image-wrapper {
-                    flex: 1;
-                    min-width: 300px;
-                }
-
-                .image-wrapper img {
-                    width: 100%;
-                    max-width: 700px;
-                    height: auto;
-                    min-height: 100px;
-                    object-fit: cover;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                }
-
-                .text-content {
-                    flex: 1;
-                    min-width: 300px;
-                }
-
-                .text-content h2 {
-                    color: #333;
-                    margin-bottom: 15px;
-                    font-size: 2.2rem;
-                }
-
-                .text-content p {
-                    color: #666;
-                    line-height: 1.6;
-                    font-size: 1.1rem;
-                }
-
-                @media (max-width: 768px) {
-                    .image-container {
-                        flex-direction: column;
-                        text-align: justify
-                    }
-
-                    .image-wrapper img {
-                        width: 100px;
-                        height: 100px !important;
-                        border-radius: 50%;
-                        margin: 0 0 1px 0;
-                    }
-
-                    .text-content {
-                        padding: 0;
-                    }
-                }            
-                </style>
-        </section>        
+    </section>    
+    
+    
       <section class="featured">
           <div class="resources-grid">
               <div class="resource-card">
-                  <i class="fas fa-shopping-cart"></i>
-                  <h3>Most Popular Template</h3>
-                  <p>E-commerce Starter Kit with full functionality and modern design</p>
-                  <p class="price">$49.99</p>
+                  <i class="fas fa-shopping-cart fa-3x" style="margin-bottom: 20px;"></i>
+                  <h3 style="margin-bottom: 15px;">Most Popular Template</h3>
+                  <p style="margin-bottom: 25px; line-height: 1.6;">E-commerce Starter Kit with full functionality and modern design</p>
+                  <button class="cta-button primary-btn">Get Template</button>
               </div>
               <div class="resource-card">
-                  <i class="fas fa-laptop-code"></i>
-                  <h3>Trending Course</h3>
-                  <p>Complete Full-Stack Development with latest technologies</p>
-                  <p class="price">$199.99</p>
+                  <i class="fas fa-laptop-code fa-3x" style="margin-bottom: 20px;"></i>
+                  <h3 style="margin-bottom: 15px;">Trending Course</h3>
+                  <p style="margin-bottom: 25px; line-height: 1.6;">Complete Full-Stack Development with latest technologies</p>
+                  <button class="cta-button primary-btn">Enroll Now</button>
               </div>
               <div class="resource-card">
-                  <i class="fas fa-lock"></i>
-                  <h3>Top Snippet</h3>
-                  <p>Secure Authentication System with OAuth integration</p>
-                  <p class="price">$29.99</p>
+                  <i class="fas fa-lock fa-3x" style="margin-bottom: 20px;"></i>
+                  <h3 style="margin-bottom: 15px;">Top Snippet</h3>
+                  <p style="margin-bottom: 25px; line-height: 1.6;">Secure Authentication System with OAuth integration</p>
+                  <button class="cta-button primary-btn">Get Snippet</button>
               </div>
           </div>
       </section>
 
       <section class="testimonials">
-          <div class="testimonial-grid">
-              <div class="testimonial-card">
-                  <i class="fas fa-user-circle fa-3x"></i>
-                  <h3>John Doe</h3>
-                  <p>"SwiftTech helped me land my dream job as a senior developer."</p>
+          <div class="testimonial-carousel" id="testimonialCarousel">
+              <div class="testimonial-slide active">
+                  <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="John Doe" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 15px;">John Doe</h3>
+                  <p style="line-height: 1.6; margin-bottom: 20px;">"SwiftTech helped me land my dream job as a senior developer. The resources and community support were invaluable in my journey."</p>
+                  <p style="color: #666; font-style: italic;">Senior Developer at TechCorp</p>
               </div>
-              <div class="testimonial-card">
-                  <i class="fas fa-user-circle fa-3x"></i>
-                  <h3>Jane Smith</h3>
-                  <p>"The courses are comprehensive and up-to-date with industry standards."</p>
+              <div class="testimonial-slide">
+                  <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Jane Smith" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 15px;">Jane Smith</h3>
+                  <p style="line-height: 1.6; margin-bottom: 20px;">"The courses are comprehensive and up-to-date with industry standards. The instructors are experts who truly care about student success."</p>
+                  <p style="color: #666; font-style: italic;">Full Stack Developer at WebSolutions</p>
               </div>
-              <div class="testimonial-card">
-                  <i class="fas fa-user-circle fa-3x"></i>
-                  <h3>Mike Johnson</h3>
-                  <p>"The templates saved me countless hours of development time."</p>
+              <div class="testimonial-slide">
+                  <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Mike Johnson" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
+                  <h3 style="margin-bottom: 15px;">Mike Johnson</h3>
+                  <p style="line-height: 1.6; margin-bottom: 20px;">"The templates saved me countless hours of development time. They're well-documented and easily customizable for any project needs."</p>
+                  <p style="color: #666; font-style: italic;">Freelance Web Developer</p>
               </div>
+          </div>
+          <div class="carousel-controls">
+              <button class="prev-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+              <button class="next-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
           </div>
       </section>
 
+      <script>
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function moveSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("testimonial-slide");
+            
+            if (n >= slides.length) {slideIndex = 0}
+            if (n < 0) {slideIndex = slides.length - 1}
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            slides[slideIndex].style.display = "block";
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => moveSlide(1), 5000);
+      </script>
+
+      <style>
+        .testimonial-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slide {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .testimonial-slide.active {
+            display: block;
+        }
+
+        .carousel-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .prev-btn, .next-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .prev-btn:hover, .next-btn:hover {
+            background: #0056b3;
+        }
+      </style>
       <footer>
         <div class="footer-content">
             <div class="footer-section">
