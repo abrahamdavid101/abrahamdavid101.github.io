@@ -388,7 +388,7 @@
             .sticky-cta {
                 position: fixed;
                 bottom: 20px;
-                right: 70px;
+                right: 20px;
                 padding: 15px 30px;
                 background-color: #3110ee;
                 color: white;
@@ -610,7 +610,7 @@
                         <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they're essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
                         <button class="cta-button primary-btn" style="margin-top: 20px;">Get Snippets</button>
                     </div>
-                    <img src="https://www.swifttech.me/snippets.png" alt="Featured Image" style="width: 100%; max-width: 700px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                    <img src="https://www.swifttech.me/cbd.jpg" alt="Featured Image" style="width: 100%; max-width: 500px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>
     </section>    
     
@@ -644,12 +644,12 @@
                 <div class="stats-container" style="display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
                     <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
                         <i class="fas fa-code fa-3x" style="color: #007bff; margin-bottom: 15px;"></i>
-                        <h3 class="stat-number" id="snippetsCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">5,000+</h3>
+                        <h3 class="stat-number" id="snippetsCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">0+</h3>
                         <p style="color: #666;">Snippets Shared</p>
                     </div>
                     <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
                         <i class="fas fa-users fa-3x" style="color: #28a745; margin-bottom: 15px;"></i>
-                        <h3 class="stat-number" id="freelancersCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">1,200</h3>
+                        <h3 class="stat-number" id="freelancersCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">0</h3>
                         <p style="color: #666;">Verified Freelancers</p>
                     </div>
                     <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
@@ -696,7 +696,14 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             statNumbers.forEach(stat => {
-                                const endValue = parseInt(stat.textContent);
+                                let endValue;
+                                if (stat.id === 'freelancersCount') {
+                                    endValue = 50;
+                                } else if (stat.id === 'snippetsCount') {
+                                    endValue = 400;
+                                } else {
+                                    endValue = parseInt(stat.textContent);
+                                }
                                 animateValue(stat, 0, endValue, 2000);
                             });
                             statsObserver.unobserve(entry.target);
