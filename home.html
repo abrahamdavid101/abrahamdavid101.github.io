@@ -135,7 +135,7 @@
 
           /* Hero Section */
           .hero {
-              background: linear-gradient(135deg, #1a73e8, #1558b3);
+              background: #1a73e8;
               color: white;
               padding: 4rem 2rem;
               text-align: center;
@@ -144,6 +144,20 @@
               overflow: hidden;
           }
 
+          .hero::after {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 500px;
+              height: 500px;
+              background: url('https://www.swifttech.me/SwiftTech.png') no-repeat center center;
+              background-size: contain;
+              opacity: 0.1;
+              pointer-events: none;
+              z-index: 1;
+          }
           .hero::before {
               content: '';
               position: absolute;
@@ -370,14 +384,39 @@
     <!-- End of Async Drift Code -->
   </head>
   <body>
+    <style>
+            .sticky-cta {
+                position: fixed;
+                bottom: 20px;
+                right: 70px;
+                padding: 15px 30px;
+                background-color: #3110ee;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                font-size: 16px;
+                font-weight: bold;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(0,110,255,0.3);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                z-index: 1000;
+            }
+    
+            .sticky-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(0,110,255,0.4);
+            }
+        </style>
+        <button class="sticky-cta">Get Started</button>
+    
       <header>
           <div class="nav-container">
-              <a href="/" class="logo">SwiftTech</a>
+              <a href="https://www.swifttech.me/home" class="logo">SwiftTech</a>
               <button class="mobile-menu-btn" id="menuBtn">
                   <i class="fas fa-bars"></i>
               </button>
               <nav class="nav-menu">
-                  <a href="/">Home</a>
+                  <a href="https://www.swifttech.me/home">Home</a>
                   <a href="#templates">Templates</a>
                   <a href="#snippets">Snippets</a>
                   <a href="#courses">Courses</a>
@@ -385,7 +424,7 @@
                   <a href="#contact">Contact</a>
               </nav>              
               <div class="cta-buttons">
-                  <button class="cta-button">Login</button>
+                  <button class="cta-button">Log In</button>
                   <button class="cta-button primary-btn">Sign Up</button>
               </div>
           </div>
@@ -413,7 +452,7 @@
               <h1>Learn, Build, and Hire the Best Coders</h1>
               <p>Access premium resources, tools, and opportunities to accelerate your tech journey</p>
               <div class="hero-buttons">
-                  <button class="cta-button primary-btn">Browse Templates</button>
+                  <button class="cta-button primary-btn" style="background-color: #006eff;">Browse Templates</button>
                   <button class="cta-button">Hire a Freelancer</button>
               </div>
               <i class="fas fa-laptop-code fa-5x"></i>
@@ -438,7 +477,15 @@
                       <h3>Freelancing</h3>
                       <p>Hire skilled developers for your projects</p>
                   </div>
+                  
               </div>
+              <div class="feature-card" style="margin-top: 20px;">
+                <i class="fas fa-rocket"></i>
+                <h3>Get Started</h3>
+                <p>Begin your coding journey today</p>
+                <button class="cta-button primary-btn">Start Now</button>
+            </div>
+            
           </div>
       </section>
 
@@ -499,13 +546,69 @@
                     </div>
                 </div>
             </section>
+            
+            
+            <section class="how-it-works" style="padding: 80px 0; background: #f8f9fa;">
+                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                    <h2 style="text-align: center; color: #333; font-size: 2.5rem; margin-bottom: 50px;">How It Works</h2>
+                    
+                    <div class="workflow-steps" style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 0 -20px;">
+                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up">
+                            <div class="step-icon" style="margin-bottom: 25px;">
+                                <i class="fas fa-search fa-4x" style="color: #007bff;"></i>
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 15px;">1. Find</h3>
+                            <p style="color: #666; line-height: 1.6;">Browse our collection of templates or connect with expert freelancers for your project needs</p>
+                        </div>
+            
+                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up" data-aos-delay="200">
+                            <div class="step-icon" style="margin-bottom: 25px;">
+                                <i class="fas fa-code fa-4x" style="color: #28a745;"></i>
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 15px;">2. Customize</h3>
+                            <p style="color: #666; line-height: 1.6;">Modify templates to your needs or work closely with freelancers to bring your vision to life</p>
+                        </div>
+            
+                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up" data-aos-delay="400">
+                            <div class="step-icon" style="margin-bottom: 25px;">
+                                <i class="fas fa-rocket fa-4x" style="color: #dc3545;"></i>
+                            </div>
+                            <h3 style="color: #333; margin-bottom: 15px;">3. Launch</h3>
+                            <p style="color: #666; line-height: 1.6;">Deploy your project seamlessly or download your customized templates instantly</p>
+                        </div>
+                    </div>
+            
+                    <div style="text-align: center; margin-top: 50px;">
+                        <button class="cta-button primary-btn" style="font-size: 1.2rem; padding: 15px 40px;">Start Exploring Now!</button>
+                    </div>
+                </div>
+            </section>
+            
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const steps = document.querySelectorAll('.step');
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.5 });
+            
+                steps.forEach(step => observer.observe(step));
+            });
+            </script>
+            
       
 
       <section class="featured-content">
                 <div class="image-container" style="display: flex; align-items: center; padding: 40px; flex-wrap: wrap;">
                     <div class="text-content" style="flex: 1; padding-right: 40px; min-width: 300px;">
                         <h2 style="color: #333; margin-bottom: 15px; font-size: 2.2rem;">Why Choose Our Snippets</h2>
-                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they’re essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
+                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they're essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
+                        <button class="cta-button primary-btn" style="margin-top: 20px;">Get Snippets</button>
                     </div>
                     <img src="https://www.swifttech.me/snippets.png" alt="Featured Image" style="width: 100%; max-width: 700px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>
@@ -534,6 +637,76 @@
               </div>
           </div>
       </section>
+
+
+      <section class="achievements" style="padding: 60px 20px; background: #f8f9fa;">
+                <h2 style="text-align: center; color: #333; margin-bottom: 40px; font-size: 2.2rem;">Our Impact in Numbers</h2>
+                <div class="stats-container" style="display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
+                        <i class="fas fa-code fa-3x" style="color: #007bff; margin-bottom: 15px;"></i>
+                        <h3 class="stat-number" id="snippetsCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">5,000+</h3>
+                        <p style="color: #666;">Snippets Shared</p>
+                    </div>
+                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
+                        <i class="fas fa-users fa-3x" style="color: #28a745; margin-bottom: 15px;"></i>
+                        <h3 class="stat-number" id="freelancersCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">1,200</h3>
+                        <p style="color: #666;">Verified Freelancers</p>
+                    </div>
+                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
+                        <i class="fas fa-star fa-3x" style="color: #ffc107; margin-bottom: 15px;"></i>
+                        <h3 class="stat-number" id="satisfactionRate" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">99%</h3>
+                        <p style="color: #666;">Customer Satisfaction</p>
+                    </div>
+                </div>
+                <div class="certifications" style="text-align: center; margin-top: 50px;">
+                    <h3 style="color: #333; margin-bottom: 20px;">Our Certifications</h3>
+                    <div class="badge-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div class="badge" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <img src="https://www.swifttech.me/developercertification.svg" alt="Developer Certification" style="width: 100px; height: 100px;">
+                            <p style="margin-top: 10px; color: #666;">Certified Development Team</p>
+                        </div>
+                        <div class="badge" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                            <img src="https://www.swifttech.me/securitybadge.png" alt="Security Badge" style="width: 100px; height: 100px;">
+                            <p style="margin-top: 10px; color: #666;">Security Verified</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+      
+            <script>
+                // Animate numbers when in viewport
+                const statsSection = document.querySelector('.achievements');
+                const statNumbers = document.querySelectorAll('.stat-number');
+                
+                const animateValue = (obj, start, end, duration) => {
+                    let startTimestamp = null;
+                    const step = (timestamp) => {
+                        if (!startTimestamp) startTimestamp = timestamp;
+                        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                        const current = Math.floor(progress * (end - start) + start);
+                        obj.textContent = current + (obj.id === 'satisfactionRate' ? '%' : '+');
+                        if (progress < 1) {
+                            window.requestAnimationFrame(step);
+                        }
+                    };
+                    window.requestAnimationFrame(step);
+                };
+      
+                const statsObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            statNumbers.forEach(stat => {
+                                const endValue = parseInt(stat.textContent);
+                                animateValue(stat, 0, endValue, 2000);
+                            });
+                            statsObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+      
+                statsObserver.observe(statsSection);
+            </script>
+      
 
       <section class="testimonials">
           <div class="testimonial-carousel" id="testimonialCarousel">
@@ -583,8 +756,8 @@
             slides[slideIndex].style.display = "block";
         }
 
-        // Auto-advance slides every 5 seconds
-        setInterval(() => moveSlide(1), 5000);
+        // Auto-advance slides every 20 seconds
+        setInterval(() => moveSlide(1), 20000);
       </script>
 
       <style>
