@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign in/ Log in</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.png" type="image/x-icon">
   <style>
     body {
       display: flex;
@@ -157,7 +158,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="VN_HUB_20241226_133020_0000.png" alt="Logo" class="logo">
+    <img src="https://www.swifttech.me/favicon.png" alt="Logo" class="logo">
     <h2>Log into your account</h2>
     <p class="signup-link">Don't have an account? <a href="#" onclick="document.getElementById('email').focus(); return false;">Sign up</a></p>
 
@@ -287,31 +288,6 @@
           console.error('Error checking login state:', error);
         }
       }, 5000);  // Check every 5 seconds
-    }
-
-    // Handle Google login callback
-    function handleCredentialResponse(response) {
-      const credential = response.credential;
-      console.log('Google credential:', credential);
-
-      // Handle login with the received credential (send to your server for verification)
-      fetch('/google-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ credential })
-      }).then(res => res.json())
-        .then(data => {
-          if (data.success) {
-            window.location.href = '/dashboard';
-          } else {
-            document.getElementById('result').innerHTML = 'Failed to log in with Google';
-          }
-        })
-        .catch(err => {
-          document.getElementById('result').innerHTML = 'Error: ' + err.message;
-        });
     }
 
     // Check if user is logged in and show appropriate button status
