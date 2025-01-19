@@ -308,39 +308,18 @@
               return `
                   <div class="settings-container">
                       <div class="setting-item">
-                          <h4>Notifications</h4>
-                          <label><input type="checkbox" ${settings.notifications ? 'checked' : ''}> Enable notifications</label>
-                      </div>
-                      <div class="setting-item">
-                          <h4>Theme</h4>
-                          <select>
-                              <option ${settings.theme === 'light' ? 'selected' : ''}>Light</option>
-                              <option ${settings.theme === 'dark' ? 'selected' : ''}>Dark</option>
-                          </select>
+                          <h4>Account Status</h4>
+                          <p>${settings.accountStatus || 'active'}</p>
                       </div>
                   </div>
               `;
           }
 
           function renderSubscription(subscription) {
-              if (!subscription || !subscription.availablePlans || !Array.isArray(subscription.availablePlans)) {
-                  return '<p>No subscription plans available</p>';
-              }
               return `
                   <div class="subscription-container">
                       <div class="current-plan">
-                          <h4>Current Plan: ${subscription.currentPlan}</h4>
-                          <p>Status: ${subscription.status}</p>
-                          <p>Next billing date: ${subscription.nextBillingDate}</p>
-                      </div>
-                      <div class="available-plans">
-                          ${subscription.availablePlans.map(plan => `
-                              <div class="plan-card">
-                                  <h4>${plan.name}</h4>
-                                  <p>${plan.description}</p>
-                                  <p>Price: ${plan.price}/month</p>
-                              </div>
-                          `).join('')}
+                          <h4>Balance: $${subscription.balance || 0}</h4>
                       </div>
                   </div>
               `;
@@ -349,14 +328,10 @@
           function renderProfile(profile) {
               return `
                   <div class="profile-container">
-                      <div class="profile-header">
-                          <img src="${profile.avatar}" alt="Profile Picture" class="profile-avatar">
-                          <h4>${profile.name}</h4>
-                      </div>
                       <div class="profile-details">
-                          <p>Email: ${profile.email}</p>
-                          <p>Role: ${profile.role}</p>
-                          <p>Member since: ${profile.joinDate}</p>
+                          <p>Name: ${profile.name || 'none'}</p>
+                          <p>ID: ${profile.id || 'none'}</p>
+                          <p>Account Status: ${profile.accountStatus || 'active'}</p>
                       </div>
                   </div>
               `;
@@ -378,36 +353,23 @@
                       case 'dashboard':
                           updateDashboard(data);
                           break;
-                      case 'templates':
-                          document.getElementById('templatesList').innerHTML = data.templates.map(template => `
-                              <div class="template-item">
-                                  <h4>${template.name}</h4>
-                                  <p>${template.description}</p>
-                              </div>
-                          `).join('');
-                          break;
                       case 'snippets':
                           document.getElementById('snippetsList').innerHTML = data.codeSnippets.map(snippet => `
                               <div class="snippet-item">
-                                  <h4>${snippet.name}</h4>
-                                  <pre><code>${snippet.code}</code></pre>
+                                  <h4>${snippet.title || 'none'}</h4>
+                                  <pre><code>${snippet.code || 'none'}</code></pre>
+                                  <p>ID: ${snippet.id || 'none'}</p>
                               </div>
-                          `).join('');
-                          break;
-                      case 'hire':
-                          document.getElementById('developersList').innerHTML = renderDevelopers(data);
-                          break;
-                      case 'courses':
-                          document.getElementById('coursesList').innerHTML = renderCourses(data.courses);
+                          `).join('') || '<p>No snippets available</p>';
                           break;
                       case 'settings':
-                          document.getElementById('settingsContent').innerHTML = renderSettings(data.settings);
+                          document.getElementById('settingsContent').innerHTML = renderSettings(data);
                           break;
                       case 'subscription':
-                          document.getElementById('subscriptionPlans').innerHTML = renderSubscription(data.subscription);
+                          document.getElementById('subscriptionPlans').innerHTML = renderSubscription(data);
                           break;
                       case 'profile':
-                          document.getElementById('profileContent').innerHTML = renderProfile(data.profile);
+                          document.getElementById('profileContent').innerHTML = renderProfile(data);
                           break;
                   }
               } catch (error) {
@@ -416,33 +378,31 @@
           }
 
           function updateDashboard(data) {
-              document.getElementById('activeProjects').textContent = data.activeProjects.length;
+              document.getElementById('activeProjects').textContent = data.activeProjects || 0;
               document.getElementById('projectsGrowth').textContent = '0%';
-              document.getElementById('totalBudget').textContent = data.totalBudget.toFixed(2);
+              document.getElementById('totalBudget').textContent = data.balance || 0;
               document.getElementById('budgetGrowth').textContent = '0%';
-              document.getElementById('completedTasks').textContent = data.completedTasks.length;
+              document.getElementById('completedTasks').textContent = data.completedTasks || 0;
               document.getElementById('tasksStatus').textContent = 'On Track';
 
               const projectList = document.getElementById('projectList');
-              projectList.innerHTML = data.projects.map(project => `
-                  <div class="project-item" style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                      <div>
-                          <h4 style="color: #333;">${project.name}</h4>
-                          <p style="color: #666; font-size: 0.9rem;">ID: ${project.id}</p>
+              if (data.activeProjects && data.activeProjects.length > 0) {
+                  projectList.innerHTML = data.activeProjects.map(project => `
+                      <div class="project-item" style="padding: 15px; border-bottom: 1px solid #eee;">
+                          <h4 style="color: #333;">Project ID: ${project.id || 'none'}</h4>
+                          <p style="color: #666;">Date: ${project.date || 'none'}</p>
                       </div>
-                      <span class="status" style="background: ${project.status === 'In Progress' ? '#e8f5e9' : '#fff3e0'}; 
-                          color: ${project.status === 'In Progress' ? '#28a745' : '#f57c00'}; 
-                          padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">${project.status}</span>
-                  </div>
-              `).join('');
+                  `).join('');
+              } else {
+                  projectList.innerHTML = '<p>No active projects</p>';
+              }
 
               const teamList = document.getElementById('teamList');
               teamList.innerHTML = `
                   <div class="team-member" style="display: flex; align-items: center; margin-bottom: 15px;">
-                      <img src="${data.profile.profilePicture}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                       <div>
-                          <h4 style="color: #333; font-size: 0.9rem;">${data.profile.email}</h4>
-                          <p style="color: #666; font-size: 0.8rem;">Trust Score: ${data.profile.trustScore}</p>
+                          <h4 style="color: #333; font-size: 0.9rem;">${data.name || 'none'}</h4>
+                          <p style="color: #666; font-size: 0.8rem;">ID: ${data.id || 'none'}</p>
                       </div>
                   </div>
               `;
