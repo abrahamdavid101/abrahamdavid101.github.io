@@ -262,16 +262,13 @@
           // Tab switching functionality
           document.querySelectorAll('.nav-item').forEach(item => {
               item.addEventListener('click', () => {
-                  // Remove active class from all tabs and content
                   document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
                   document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
                   
-                  // Add active class to clicked tab and corresponding content
                   item.classList.add('active');
                   const tabId = item.getAttribute('data-tab');
                   document.getElementById(tabId).classList.add('active');
 
-                  // Load content based on tab
                   loadTabContent(tabId);
               });
           });
@@ -350,13 +347,14 @@
               return `
                   <div class="profile-container">
                       <div class="profile-header">
-                          <img src="${profile.avatar}" alt="Profile Picture" class="profile-avatar">
-                          <h4>${profile.name}</h4>
+                          <img src="${profile.avatar || 'default-avatar.png'}" alt="Profile Picture" class="profile-avatar">
+                          <h4>${profile.name || 'User'}</h4>
                       </div>
                       <div class="profile-details">
                           <p>Email: ${profile.email}</p>
-                          <p>Role: ${profile.role}</p>
-                          <p>Member since: ${profile.joinDate}</p>
+                          <p>Account Status: ${profile.accountStatus || 'active'}</p>
+                          <p>Balance: $${profile.balance || 0}</p>
+                          <p>Member since: ${profile.joinDate || 'N/A'}</p>
                       </div>
                   </div>
               `;
@@ -389,8 +387,9 @@
                       case 'snippets':
                           document.getElementById('snippetsList').innerHTML = data.codeSnippets.map(snippet => `
                               <div class="snippet-item">
-                                  <h4>${snippet.name}</h4>
-                                  <pre><code>${snippet.code}</code></pre>
+                                  <h4>${snippet.title || 'Untitled'}</h4>
+                                  <p>ID: ${snippet.id || 'none'}</p>
+                                  <pre><code>${snippet.code || 'No code available'}</code></pre>
                               </div>
                           `).join('');
                           break;
@@ -416,33 +415,33 @@
           }
 
           function updateDashboard(data) {
-              document.getElementById('activeProjects').textContent = data.activeProjects.length;
+              document.getElementById('activeProjects').textContent = data.activeProjects?.length || 0;
               document.getElementById('projectsGrowth').textContent = '0%';
-              document.getElementById('totalBudget').textContent = data.totalBudget.toFixed(2);
+              document.getElementById('totalBudget').textContent = (data.balance || 0).toFixed(2);
               document.getElementById('budgetGrowth').textContent = '0%';
-              document.getElementById('completedTasks').textContent = data.completedTasks.length;
+              document.getElementById('completedTasks').textContent = data.completedTasks?.length || 0;
               document.getElementById('tasksStatus').textContent = 'On Track';
 
               const projectList = document.getElementById('projectList');
-              projectList.innerHTML = data.projects.map(project => `
+              projectList.innerHTML = (data.activeProjects || []).map(project => `
                   <div class="project-item" style="padding: 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
                       <div>
-                          <h4 style="color: #333;">${project.name}</h4>
-                          <p style="color: #666; font-size: 0.9rem;">ID: ${project.id}</p>
+                          <h4 style="color: #333;">${project.name || 'Untitled Project'}</h4>
+                          <p style="color: #666; font-size: 0.9rem;">ID: ${project.id || 'none'}</p>
                       </div>
                       <span class="status" style="background: ${project.status === 'In Progress' ? '#e8f5e9' : '#fff3e0'}; 
                           color: ${project.status === 'In Progress' ? '#28a745' : '#f57c00'}; 
-                          padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">${project.status}</span>
+                          padding: 5px 10px; border-radius: 15px; font-size: 0.8rem;">${project.status || 'Unknown'}</span>
                   </div>
               `).join('');
 
               const teamList = document.getElementById('teamList');
               teamList.innerHTML = `
                   <div class="team-member" style="display: flex; align-items: center; margin-bottom: 15px;">
-                      <img src="${data.profile.profilePicture}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                      <img src="${data.profile?.profilePicture || 'default-avatar.png'}" alt="Profile Picture" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                       <div>
-                          <h4 style="color: #333; font-size: 0.9rem;">${data.profile.email}</h4>
-                          <p style="color: #666; font-size: 0.8rem;">Trust Score: ${data.profile.trustScore}</p>
+                          <h4 style="color: #333; font-size: 0.9rem;">${data.profile?.email || 'Unknown User'}</h4>
+                          <p style="color: #666; font-size: 0.8rem;">Account Status: ${data.accountStatus || 'active'}</p>
                       </div>
                   </div>
               `;
