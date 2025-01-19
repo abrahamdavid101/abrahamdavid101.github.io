@@ -277,23 +277,29 @@
           });
 
           function renderDevelopers(data) {
+              if (!data || !data.developers || !Array.isArray(data.developers)) {
+                  return '<p>No developers available</p>';
+              }
               return data.developers.map(dev => `
                   <div class="developer-card">
                       <h4>${dev.name}</h4>
                       <p>Skills: ${dev.skills.join(', ')}</p>
                       <p>Experience: ${dev.experience} years</p>
-                      <p>Rate: $${dev.hourlyRate}/hour</p>
+                      <p>Rate: ${dev.hourlyRate}/hour</p>
                   </div>
               `).join('');
           }
 
           function renderCourses(courses) {
+              if (!courses || !Array.isArray(courses)) {
+                  return '<p>No courses available</p>';
+              }
               return courses.map(course => `
                   <div class="course-card">
                       <h4>${course.title}</h4>
                       <p>${course.description}</p>
                       <p>Duration: ${course.duration}</p>
-                      <p>Price: $${course.price}</p>
+                      <p>Price: ${course.price}</p>
                   </div>
               `).join('');
           }
@@ -317,6 +323,9 @@
           }
 
           function renderSubscription(subscription) {
+              if (!subscription || !subscription.availablePlans || !Array.isArray(subscription.availablePlans)) {
+                  return '<p>No subscription plans available</p>';
+              }
               return `
                   <div class="subscription-container">
                       <div class="current-plan">
@@ -329,7 +338,7 @@
                               <div class="plan-card">
                                   <h4>${plan.name}</h4>
                                   <p>${plan.description}</p>
-                                  <p>Price: $${plan.price}/month</p>
+                                  <p>Price: ${plan.price}/month</p>
                               </div>
                           `).join('')}
                       </div>
