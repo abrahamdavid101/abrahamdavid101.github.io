@@ -220,7 +220,7 @@
           async function checkAuthState() {
               const storedEmail = localStorage.getItem('userEmail');
               
-              if (!storedEmail) {
+              if (!storedEmail || !storedEmail.includes('@')) {
                   window.location.href = 'login.html';
                   return;
               }
@@ -238,10 +238,10 @@
                   });              
                   const data = await response.json();
                   
-                  if (!response.ok || !data.loginState) {
-                      localStorage.clear();
-                      window.location.replace('login.html');
-                      return;
+                  if (data.loginState === true) {
+                      console.log(true);
+                  } else {
+                      window.location.href = 'login.html';
                   }
                   
                   } catch (error) {
@@ -252,9 +252,7 @@
               }
 
           // Run auth check before loading dashboard
-          checkAuthState(); 
-          
-          
+          checkAuthState();                   
           // Tab switching functionality
           document.querySelectorAll('.nav-item').forEach(item => {
               item.addEventListener('click', () => {
