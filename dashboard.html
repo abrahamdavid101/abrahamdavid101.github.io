@@ -84,11 +84,71 @@
       <section class="dashboard" style="padding: 10px; background: #f8f9fa;">
           <div class="dashboard-container" style="max-width: 1200px; margin: 0 auto;">
               <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: nowrap;">
-                  <h2 style="color: #333; white-space: nowrap; font-size: clamp(1rem, 4vw, 1.5rem);">Dashboard <img src="https://www.swifttech.me/swift.png" alt="Dashboard Icon" style="width: clamp(50px, 10vw, 70px); height: auto; margin-right: 8px; vertical-align: middle; font-size: 14px;"></h2>                  <div class="header-actions" style="display: flex; align-items: center; gap: 5px;">
-                      <button class="cta-button" style="padding: clamp(5px, 2vw, 10px);"><i class="fas fa-bell"></i></button>
-                      <button class="cta-button" style="padding: clamp(5px, 2vw, 10px);"><i class="fas fa-user"></i></button>
-                      <button class="cta-button primary-btn" style="white-space: nowrap; padding: clamp(5px, 2vw, 10px);">New Project</button>
-                  </div>
+                  <h2 style="color: #333; white-space: nowrap; font-size: clamp(1rem, 4vw, 1.5rem);">Dashboard <img src="https://www.swifttech.me/swift.png" alt="Dashboard Icon" style="width: clamp(50px, 10vw, 70px); height: auto; margin-right: 8px; vertical-align: middle; font-size: 14px;"></h2>                  
+                  <div class="header-actions" style="display: flex; align-items: center; gap: 5px;">
+                                        <button class="cta-button" style="padding: clamp(5px, 2vw, 10px);" onclick="showNotifications()"><i class="fas fa-bell"></i></button>
+                                        <div id="notificationsPanel" style="display: none; position: absolute; top: 60px; right: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; max-height: 400px; overflow-y: auto; z-index: 1000;">
+                                            <div style="padding: 15px; border-bottom: 1px solid #eee;">
+                                                <h3 style="margin: 0; color: #333;">Notifications</h3>
+                                            </div>
+                                            <div id="notificationsList" style="padding: 10px;">
+                                                <div class="notification-item" style="padding: 10px; text-align: center; color: #666;">
+                                                    No notifications yet
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <script>
+                                            function showNotifications() {
+                                                const panel = document.getElementById('notificationsPanel');
+                                                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+                              
+                                                fetch('https://swifttech-server.onrender.com/notifications', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json'
+                                                    },
+                                                    body: JSON.stringify({
+                                                        email: localStorage.getItem('userEmail')                                                    })
+                                                })
+                                                .then(response => response.json())
+                                                .then(notifications => {
+                                                    const notificationsList = document.getElementById('notificationsList');
+                                                    if (!notifications || notifications.length === 0) {
+                                                        notificationsList.innerHTML = `
+                                                            <div class="notification-item" style="padding: 10px; text-align: center; color: #666;">
+                                                                No notifications yet
+                                                            </div>
+                                                        `;
+                                                        return;
+                                                    }
+                                                    notificationsList.innerHTML = notifications.map(notification => `
+                                                        <div class="notification-item" style="padding: 10px; border-bottom: 1px solid #f5f5f5;">
+                                                            <div style="font-weight: 500; color: #333;">${notification.message}</div>
+                                                            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">${new Date(notification.timestamp).toLocaleDateString()}</div>
+                                                        </div>
+                                                    `).join('');
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error fetching notifications:', error);
+                                                    const notificationsList = document.getElementById('notificationsList');
+                                                    notificationsList.innerHTML = `
+                                                        <div class="notification-item" style="padding: 10px; text-align: center; color: #666;">
+                                                            Error loading notifications. Please try again later.
+                                                        </div>
+                                                    `;
+                                                });
+                                            }
+
+                                            // Close notifications panel when clicking outside
+                                            document.addEventListener('click', function(event) {
+                                                const panel = document.getElementById('notificationsPanel');
+                                                const button = event.target.closest('.cta-button');
+                                                if (!button && !panel.contains(event.target) && panel.style.display === 'block') {
+                                                    panel.style.display = 'none';
+                                                }
+                                            });
+                                        </script>                                        <button class="cta-button" style="padding: clamp(5px, 2vw, 10px);" onclick="document.querySelector('[data-tab=profile]').click()"><i class="fas fa-user"></i></button>                      
+                      <button class="cta-button primary-btn" style="white-space: nowrap; padding: clamp(5px, 2vw, 10px);" onclick="document.querySelector('[data-tab=hire]').click()">New Project</button>                  </div>
               </div>
 
               <div class="nav-menu">
@@ -141,9 +201,9 @@
                       </div>
 
                       <div class="side-content" style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                          <h3 style="margin-bottom: 20px;">Team Members</h3>
+                          <h3 style="margin-bottom: 20px;">Current User</h3>
                           <div class="team-list" id="teamList">
-                              <div style="text-align: center; padding: 20px;">Loading team members...</div>
+                              <div style="text-align: center; padding: 20px;">Loading current user...</div>
                           </div>
                       </div>
                   </div>
