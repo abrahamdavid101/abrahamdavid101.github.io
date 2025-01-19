@@ -293,10 +293,20 @@
                           updateDashboard(data);
                           break;
                       case 'templates':
-                          document.getElementById('templatesList').innerHTML = renderTemplates(data.templates);
+                          document.getElementById('templatesList').innerHTML = data.templates.map(template => `
+                              <div class="template-item">
+                                  <h4>${template.name}</h4>
+                                  <p>${template.description}</p>
+                              </div>
+                          `).join('');
                           break;
                       case 'snippets':
-                          document.getElementById('snippetsList').innerHTML = renderSnippets(data.codeSnippets);
+                          document.getElementById('snippetsList').innerHTML = data.codeSnippets.map(snippet => `
+                              <div class="snippet-item">
+                                  <h4>${snippet.name}</h4>
+                                  <pre><code>${snippet.code}</code></pre>
+                              </div>
+                          `).join('');
                           break;
                       case 'hire':
                           document.getElementById('developersList').innerHTML = renderDevelopers(data);
@@ -352,8 +362,8 @@
               `;
           }
 
-          // Initial load of dashboard
-          fetchDashboardData();
+          // Initial load of dashboard tab content
+          loadTabContent('dashboard');
 
           </script>      
       </body>
