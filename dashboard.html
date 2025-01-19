@@ -218,9 +218,9 @@
 
           // Check authentication state on page load and verify server connection
           async function checkAuthState() {
-              const userEmail = localStorage.getItem('userEmail');
+              const storedEmail = localStorage.getItem('userEmail');
               
-              if (!userEmail) {
+              if (!storedEmail) {
                   window.location.href = 'login.html';
                   return;
               }
@@ -233,7 +233,7 @@
                           'Accept': 'application/json'
                       },
                       body: JSON.stringify({
-                          email: userEmail
+                          email: storedEmail
                       })
                   });              
                   const data = await response.json();
@@ -252,7 +252,10 @@
               }
 
           // Run auth check before loading dashboard
-          checkAuthState();          // Tab switching functionality
+          checkAuthState(); 
+          
+          
+          // Tab switching functionality
           document.querySelectorAll('.nav-item').forEach(item => {
               item.addEventListener('click', () => {
                   // Remove active class from all tabs and content
@@ -270,14 +273,14 @@
           });
 
           async function loadTabContent(tabId) {
-              const userEmail = localStorage.getItem('userEmail');
+              const storedEmail = localStorage.getItem('userEmail');
               try {
                   const response = await fetch(`${API_URL}/${tabId}`, {
                       method: 'POST',
                       headers: {
                           'Content-Type': 'application/json'
                       },
-                      body: JSON.stringify({ email: userEmail })
+                      body: JSON.stringify({ email: storedEmail })
                   });
                   const data = await response.json();
                   
