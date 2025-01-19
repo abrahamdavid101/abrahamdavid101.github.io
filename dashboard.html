@@ -215,7 +215,6 @@
 
       <script>
           const API_URL = 'https://www.swifttech-server.onrender.com';
-          const userEmail = localStorage.getItem('userEmail');
 
           // Check authentication state on page load and verify server connection
           async function checkAuthState() {
@@ -275,6 +274,7 @@
           });
 
           async function loadTabContent(tabId) {
+              const userEmail = localStorage.getItem('email');
               try {
                   const response = await fetch(`${API_URL}/${tabId}`, {
                       method: 'POST',
