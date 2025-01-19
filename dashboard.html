@@ -276,6 +276,83 @@
               });
           });
 
+          function renderDevelopers(data) {
+              return data.developers.map(dev => `
+                  <div class="developer-card">
+                      <h4>${dev.name}</h4>
+                      <p>Skills: ${dev.skills.join(', ')}</p>
+                      <p>Experience: ${dev.experience} years</p>
+                      <p>Rate: $${dev.hourlyRate}/hour</p>
+                  </div>
+              `).join('');
+          }
+
+          function renderCourses(courses) {
+              return courses.map(course => `
+                  <div class="course-card">
+                      <h4>${course.title}</h4>
+                      <p>${course.description}</p>
+                      <p>Duration: ${course.duration}</p>
+                      <p>Price: $${course.price}</p>
+                  </div>
+              `).join('');
+          }
+
+          function renderSettings(settings) {
+              return `
+                  <div class="settings-container">
+                      <div class="setting-item">
+                          <h4>Notifications</h4>
+                          <label><input type="checkbox" ${settings.notifications ? 'checked' : ''}> Enable notifications</label>
+                      </div>
+                      <div class="setting-item">
+                          <h4>Theme</h4>
+                          <select>
+                              <option ${settings.theme === 'light' ? 'selected' : ''}>Light</option>
+                              <option ${settings.theme === 'dark' ? 'selected' : ''}>Dark</option>
+                          </select>
+                      </div>
+                  </div>
+              `;
+          }
+
+          function renderSubscription(subscription) {
+              return `
+                  <div class="subscription-container">
+                      <div class="current-plan">
+                          <h4>Current Plan: ${subscription.currentPlan}</h4>
+                          <p>Status: ${subscription.status}</p>
+                          <p>Next billing date: ${subscription.nextBillingDate}</p>
+                      </div>
+                      <div class="available-plans">
+                          ${subscription.availablePlans.map(plan => `
+                              <div class="plan-card">
+                                  <h4>${plan.name}</h4>
+                                  <p>${plan.description}</p>
+                                  <p>Price: $${plan.price}/month</p>
+                              </div>
+                          `).join('')}
+                      </div>
+                  </div>
+              `;
+          }
+
+          function renderProfile(profile) {
+              return `
+                  <div class="profile-container">
+                      <div class="profile-header">
+                          <img src="${profile.avatar}" alt="Profile Picture" class="profile-avatar">
+                          <h4>${profile.name}</h4>
+                      </div>
+                      <div class="profile-details">
+                          <p>Email: ${profile.email}</p>
+                          <p>Role: ${profile.role}</p>
+                          <p>Member since: ${profile.joinDate}</p>
+                      </div>
+                  </div>
+              `;
+          }
+
           async function loadTabContent(tabId) {
               const storedEmail = localStorage.getItem('userEmail');
               try {
