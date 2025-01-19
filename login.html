@@ -230,10 +230,18 @@
         return;
       }
 
+      // Check if email exists in localStorage
+      const storedEmail = localStorage.getItem('userEmail');
+      if (storedEmail === email) {
+        document.getElementById('result').innerHTML = 'Checking login state...';
+        checkLoginState(email);
+        return;
+      }
+
       // Show loading spinner
-  const submitButton = document.querySelector('.email-btn');
-  submitButton.innerHTML = '<div class="spinner"></div>';
-  submitButton.disabled = true;
+      const submitButton = document.querySelector('.email-btn');
+      submitButton.innerHTML = '<div class="spinner"></div>';
+      submitButton.disabled = true;
 
       try {
         // Send request to server to send login link
@@ -305,5 +313,6 @@
 
     // Call this function to check login status when the page loads
     checkLoginStatus();
-  </script></body>
-</html>
+  </script>
+  </body>
+  </html>
