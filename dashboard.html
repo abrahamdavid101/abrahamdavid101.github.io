@@ -218,7 +218,7 @@
 
           // Check authentication state on page load and verify server connection
           async function checkAuthState() {
-              userEmail = localStorage.getItem('email');
+              const userEmail = localStorage.getItem('userEmail');
               
               if (!userEmail) {
                   window.location.href = 'login.html';
@@ -233,22 +233,23 @@
                           'Accept': 'application/json'
                       },
                       body: JSON.stringify({
-                          email: localStorage.getItem('email')
+                          email: userEmail
                       })
                   });              
                   const data = await response.json();
                   
                   if (!response.ok || !data.loginState) {
-                      localStorage.removeItem('email');
-                      window.location.href = 'login.html';
+                      localStorage.clear();
+                      window.location.replace('login.html');
                       return;
                   }
-              } catch (error) {
-                  console.error('Error checking login state:', error);
-                  // Don't redirect on connection error to allow offline access
-                  console.log('Continuing with stored credentials due to connection error');
+                  
+                  } catch (error) {
+                      console.error('Error checking login state:', error);
+                      localStorage.clear();
+                      window.location.replace('login.html');
+                  }
               }
-          }
 
           // Run auth check before loading dashboard
           checkAuthState();          // Tab switching functionality
@@ -269,7 +270,7 @@
           });
 
           async function loadTabContent(tabId) {
-              const userEmail = localStorage.getItem('email');
+              const userEmail = localStorage.getItem('userEmail');
               try {
                   const response = await fetch(`${API_URL}/${tabId}`, {
                       method: 'POST',
