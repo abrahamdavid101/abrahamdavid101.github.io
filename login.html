@@ -289,7 +289,7 @@
           if (data.loginState === true) {
             clearInterval(interval);  // Stop retrying
             localStorage.setItem('userEmail', email); // Save email to local storage
-            window.location.href = '/dashboard';  // Redirect to dashboard
+            window.location.href = 'https://app.swifttech.me';  // Redirect to dashboard
           } else {
             console.log('Login state is false, retrying...');
           }
