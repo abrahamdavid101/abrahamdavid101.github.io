@@ -1,860 +1,1809 @@
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="SwiftTech - Your ultimate resource for professional development templates, code snippets, and expert solutions. Streamline your workflow today.">
-      <meta name="keywords" content="SwiftTech, development templates, code snippets, web development, programming resources, developer tools, how to code, coding tutorials, free coding courses, free templates">
-      <meta name="author" content="SwiftTech">
-      <meta name="robots" content="index, follow">
-      <meta property="og:title" content="SwiftTech - Professional Development Resources">
-      <meta property="og:description" content="Access premium development templates, code snippets, and expert solutions to accelerate your development workflow.">
-      <meta property="og:image" content="og-image.jpg">
-      <meta property="og:url" content="https://www.swifttech.me">
-      <meta name="twitter:card" content="summary_large_image">
-      <meta name="theme-color" content="#1a73e8">
-      <title>Simplify Development with SwiftTech – Templates, Snippets, and Verified Experts</title>
-      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-      <link rel="icon" href="favicon.png" type="image/x-icon">
-      <style>          * {
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-              font-family: 'Montserrat', sans-serif;
-          }
-
-          @keyframes fadeIn {
-              from { opacity: 0; }
-              to { opacity: 1; }
-          }
-
-          @keyframes slideIn {
-              from { transform: translateY(20px); opacity: 0; }
-              to { transform: translateY(0); opacity: 1; }
-          }
-
-          @keyframes scaleIn {
-              from { transform: scale(0.95); opacity: 0; }
-              to { transform: scale(1); opacity: 1; }
-          }
-
-          @keyframes bounce {
-              0% { transform: translateY(0); }
-              50% { transform: translateY(-10px); }
-              100% { transform: translateY(0); }
-          }
-
-          /* Header Styles */
-          header {
-              padding: 1rem;
-              background: #ffffff;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              animation: fadeIn 0.5s ease-out;
-              position: relative;
-          }
-
-          .nav-container {
-              max-width: 1200px;
-              margin: 0 auto;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-          }
-
-          .logo {
-              font-size: 1.5rem;
-              font-weight: bold;
-              color: #1a73e8;
-              transition: transform 0.3s ease;
-              text-decoration: none;
-          }
-
-          .logo:hover {
-              transform: scale(1.05);
-          }
-
-          .nav-menu {
-              display: flex;
-              gap: 2rem;
-          }
-
-          .nav-menu a {
-              text-decoration: none;
-              color: #333;
-              transition: color 0.3s ease;
-          }
-
-          .nav-menu a:hover {
-              color: #1a73e8;
-              transform: translateY(-2px);
-              transition: all 0.2s ease-in-out;
-
-          }
-
-          .cta-buttons {
-              display: flex;
-              gap: 1rem;
-          }
-
-          .cta-button {
-              padding: 0.5rem 1rem;
-              border-radius: 5px;
-              border: none;
-              cursor: pointer;
-              transition: transform 0.3s ease, box-shadow 0.3s ease;
-          }
-
-          .cta-button:hover {
-              transform: translateY(-2px);
-              box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-          }
-
-          .primary-btn {
-              background: #006eff;
-              color: white;
-          }
-
-          .newsletter-form {
-              display: flex;
-              gap: 1rem;
-              margin-top: 1rem;
-          }
-
-          .newsletter-form input {
-              padding: 0.5rem;
-              border-radius: 5px;
-              border: 1px solid #ddd;
-          }
-
-          .mobile-menu-btn {
-              display: none;
-              font-size: 1.5rem;
-              background: none;
-              border: none;
-              color: #1a73e8;
-              cursor: pointer;
-              transition: transform 0.3s ease;
-              z-index: 1000;
-          }
-
-          .mobile-menu-btn.active i {
-              transform: rotate(90deg);
-          }
-
-          /* Hero Section */
-          .hero {
-              background: #1a73e8;
-              color: white;
-              padding: 4rem 2rem;
-              text-align: center;
-              animation: fadeIn 1s ease-out;
-              position: relative;
-              overflow: hidden;
-          }
-
-          .hero::after {
-              content: '';
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              width: 500px;
-              height: 500px;
-              background: url('SwiftTech.png') no-repeat center center;
-              background-size: contain;
-              opacity: 0.1;
-              pointer-events: none;
-              z-index: 1;
-          }
-          .hero::before {
-              content: '';
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              background: url('https://example.com/pattern.svg');
-              opacity: 0.1;
-              animation: slideIn 20s linear infinite;
-          }
-
-          .hero-content {
-              max-width: 800px;
-              margin: 0 auto;
-              position: relative;
-          }
-
-          .hero h1 {
-              animation: slideIn 0.8s ease-out;
-              font-size: 2.5rem;
-              margin-bottom: 1rem;
-          }
-
-          .hero p {
-              animation: slideIn 0.8s ease-out 0.2s backwards;
-              font-size: 1.2rem;
-              margin-bottom: 2rem;
-          }
-
-          .hero-buttons {
-              display: flex;
-              gap: 1rem;
-              justify-content: center;
-              margin-bottom: 2rem;
-          }
-
-          .hero img {
-              width: 100%;
-              max-width: 600px;
-              margin: 2rem 0;
-              border-radius: 10px;
-              animation: scaleIn 0.8s ease-out 0.4s backwards;
-          }
-
-          .features-grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-              gap: 2rem;
-              margin-top: 3rem;
-          }
-
-          .feature-card {
-              background: rgba(255,255,255,0.1);
-              padding: 1.5rem;
-              border-radius: 10px;
-              transition: transform 0.3s ease;
-              animation: fadeIn 0.8s ease-out;
-          }
-
-          .feature-card:hover {
-              transform: translateY(-10px);
-          }
-
-          .feature-card i {
-              font-size: 3rem;
-              margin-bottom: 1rem;
-              animation: bounce 2s infinite;
-          }
-
-          /* Featured Section */
-          .featured {
-              padding: 4rem 2rem;
-              background: #f4f4f4;
-              animation: fadeIn 1s ease-out;
-          }
-
-          .resources-grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-              gap: 2rem;
-              max-width: 1200px;
-              margin: 0 auto;
-          }
-
-          .resource-card {
-              background: white;
-              padding: 1.5rem;
-              border-radius: 10px;
-              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-              transition: transform 0.3s ease, box-shadow 0.3s ease;
-              animation: scaleIn 0.8s ease-out;
-          }
-
-          .resource-card:hover {
-              transform: translateY(-5px);
-              box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-          }
-
-          .resource-card i {
-              font-size: 4rem;
-              color: #1a73e8;
-              margin-bottom: 1rem;
-              transition: transform 0.3s ease;
-          }
-
-          .resource-card i:hover {
-              transform: scale(1.03);
-          }
-
-          /* Testimonials Section */
-          .testimonials {
-              padding: 4rem 2rem;
-              background: white;
-              animation: fadeIn 1s ease-out;
-          }
-
-          .testimonial-grid {
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-              gap: 2rem;
-              max-width: 1200px;
-              margin: 0 auto;
-          }
-
-          .testimonial-card {
-              background: #f4f4f4;
-              padding: 2rem;
-              border-radius: 10px;
-              transition: transform 0.3s ease;
-              animation: slideIn 0.8s ease-out;
-          }
-
-          .testimonial-card:hover {
-              transform: translateY(-5px);
-          }
-
-          /* Footer */
-          footer {
-              background: #1a73e8;
-              color: white;
-              padding: 3rem 2rem;
-              animation: fadeIn 1s ease-out;
-          }
-
-          .footer-content {
-              max-width: 1200px;
-              margin: 0 auto;
-              display: grid;
-              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-              gap: 2rem;
-          }
-
-          .social-links {
-              display: flex;
-              gap: 1rem;
-          }
-
-          .social-links i {
-              font-size: 1.5rem;
-              transition: transform 0.3s ease;
-          }
-
-          .social-links i:hover {
-              transform: scale(1.2);
-          }
-
-          /* Mobile Responsive */
-          @media (max-width: 768px) {
-              .nav-menu {
-                  display: none;
-                  position: fixed;
-                  top: 70px;
-                  left: 0;
-                  right: 0;
-                  background: white;
-                  flex-direction: column;
-                  padding: 1rem;
-                  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                  z-index: 999;
-                  animation: slideIn 0.3s ease-out;
-              }
-
-              .nav-menu.active {
-                  display: flex;
-              }
-
-              .cta-buttons {
-                  display: none;
-              }
-
-              .mobile-menu-btn {
-                  display: block;
-              }
-          }
-      </style>
-      <!-- Start of Async Drift Code -->
-<script>
-    "use strict";
-    
-    !function() {
-      var t = window.driftt = window.drift = window.driftt || [];
-      if (!t.init) {
-        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-        t.factory = function(e) {
-          return function() {
-            var n = Array.prototype.slice.call(arguments);
-            return n.unshift(e), t.push(n), t;
-          };
-        }, t.methods.forEach(function(e) {
-          t[e] = t.factory(e);
-        }), t.load = function(t) {
-          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-          var i = document.getElementsByTagName("script")[0];
-          i.parentNode.insertBefore(o, i);
-        };
-      }
-    }();
-    drift.SNIPPET_VERSION = '0.3.1';
-    drift.load('teitr4vi599r');
-    </script>
-    <!-- End of Async Drift Code -->
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SwiftTech - Innovative 3D Printing & Design Solutions for Custom Parts and Prototypes">
+    <meta name="keywords" content="3D printing, custom parts, prototypes, design solutions, manufacturing, rapid prototyping">
+    <meta name="author" content="SwiftTech">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="SwiftTech - 3D Printing Solutions">
+    <meta property="og:description" content="Professional 3D printing services for custom parts, prototypes, and design solutions">
+    <meta property="og:url" content="https://www.swifttech3d.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#4A90E2">
+    <title>SwiftTech - 3D Printing & Design Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-            .sticky-cta {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                padding: 15px 30px;
-                background-color: #3110ee;
-                color: white;
-                border: none;
-                border-radius: 25px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                box-shadow: 0 4px 12px rgba(0,110,255,0.3);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-                z-index: 1000;
-            }
-    
-            .sticky-cta:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(0,110,255,0.4);
-            }
-
-            @media screen and (max-width: 768px) {
-                .sticky-cta {
-                    transform: scale(0.6);
-                    right: 0;
-                }
-                .sticky-cta:hover {
-                    transform: scale(0.6) translateY(-2px);
-                }
-            }
-        </style>
-        <button class="sticky-cta">Get Started</button>
-    
-      <header>
-          <div class="nav-container">
-              <a href="https://www.swifttech.me" class="logo">SwiftTech</a>
-              <button class="mobile-menu-btn" id="menuBtn">
-                  <i class="fas fa-bars"></i>
-              </button>
-              <nav class="nav-menu">
-                  <a href="https://www.swifttech.me">Home</a>
-                  <a href="#templates">Templates</a>
-                  <a href="#snippets">Snippets</a>
-                  <a href="#courses">Courses</a>
-                  <a href="#freelancing">Freelancing</a>
-                  <a href="#contact">Contact</a>
-              </nav>              
-              <div class="cta-buttons">
-                  <button class="cta-button">Log In</button>
-                  <button class="cta-button primary-btn">Sign Up</button>
-              </div>
-          </div>
-      </header>      
-      <script>
-          const menuBtn = document.getElementById('menuBtn');
-          const navMenu = document.querySelector('.nav-menu');
-          
-          menuBtn.addEventListener('click', function() {
-              navMenu.classList.toggle('active');
-              menuBtn.classList.toggle('active');
-              const icon = menuBtn.querySelector('i');
-              if (navMenu.classList.contains('active')) {
-                  icon.classList.remove('fa-bars');
-                  icon.classList.add('fa-times');
-              } else {
-                  icon.classList.remove('fa-times');
-                  icon.classList.add('fa-bars');
-              }
-          });
-      </script>
-
-      <section class="hero">
-          <div class="hero-content">
-              <h1>Learn, Build, and Hire the Best Coders</h1>
-              <p>Access premium resources, tools, and opportunities to accelerate your tech journey</p>
-              <div class="hero-buttons">
-                  <button class="cta-button primary-btn" style="background-color: #006eff;">Browse Templates</button>
-                  <button class="cta-button">Hire a Freelancer</button>
-              </div>
-              <i class="fas fa-laptop-code fa-5x"></i>
-              <div class="features-grid">
-                  <div class="feature-card">
-                      <i class="fas fa-file-code"></i>
-                      <h3>Templates</h3>
-                      <p>Pre-designed websites ready to deploy</p>
-                  </div>
-                  <div class="feature-card">
-                      <i class="fas fa-code"></i>
-                      <h3>Code Snippets</h3>
-                      <p>Reusable code blocks for faster development</p>
-                  </div>
-                  <div class="feature-card">
-                      <i class="fas fa-graduation-cap"></i>
-                      <h3>Courses</h3>
-                      <p>Learn coding step by step with our experts</p>
-                  </div>
-                  <div class="feature-card">
-                      <i class="fas fa-users"></i>
-                      <h3>Freelancing</h3>
-                      <p>Hire skilled developers for your projects</p>
-                  </div>
-                  
-              </div>
-              <div class="feature-card" style="margin-top: 20px;">
-                <i class="fas fa-rocket"></i>
-                <h3>Get Started</h3>
-                <p>Begin your coding journey today</p>
-                <button class="cta-button primary-btn">Start Now</button>
-            </div>
-            
-          </div>
-      </section>
-
-      <section class="professional-freelancers" style="padding: 80px 0; background-color: #f8f9fa;">
-                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-                    <div class="section-header" style="text-align: center; margin-bottom: 60px;">
-                        <h2 style="color: #333; font-size: 2.5rem; margin-bottom: 20px;">Verified Professional Freelancers</h2>
-                        <p style="color: #666; font-size: 1.2rem; max-width: 800px; margin: 0 auto;">Connect with top-tier developers who have been thoroughly vetted for their expertise and professionalism</p>
-                    </div>
-                    
-                    <div class="freelancer-benefits" style="display: flex; flex-wrap: wrap; justify-content: space-between; margin-bottom: 60px;">
-                        <div class="benefit-card" style="flex: 1; min-width: 300px; padding: 30px; margin: 15px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                            <i class="fas fa-shield-alt fa-3x" style="color: #007bff; margin-bottom: 20px;"></i>
-                            <h3 style="margin-bottom: 15px; color: #333;">Secure Payments</h3>
-                            <p style="color: #666; line-height: 1.6;">Your payments are held in escrow until you're completely satisfied with the work delivered</p>
-                        </div>
-                        
-                        <div class="benefit-card" style="flex: 1; min-width: 300px; padding: 30px; margin: 15px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                            <i class="fas fa-check-circle fa-3x" style="color: #28a745; margin-bottom: 20px;"></i>
-                            <h3 style="margin-bottom: 15px; color: #333;">Verified Expertise</h3>
-                            <p style="color: #666; line-height: 1.6;">All freelancers undergo rigorous screening and skill verification processes</p>
-                        </div>
-                        
-                        <div class="benefit-card" style="flex: 1; min-width: 300px; padding: 30px; margin: 15px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-                            <i class="fas fa-headset fa-3x" style="color: #ffc107; margin-bottom: 20px;"></i>
-                            <h3 style="margin-bottom: 15px; color: #333;">24/7 Support</h3>
-                            <p style="color: #666; line-height: 1.6;">Our dedicated team ensures smooth collaboration between you and freelancers</p>
-                        </div>
-                    </div>
-      
-                    <div class="platform-features" style="display: flex; align-items: center; flex-wrap: wrap;">
-                        <div class="platform-image" style="flex: 1; min-width: 300px; padding: 20px;">
-                            <img src="platform-illustration.webp" alt="Platform Features" style="width: 100%; max-width: 500px; height: auto; border-radius: 10px;">
-                        </div>
-                        
-                        <div class="platform-content" style="flex: 1; min-width: 300px; padding: 20px;">
-                            <h3 style="color: #333; font-size: 2rem; margin-bottom: 25px;">Why Choose Our Platform?</h3>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 20px; display: flex; align-items: center;">
-                                    <i class="fas fa-dollar-sign" style="color: #007bff; margin-right: 15px;"></i>
-                                    <span style="color: #666; line-height: 1.6;">Competitive pricing with transparent fee structure</span>
-                                </li>
-                                <li style="margin-bottom: 20px; display: flex; align-items: center;">
-                                    <i class="fas fa-file-contract" style="color: #007bff; margin-right: 15px;"></i>
-                                    <span style="color: #666; line-height: 1.6;">Automated contracts and invoicing system</span>
-                                </li>
-                                <li style="margin-bottom: 20px; display: flex; align-items: center;">
-                                    <i class="fas fa-tasks" style="color: #007bff; margin-right: 15px;"></i>
-                                    <span style="color: #666; line-height: 1.6;">Built-in project management and milestone tracking</span>
-                                </li>
-                                <li style="margin-bottom: 20px; display: flex; align-items: center;">
-                                    <i class="fas fa-comments" style="color: #007bff; margin-right: 15px;"></i>
-                                    <span style="color: #666; line-height: 1.6;">Real-time communication and collaboration tools</span>
-                                </li>
-                            </ul>
-                            <button class="cta-button primary-btn" style="margin-top: 20px;">Find A Verified Freelancer</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            
-            <section class="how-it-works" style="padding: 80px 0; background: #f8f9fa;">
-                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-                    <h2 style="text-align: center; color: #333; font-size: 2.5rem; margin-bottom: 50px;">How It Works</h2>
-                    
-                    <div class="workflow-steps" style="display: flex; justify-content: space-around; flex-wrap: wrap; margin: 0 -20px;">
-                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up">
-                            <div class="step-icon" style="margin-bottom: 25px;">
-                                <i class="fas fa-search fa-4x" style="color: #007bff;"></i>
-                            </div>
-                            <h3 style="color: #333; margin-bottom: 15px;">1. Find</h3>
-                            <p style="color: #666; line-height: 1.6;">Browse our collection of templates or connect with expert freelancers for your project needs</p>
-                        </div>
-            
-                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up" data-aos-delay="200">
-                            <div class="step-icon" style="margin-bottom: 25px;">
-                                <i class="fas fa-code fa-4x" style="color: #28a745;"></i>
-                            </div>
-                            <h3 style="color: #333; margin-bottom: 15px;">2. Customize</h3>
-                            <p style="color: #666; line-height: 1.6;">Modify templates to your needs or work closely with freelancers to bring your vision to life</p>
-                        </div>
-            
-                        <div class="step" style="flex: 1; min-width: 250px; margin: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out;" data-aos="fade-up" data-aos-delay="400">
-                            <div class="step-icon" style="margin-bottom: 25px;">
-                                <i class="fas fa-rocket fa-4x" style="color: #dc3545;"></i>
-                            </div>
-                            <h3 style="color: #333; margin-bottom: 15px;">3. Launch</h3>
-                            <p style="color: #666; line-height: 1.6;">Deploy your project seamlessly or download your customized templates instantly</p>
-                        </div>
-                    </div>
-            
-                    <div style="text-align: center; margin-top: 50px;">
-                        <button class="cta-button primary-btn" style="font-size: 1.2rem; padding: 15px 40px;">Start Exploring Now!</button>
-                    </div>
-                </div>
-            </section>
-            
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const steps = document.querySelectorAll('.step');
-                
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.style.opacity = '1';
-                            entry.target.style.transform = 'translateY(0)';
-                        }
-                    });
-                }, { threshold: 0.5 });
-            
-                steps.forEach(step => observer.observe(step));
-            });
-            </script>
-            
-      
-
-      <section class="featured-content">
-                <div class="image-container" style="display: flex; align-items: center; padding: 40px; flex-wrap: wrap;">
-                    <div class="text-content" style="flex: 1; padding-right: 40px; min-width: 300px;">
-                        <h2 style="color: #333; margin-bottom: 15px; font-size: 2.2rem;">Why Choose Our Snippets</h2>
-                        <p style="color: #666; line-height: 1.6; font-size: 1.1rem;">Our code snippets are powerful tools designed to save developers time, reduce errors, and boost productivity. Pre-tested and optimized for quality, they offer ready-to-use solutions for a wide range of tasks across multiple programming languages and frameworks. Whether you're a beginner learning best practices, a freelancer meeting tight deadlines, or a professional team streamlining workflows, our snippets help you focus on innovation by handling routine coding tasks. Flexible, customizable, and consistently updated, they're essential for anyone looking to code smarter and faster. Start simplifying your development process with our snippets today!</p>
-                        <button class="cta-button primary-btn" style="margin-top: 20px; margin-bottom: 15px;">Get Snippets</button>
-                    </div>
-                    <img src="cbd.jpg" alt="Featured Image" style="width: 100%; max-width: 500px; height: auto; min-height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                </div>
-    </section>    
-    
-    
-      <section class="featured">
-          <div class="resources-grid">
-              <div class="resource-card">
-                  <i class="fas fa-shopping-cart fa-3x" style="margin-bottom: 20px;"></i>
-                  <h3 style="margin-bottom: 15px;">Most Popular Template</h3>
-                  <p style="margin-bottom: 25px; line-height: 1.6;">E-commerce Starter Kit with full functionality and modern design</p>
-                  <button class="cta-button primary-btn">Get Template</button>
-              </div>
-              <div class="resource-card">
-                  <i class="fas fa-laptop-code fa-3x" style="margin-bottom: 20px;"></i>
-                  <h3 style="margin-bottom: 15px;">Trending Course</h3>
-                  <p style="margin-bottom: 25px; line-height: 1.6;">Complete Full-Stack Development with latest technologies</p>
-                  <button class="cta-button primary-btn">Enroll Now</button>
-              </div>
-              <div class="resource-card">
-                  <i class="fas fa-lock fa-3x" style="margin-bottom: 20px;"></i>
-                  <h3 style="margin-bottom: 15px;">Top Snippet</h3>
-                  <p style="margin-bottom: 25px; line-height: 1.6;">Secure Authentication System with OAuth integration</p>
-                  <button class="cta-button primary-btn">Get Snippet</button>
-              </div>
-          </div>
-      </section>
-
-
-      <section class="achievements" style="padding: 60px 20px; background: #f8f9fa;">
-                <h2 style="text-align: center; color: #333; margin-bottom: 40px; font-size: 2.2rem;">Our Impact in Numbers</h2>
-                <div class="stats-container" style="display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
-                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
-                        <i class="fas fa-code fa-3x" style="color: #007bff; margin-bottom: 15px;"></i>
-                        <h3 class="stat-number" id="snippetsCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">0+</h3>
-                        <p style="color: #666;">Snippets Shared</p>
-                    </div>
-                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
-                        <i class="fas fa-users fa-3x" style="color: #28a745; margin-bottom: 15px;"></i>
-                        <h3 class="stat-number" id="freelancersCount" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">0</h3>
-                        <p style="color: #666;">Verified Freelancers</p>
-                    </div>
-                    <div class="stat-card" style="text-align: center; padding: 20px; min-width: 250px;">
-                        <i class="fas fa-star fa-3x" style="color: #ffc107; margin-bottom: 15px;"></i>
-                        <h3 class="stat-number" id="satisfactionRate" style="font-size: 2.5rem; color: #333; margin-bottom: 10px;">99%</h3>
-                        <p style="color: #666;">Customer Satisfaction</p>
-                    </div>
-                </div>
-                <div class="certifications" style="text-align: center; margin-top: 50px;">
-                    <h3 style="color: #333; margin-bottom: 20px;">Our Certifications</h3>
-                    <div class="badge-container" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                        <div class="badge" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <img src="developercertification.svg" alt="Developer Certification" style="width: 100px; height: 100px;">
-                            <p style="margin-top: 10px; color: #666;">Certified Development Team</p>
-                        </div>
-                        <div class="badge" style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <img src="securitybadge.png" alt="Security Badge" style="width: 100px; height: 100px;">
-                            <p style="margin-top: 10px; color: #666;">Security Verified</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-      
-            <script>
-                // Animate numbers when in viewport
-                const statsSection = document.querySelector('.achievements');
-                const statNumbers = document.querySelectorAll('.stat-number');
-                
-                const animateValue = (obj, start, end, duration) => {
-                    let startTimestamp = null;
-                    const step = (timestamp) => {
-                        if (!startTimestamp) startTimestamp = timestamp;
-                        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                        const current = Math.floor(progress * (end - start) + start);
-                        obj.textContent = current + (obj.id === 'satisfactionRate' ? '%' : '+');
-                        if (progress < 1) {
-                            window.requestAnimationFrame(step);
-                        }
-                    };
-                    window.requestAnimationFrame(step);
-                };
-      
-                const statsObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            statNumbers.forEach(stat => {
-                                let endValue;
-                                if (stat.id === 'freelancersCount') {
-                                    endValue = 50;
-                                } else if (stat.id === 'snippetsCount') {
-                                    endValue = 400;
-                                } else {
-                                    endValue = parseInt(stat.textContent);
-                                }
-                                animateValue(stat, 0, endValue, 2000);
-                            });
-                            statsObserver.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.5 });
-      
-                statsObserver.observe(statsSection);
-            </script>
-      
-
-      <section class="testimonials">
-          <div class="testimonial-carousel" id="testimonialCarousel">
-              <div class="testimonial-slide active">
-                  <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="John Doe" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 15px;">John Doe</h3>
-                  <p style="line-height: 1.6; margin-bottom: 20px;">"SwiftTech helped me land my dream job as a senior developer. The resources and community support were invaluable in my journey."</p>
-                  <p style="color: #666; font-style: italic;">Senior Developer at TechCorp</p>
-              </div>
-              <div class="testimonial-slide">
-                  <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Jane Smith" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 15px;">Jane Smith</h3>
-                  <p style="line-height: 1.6; margin-bottom: 20px;">"The courses are comprehensive and up-to-date with industry standards. The instructors are experts who truly care about student success."</p>
-                  <p style="color: #666; font-style: italic;">Full Stack Developer at WebSolutions</p>
-              </div>
-              <div class="testimonial-slide">
-                  <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Mike Johnson" style="width: 100px; height: 100px; border-radius: 50%; margin-bottom: 20px;">
-                  <h3 style="margin-bottom: 15px;">Mike Johnson</h3>
-                  <p style="line-height: 1.6; margin-bottom: 20px;">"The templates saved me countless hours of development time. They're well-documented and easily customizable for any project needs."</p>
-                  <p style="color: #666; font-style: italic;">Freelance Web Developer</p>
-              </div>
-          </div>
-          <div class="carousel-controls">
-              <button class="prev-btn" onclick="moveSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-              <button class="next-btn" onclick="moveSlide(1)"><i class="fas fa-chevron-right"></i></button>
-          </div>
-      </section>
-
-      <script>
-        let slideIndex = 0;
-        showSlides(slideIndex);
-
-        function moveSlide(n) {
-            showSlides(slideIndex += n);
+        /* Previous styles remain the same until .section */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("testimonial-slide");
-            
-            if (n >= slides.length) {slideIndex = 0}
-            if (n < 0) {slideIndex = slides.length - 1}
-            
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            
-            slides[slideIndex].style.display = "block";
+        body {
+            background: #f8f9ff;
+            color: #2C3E50;
         }
 
-        // Auto-advance slides every 20 seconds
-        setInterval(() => moveSlide(1), 20000);
-      </script>
+        header {
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            padding: 1rem; /* Reduced padding */
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
 
-      <style>
-        .testimonial-carousel {
-            position: relative;
-            max-width: 800px;
+        .logo {
+            font-family: 'Brittany Signature', cursive;
+            font-size: 2.5rem;
+            font-weight: normal;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: #fff;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .section {
+            display: none;
+            padding: 20px 20px 60px; /* Reduced top padding */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .testimonial-slide {
-            display: none;
-            text-align: center;
-            padding: 20px;
+        /* Previous styles remain the same until .project-grid */
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
-        .testimonial-slide.active {
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: visible;
+            transition: all 0.3s;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            height: auto;
+            min-height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #4A90E2;
+        }
+
+        .project-content {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .project-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .project-tag {
+            background: #f0f7ff;
+            color: #4A90E2;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #4A90E2;
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            color: #4A90E2;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4A90E2;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        .cookie-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .cookie-banner button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-menu {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+                align-items: center;
+                gap: 0.5rem;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+          
+            .cookie-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="/" class="logo">SwiftTech</a>
+            <nav class="nav-menu">
+                <div class="nav-item active" data-section="home">
+                    <i class="fas fa-home"></i> Home
+                </div>
+                <div class="nav-item" data-section="services">
+                    <i class="fas fa-cogs"></i> Services
+                </div>
+                <div class="nav-item" data-section="projects">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </div>
+                <div class="nav-item" data-section="resources">
+                    <i class="fas fa-book"></i> Resources
+                </div>
+                <div class="nav-item" data-section="contact">
+                    <i class="fas fa-envelope"></i> Contact
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="section active">
+            <div class="hero-content">
+                            <h1 class="hero-title">Innovative 3D Printing & Design Solutions</h1>
+                            <p class="subtitle-text">Delivering excellence in additive manufacturing and custom design services</p>
+                            <div class="illustration-container">
+                                <div class="feature-card">
+                                    <img src="img1.jpg" alt="3D Printing Process" class="feature-img">
+                                </div>
+                                <div class="feature-card">
+                                    <img src="img2.jpg" alt="Design Solutions" class="feature-img">
+                                </div>
+                                <div class="feature-card">
+                                    <img src="img3.png" alt="Custom Manufacturing" class="feature-img">
+                                </div>
+                            </div>
+                            <style>
+                                .subtitle-text {
+                                    text-align: center;
+                                    color: #666;
+                                    font-size: 1.2rem;
+                                    margin-bottom: 2rem;
+                                }
+                                .illustration-container {
+                                    display: flex;
+                                    justify-content: center;
+                                    gap: 2rem;
+                                    margin: 5rem 0;
+                                }
+                                .feature-card {
+                                    width: 270px;
+                                    height: 200px;
+                                    border-radius: 12px;
+                                    overflow: hidden;
+                                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                                    transition: transform 0.3s ease;
+                                    background-color: #ffffff;
+                                }                                
+                                .feature-card:hover {
+                                    transform: translateY(-5px);
+                                }
+                                .feature-img {
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                }
+                            </style>                
+                            <div class="content-row">
+                    <div class="text-content">
+                        <h2 class="section-heading" style="margin-bottom: 0.5rem; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Professional 3D Printing & Manufacturing Services</h2>
+                        <p class="hero-subtext" style="margin-bottom: 0.5rem;">Experience the future of manufacturing with our advanced 3D printing solutions, where innovation meets precision engineering.</p>
+                        <p class="hero-subtext" style="margin-bottom: 0.5rem;">From rapid prototyping to full-scale production, we specialize in crafting high-quality parts using premium materials including aluminum, rubber, and engineering-grade plastics.</p>
+                        <p class="hero-subtext" style="margin-bottom: 0.5rem;">Backed by cutting-edge technology and industry expertise, we deliver exceptional quality with quick turnaround times at competitive market rates.</p>
+                        <button class="get-started-btn" onclick="scrollToSection('contact')"><i class="fas fa-rocket"></i> Get Started</button>
+                    </div>                    <div class="hero-animation">
+                        <div class="printer-animation">
+                            <video autoplay loop muted playsinline class="printer-gif">
+                                <source src="https://www.swifttech.me/video1.mp4" type="video/mp4">
+                            </video>
+                            <div class="animation-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                .hero-content {
+                    padding: 2rem;
+                }
+
+                .content-row {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    gap: 4rem;
+                    margin-top: 2rem;
+                }
+
+                .text-content {
+                    flex: 1;
+                }
+
+                .hero-title {
+                    font-size: 3.0rem;
+                    background: linear-gradient(45deg, #2196F3, #00BCD4);
+                    -webkit-background-clip: text;
+                    background-clip: text;                    
+                    -webkit-text-fill-color: transparent;
+                    margin-bottom: 1.5rem;
+                    text-align: center;
+                }
+
+                .hero-text {
+                    font-size: 1rem !important;
+                    color: #333;
+                    margin-bottom: 0.4rem;
+                    line-height: 1.1 !important;
+                    text-align: left !important;
+                }
+
+                .hero-subtext {
+                    font-size: 1rem;
+                    color: #666;
+                    line-height: 1.4;
+                    text-align: left;
+                }
+
+                .hero-animation {
+                    flex: 1;
+                    max-width: 500px;
+                }
+
+                .printer-animation {
+                    position: relative;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                }
+
+                .printer-gif {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                }
+
+                .animation-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: linear-gradient(45deg, rgba(33,150,243,0.1), rgba(0,188,212,0.1));
+                    pointer-events: none;
+                }
+
+                @media (max-width: 768px) {
+                    .content-row {
+                        flex-direction: column;
+                        text-align: center;
+                        gap: 2rem;
+                    }
+
+                    .hero-title {
+                        font-size: 1.7rem;
+                    }
+
+                    .hero-text {
+                        font-size: 1rem !important;
+                        text-align: left;
+                    }
+
+                    .hero-subtext {
+                        font-size: 1rem;
+                        text-align: left;
+                    }
+                }
+            </style>        
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <p>3D Printers</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">200+</span>
+                <p>Happy Customers</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">99%</span>
+                <p>Satisfaction Rate</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1000+</span>
+                <p>Projects Completed</p>
+            </div>
+        </div>
+
+        <div class="process-section">
+            <h2 class="section-title">How We Work</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <h3>1. Design Consultation</h3>
+                    <p>Share your ideas with our expert designers</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-code"></i>
+                    <h3>2. 3D Modeling</h3>
+                    <p>We create precise 3D models of your design</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-print"></i>
+                    <h3>3. Printing & Production</h3>
+                    <p>Using advanced 3D printing technology</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>4. Quality Assurance</h3>
+                    <p>Rigorous testing and verification</p>
+                </div>
+            </div>
+            
+                        <div class="demo-section">
+                                                    <h2 class="section-title">Experience SwiftTech in Action</h2>
+                                                    <p class="section-description">Explore how SwiftTech revolutionizes 3D printing with advanced technology and exceptional service with this self-guided demo.</p>
+                                                    <style>
+                                                        .section-title {
+                                                            margin-bottom: 1.5rem;
+                                                            font-size: 2.5rem;
+                                                            color: #333;
+                                                        }
+                                                        .section-description {
+                                                            margin-bottom: 2rem;
+                                                            font-size: 1.2rem;
+                                                            color: #666;
+                                                            line-height: 1.6;
+                                                            text-align: center;
+                                                        }
+                                                    </style>
+
+
+                            <div class="demo-container">
+                                <div class="demo-image">
+                                    <img src="demo.png" alt="3D Printer Demo" class="preview-image">
+                                </div>
+                                <div class="demo-form">
+                                    <div class="scrollable-form">
+                                        <h2>Get a Preview</h2>
+                                        <p>Fill this form to experience SwiftTech in action</p>
+                                        <form class="contact-form2">
+                                            <div class="form-group">
+                                                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required autocomplete="name">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="email" id="email" name="email" placeholder="Email Address" required autocomplete="email">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" id="companyName" name="companyName" placeholder="Company Name (Optional)" autocomplete="organization">
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="country" name="country" required autocomplete="country">
+                                                    <option value="">Select Country</option>
+                                                    <option value="US">United States</option>
+                                                    <option value="UK">United Kingdom</option>
+                                                    <option value="CA">Canada</option>
+                                                    <option value="AU">Australia</option>
+                                                    <option value="other">Other</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group checkbox">
+                                                <input type="checkbox" id="consent" name="consent" required>
+                                                <label for="consent">By submitting this form, I authorize SwiftTech to contact me about product offerings, services, events, and other marketing materials. I may unsubscribe at any time. To learn more, see our <a href="#">Privacy Policy</a></label>
+                                            </div>                                       
+                                            <button type="submit" class="submit-btn">Start Experiencing</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <style>
+                            .demo-section {
+                                padding: 2rem 0;
+                                background-color: #f8f9fa;
+                                position: relative;
+                            }
+                            .demo-container {
+                                max-width: 1200px;
+                                margin: 0 auto;
+                                position: relative;
+                                padding: 2rem;
+                                min-height: 600px;
+                                display: flex;
+                                align-items: center;
+                            }
+                            .demo-image {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                z-index: 1;
+                            }
+                            .preview-image {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                                border-radius: 8px;
+                                filter: grayscale(80%);
+                                background: linear-gradient(135deg, #f8f9fa, #e9ecef);                                
+                                -webkit-font-smoothing: antialiased;                                
+                                -moz-osx-font-smoothing: grayscale;
+                            }
+                            .demo-form {
+                                position: relative;
+                                z-index: 2;
+                                background: rgba(255, 255, 255, 0.95);
+                                padding: 2rem;
+                                border-radius: 8px;
+                                max-width: 500px;
+                                margin: 3rem auto;
+                                box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);                            
+                            }
+                            .scrollable-form {
+                                max-height: 400px;
+                                overflow-y: auto;
+                                position: relative;
+                                scrollbar-width: none;
+                                -ms-overflow-style: none;
+                                padding-right: 20px;
+                            }
+                            .scrollable-form::-webkit-scrollbar {
+                                display: none;
+                            }
+                            .scrollable-form h2 {
+                                margin-bottom: 0.5rem;
+                                color: #333;
+                            }
+                            .scrollable-form p {
+                                margin-bottom: 1.5rem;
+                                color: #666;
+                            }
+                            .form-group {
+                                margin-bottom: 1rem;
+                            }
+                            .form-group input,
+                            .form-group select {
+                                width: 100%;
+                                padding: 0.75rem;
+                                border: 1px solid #ddd;
+                                border-radius: 4px;
+                                font-size: 1rem;
+                            }
+                            .checkbox {
+                                display: flex;
+                                align-items: flex-start;
+                                gap: 0.5rem;
+                            }
+                            .checkbox input {
+                                width: auto;
+                                margin-top: 0.25rem;
+                            }
+                            .checkbox label {
+                                font-size: 0.9rem;
+                                color: #666;
+                            }
+                            .submit-btn {
+                                width: 100%;
+                                padding: 0.75rem;
+                                background-color: #007bff;
+                                color: white;
+                                border: none;
+                                border-radius: 4px;
+                                font-size: 1rem;
+                                cursor: pointer;
+                                transition: background-color 0.3s;
+                            }
+                            .submit-btn:hover {
+                                background-color: #0056b3;
+                            }
+                            @media (max-width: 768px) {
+                                .demo-container {
+                                    padding: 0.4rem;
+                                    min-height: 400px;
+                                }
+                                .demo-form {
+                                    width: 95%;
+                                    padding: 10px;
+                                    margin: 1.5rem auto;
+                                }
+                                .section-title {
+                                    font-size: 1.8rem;
+                                    margin-bottom: 1rem;
+                                }
+                                .section-description {
+                                    font-size: 1rem;
+                                    margin-bottom: 1.5rem;
+                                }
+                                .scrollable-form h2 {
+                                    font-size: 1.5rem;
+                                }
+                                .scrollable-form p {
+                                    font-size: 0.9rem;
+                                }
+                                .form-group input,
+                                .form-group select {
+                                    padding: 0.6rem;
+                                    font-size: 0.9rem;
+                                }
+                                .checkbox label {
+                                    font-size: 0.8rem;
+                                }
+                                .submit-btn {
+                                    padding: 0.6rem;
+                                    font-size: 0.9rem;
+                                }
+                            }
+                        </style>            
+        </div>
+        
+        <div class="service-grid">
+
+            <div class="service-card">
+                <i class="fas fa-print"></i>
+                <h3>Custom Parts</h3>
+                <p>Precision-engineered replacement parts for your specific needs</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-cube"></i>
+                <h3>Prototyping</h3>
+                <p>Rapid prototyping services for product development</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-recycle"></i>
+                <h3>Sustainable Solutions</h3>
+                <p>Eco-friendly materials and recycling programs</p>
+            </div>
+        </div>
+
+        <!-- Customer Reviews Section -->
+        <div class="reviews-section">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="avatar1.jpeg" alt="Customer 1" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <h4>Treyvon E. Brooks</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Exceptional quality and quick turnaround. The team went above and beyond to meet our specifications."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="avatar2.jpg" alt="Customer 2" class="reviewer-avatar">
+                        <div class="reviewer-info">
+                            <h4>Taliyah M. Robinson</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>"Professional service with attention to detail. Will definitely use their services again."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest Blogs Section -->
+        <div class="blog-section">
+            <h2 class="section-title">Latest from Our Blog</h2>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="1.jpg" alt="3D Printing Trends" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-date">March 15, 2024</span>
+                        <h3>Latest Trends in 3D Printing</h3>
+                        <p>Discover the newest innovations shaping the future of additive manufacturing...</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="2.webp" alt="Material Science" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-date">March 10, 2024</span>
+                        <h3>Advances in Material Science</h3>
+                        <p>Exploring new materials revolutionizing the 3D printing industry...</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Applications Section -->
+        <div class="industry-section">
+            <h2 class="section-title">Industry Applications</h2>
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <i class="fas fa-hospital"></i>
+                    <h3>Healthcare</h3>
+                    <p>Medical devices, prosthetics, and anatomical models</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Aerospace</h3>
+                    <p>Lightweight components and complex assemblies</p>
+                </div>
+                <div class="industry-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Manufacturing</h3>
+                    <p>Tools, fixtures, and end-use parts</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Information Section -->
+        <div class="shipping-section">
+            <h2 class="section-title">Shipping Information</h2>
+            <div class="shipping-grid">
+                <div class="shipping-card">
+                    <i class="fas fa-truck"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>2-5 business days standard shipping</p>
+                </div>
+                <div class="shipping-card">
+                    <i class="fas fa-globe-americas"></i>
+                    <h3>Africa-Based Shipping</h3>
+                    <p>International delivery to 10+ countries</p>
+                </div>
+                <div class="shipping-card">
+                    <i class="fas fa-box"></i>
+                    <h3>Secure Packaging</h3>
+                    <p>Custom protective packaging for safe delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action Section -->
+        <div class="cta-section">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Let's turn your ideas into reality with our cutting-edge 3D printing solutions</p>
+            <a href="#contact" class="cta-button">Get Started Now</a>
+        </div>
+
+        <style>
+            /* Reviews Section Styles */
+            .reviews-section {
+                padding: 4rem 0 .5rem 0;
+                background: #f8f9fa;
+            }
+
+            .reviews-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .review-card {
+                background: white;
+                padding: 2rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .review-header {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1rem;
+            }
+
+            .reviewer-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                margin-right: 1rem;
+                object-fit: cover;
+            }
+
+            .stars {
+                color: #ffd700;
+            }
+
+            /* Blog Section Styles */
+            .blog-section {
+                padding: 0.5rem 0;
+            }
+
+            .blog-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .blog-card {
+                background: white;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .blog-image {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
+
+            .blog-date {
+                color: #666;
+                font-size: 0.9rem;
+            }
+
+            .read-more {
+                color: #007bff;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            /* Industry Section Styles */
+            .industry-section {
+                padding: 0.5rem 0;
+                background: #f8f9fa;
+            }
+
+            .industry-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .industry-card {
+                text-align: center;
+                padding: 2rem;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .industry-card i {
+                font-size: 2.5rem;
+                color: #007bff;
+                margin-bottom: 1rem;
+            }
+
+            /* Shipping Section Styles */
+            .shipping-section {
+                padding: 0.5rem 0;
+            }
+
+            .shipping-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .shipping-card {
+                text-align: center;
+                padding: 2rem;
+                background: white;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            }
+
+            .shipping-card i {
+                font-size: 2.5rem;
+                color: #007bff;
+                margin-bottom: 1rem;
+            }
+
+            /* CTA Section Styles */
+            .cta-section {
+                text-align: center;
+                padding: 4rem 0;
+                background-image: url('cta1.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                color: white;
+            }
+
+            .cta-button {
+                display: inline-block;
+                padding: 1rem 2rem;
+                background: white;
+                color: #007bff;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                margin-top: 1.5rem;
+                transition: transform 0.3s ease;
+            }
+
+            .cta-button:hover {
+                transform: translateY(-3px);
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 2rem;
+                color: transparent;
+                background: linear-gradient(45deg, #2196F3, #00BCD4);
+                -webkit-background-clip: text;
+                background-clip: text;
+                font-size: 2.5rem;
+            }
+
+            @media (max-width: 768px) {
+                .reviews-grid,
+                .blog-grid,
+                .industry-grid,
+                .shipping-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+
+    </section>
+
+    <section id="services" class="section">
+        <h2 class="hero-title" style="text-align: center;">Our Comprehensive Services</h2>
+        <p class="section-intro" style="font-size: 1.1rem; color: #666; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.6;">We offer end-to-end solutions for all your 3D printing and manufacturing needs, backed by years of expertise and cutting-edge technology.</p>
+        
+        <div class="service-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem auto; max-width: 1200px; padding: 0 1rem;">
+            <div class="category" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
+                <h3 style="color: #007bff; font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #007bff; padding-bottom: 0.5rem;">Manufacturing Services</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Custom Part Production</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Small Batch Manufacturing</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Rapid Prototyping</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Tool Making</li>
+                </ul>
+            </div>
+            <div class="category" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
+                <h3 style="color: #007bff; font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #007bff; padding-bottom: 0.5rem;">Design Services</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>3D Modeling</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Reverse Engineering</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Design Optimization</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Technical Documentation</li>
+                </ul>
+            </div>
+            <div class="category" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
+                <h3 style="color: #007bff; font-size: 1.5rem; margin-bottom: 1.5rem; border-bottom: 2px solid #007bff; padding-bottom: 0.5rem;">Consultation</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Material Selection</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Design Review</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Cost Optimization</li>
+                    <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative; color: #444;">
+                        <span style="position: absolute; left: 0; color: #007bff;">▸</span>Production Planning</li>
+                </ul>
+            </div>
+        </div>
+       
+
+        <div class="material-section" style="margin-bottom: 7.3rem;">
+            <h3 class="materials-title" style="text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2em;">Materials We Work With</h3>
+            <div class="materials-grid">
+                <div class="material active" onclick="showDetails(this, 'pla')">
+                    <i class="fas fa-cube"></i>
+                    <span>PLA</span>
+                </div>
+                <div class="material" onclick="showDetails(this, 'abs')">
+                    <i class="fas fa-cube"></i>
+                    <span>ABS</span>
+                </div>
+                <div class="material" onclick="showDetails(this, 'petg')">
+                    <i class="fas fa-cube"></i>
+                    <span>PETG</span>
+                </div>
+                <div class="material" onclick="showDetails(this, 'tpu')">
+                    <i class="fas fa-cube"></i>
+                    <span>TPU</span>
+                </div>
+                <div class="material" onclick="showDetails(this, 'nylon')">
+                    <i class="fas fa-cube"></i>
+                    <span>Nylon</span>
+                </div>
+            </div>
+            <div class="material-details" id="materialDetails">
+                <div class="detail-circle">
+                    <img src="" alt="" class="material-image">
+                    <div class="detail-tag tag1">
+                        <span class="tag-content">Strength: <span class="strength-value">High</span></span>
+                    </div>
+                    <div class="detail-tag tag2">
+                        <span class="tag-content">Temperature: <span class="temp-value">220°C</span></span>
+                    </div>
+                    <div class="detail-tag tag3">
+                        <span class="tag-content">Uses: <span class="uses-value">Prototypes</span></span>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .material { cursor: pointer; transition: all 0.3s ease; }
+                .material.active { color: #007bff; transform: scale(1.1); }
+                .material-details { display: none; margin-top: 2rem; }
+                .detail-circle { position: relative; width: 200px; height: 200px; margin: 0 auto; }
+                .material-image { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+                .detail-tag { 
+                    position: absolute; 
+                    background: rgba(0,123,255,0.9); 
+                    color: white; 
+                    padding: 0.5rem 1rem; 
+                    border-radius: 20px;
+                }
+                .detail-tag::before {
+                    content: '';
+                    position: absolute;
+                    width: 50px;
+                    height: 2px;
+                    background: rgba(0,123,255,0.9);
+                }
+                .detail-tag::after {
+                    content: '';
+                    position: absolute;
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: rgba(0,123,255,0.9);
+                }
+                .tag1 { 
+                    left: -240px; 
+                    top: 50%; 
+                    transform: translateY(-50%);
+                }
+                .tag1::before {
+                    left: 100%;
+                    top: 50%;
+                }
+                .tag1::after {
+                    left: calc(100% + 50px);
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .tag2 { 
+                    right: -280px; 
+                    top: 50%; 
+                    transform: translateY(-50%);
+                }
+                .tag2::before {
+                    right: 100%;
+                    top: 50%;
+                }
+                .tag2::after {
+                    right: calc(100% + 50px);
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+                .tag3 { 
+                    bottom: -100px; 
+                    left: 50%; 
+                    transform: translateX(-50%);
+                    white-space: nowrap;
+                }
+                .tag3::before {
+                    left: 50%;
+                    bottom: 100%;
+                    width: 2px;
+                    height: 50px;
+                    transform: translateX(-50%);
+                    transform-origin: bottom;
+                }
+                .tag3::after {
+                    left: 50%;
+                    bottom: calc(100% + 50px);
+                    transform: translateX(-50%);
+                }                .detail-circle { animation: fadeIn 0.5s ease-out; }
+                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+            </style>
+            <script>
+                function showDetails(element, material) {
+                    // Remove active class from all materials
+                    document.querySelectorAll('.material').forEach(m => m.classList.remove('active'));
+                    // Add active class to clicked material
+                    element.classList.add('active');
+                    
+                    const details = document.getElementById('materialDetails');
+                    details.style.display = 'block';
+                    
+                    // Material specific data
+                    const materialData = {
+                        pla: {
+                            image: 'pla-material.jpg',
+                            strength: 'Medium',
+                            temp: '180-220°C',
+                            uses: 'Prototypes, Toys'
+                        },
+                        abs: {
+                            image: 'abs-material.jpg',
+                            strength: 'High',
+                            temp: '220-250°C',
+                            uses: 'Functional Parts'
+                        },
+                        petg: {
+                            image: 'petg-material.jpg',
+                            strength: 'High',
+                            temp: '230-250°C',
+                            uses: 'Food Safe Parts'
+                        },
+                        tpu: {
+                            image: 'tpu-material.jpg',
+                            strength: 'Flexible',
+                            temp: '210-230°C',
+                            uses: 'Flexible Parts'
+                        },
+                        nylon: {
+                            image: 'nylon-material.jpg',
+                            strength: 'Very High',
+                            temp: '240-260°C',
+                            uses: 'Engineering Parts'
+                        }
+                    };
+                    
+                    // Update content
+                    const data = materialData[material];
+                    details.querySelector('.material-image').src = data.image;
+                    details.querySelector('.strength-value').textContent = data.strength;
+                    details.querySelector('.temp-value').textContent = data.temp;
+                    details.querySelector('.uses-value').textContent = data.uses;
+                }
+                
+                // Set first material as active by default
+                document.querySelector('.material').click();
+            </script>
+        </div>
+
+        <div class="service-grid" style="margin-bottom: 1.5rem;">
+
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>Custom Parts</h3>
+                <p>Replacement parts manufactured to exact specifications</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Prototyping</h3>
+                <p>Quick turnaround on prototype development</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h3>Workshops</h3>
+                <p>3D printing training and educational sessions</p>
+            </div>
+        </div>
+          
+    </section>
+
+
+    <section id="projects" class="section">
+        <h2 class="hero-title" style="text-align: center;">Featured Projects</h2>
+        <p class="hero-subtitle" style="text-align: center; color: #666; max-width: 800px; margin: 1rem auto; font-size: 1.1rem;">Explore our portfolio of successful projects showcasing our expertise in 3D printing across various industries and applications.</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="medical-prototype.jpeg" alt="Medical Prototype" class="project-image">
+                    <i class="fas fa-heartbeat fa-2x"></i>
+                    <h3>Healthcare Solutions</h3>
+                    <p>Custom medical device prototypes and parts for leading healthcare providers. Specialized in orthopedic fixtures and surgical tools.</p>
+                    <div class="project-tag">Medical Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-clock"></i> 2 weeks delivery</span>
+                        <span><i class="fas fa-check-circle"></i> FDA Approved</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="auto-parts.jpeg" alt="Automotive Parts" class="project-image">
+                    <i class="fas fa-car fa-2x"></i>
+                    <h3>Automotive Parts</h3>
+                    <p>Precision-engineered replacement components for vintage and modern vehicles. Custom interior parts and mechanical components.</p>
+                    <div class="project-tag">Automotive Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-cog"></i> Custom Fitting</span>
+                        <span><i class="fas fa-shield-alt"></i> Warranty</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="industrial.jpeg" alt="Industrial Solutions" class="project-image">
+                    <i class="fas fa-industry fa-2x"></i>
+                    <h3>Industrial Solutions</h3>
+                    <p>Heavy-duty manufacturing tools and fixtures designed for industrial applications. Includes jigs, molds, and assembly line components.</p>
+                    <div class="project-tag">Industrial Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-hammer"></i> Durability Tested</span>
+                        <span><i class="fas fa-certificate"></i> ISO Certified</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="consumer.jpeg" alt="Consumer Products" class="project-image">
+                    <i class="fas fa-shopping-bag fa-2x"></i>
+                    <h3>Consumer Products</h3>
+                    <p>Innovative consumer product prototypes and custom accessories. From phone cases to household items.</p>
+                    <div class="project-tag">Consumer Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-users"></i> Mass Production</span>
+                        <span><i class="fas fa-star"></i> Top Rated</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="aerospace.jpeg" alt="Aerospace Components" class="project-image">
+                    <i class="fas fa-plane fa-2x"></i>
+                    <h3>Aerospace Components</h3>
+                    <p>High-precision aerospace parts and prototypes. Specialized in lightweight components and testing models.</p>
+                    <div class="project-tag">Aerospace Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-microscope"></i> Precision Testing</span>
+                        <span><i class="fas fa-award"></i> Certified</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <img src="robotics.jpeg" alt="Robotics" class="project-image">
+                    <i class="fas fa-robot fa-2x"></i>
+                    <h3>Robotics & Automation</h3>
+                    <p>Custom robotics components and automation solutions. Includes servo mounts, chassis designs, and control interfaces.</p>
+                    <div class="project-tag">Robotics Grade</div>
+                    <div class="project-stats">
+                        <span><i class="fas fa-bolt"></i> Quick Assembly</span>
+                        <span><i class="fas fa-microchip"></i> Smart Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="section">
+            <h2 class="hero-title" style="text-align: center;">Learning Resources</h2>
+            <p class="section-intro" style="font-size: 1.1rem; color: #666; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                Expand your knowledge with our comprehensive collection of educational materials and industry insights.
+            </p>
+    
+            <div class="resources-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem auto; max-width: 1200px; padding: 0 1rem;">
+                <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <i class="fas fa-blog fa-3x" style="color: #007bff; margin-bottom: 1rem;"></i>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Blog Articles</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Latest 3D Printing Trends
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Material Guides
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Design Tips & Tricks
+                        </li>
+                    </ul>
+                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Read More →</a>
+                </div>
+    
+                <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <i class="fas fa-video fa-3x" style="color: #007bff; margin-bottom: 1rem;"></i>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Webinars</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Monthly Tech Talks
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Expert Interviews
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Live Q&A Sessions
+                        </li>
+                    </ul>
+                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Watch Now →</a>
+                </div>
+    
+                <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <i class="fas fa-file-pdf fa-3x" style="color: #007bff; margin-bottom: 1rem;"></i>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Technical Resources</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Design Guidelines
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Material Datasheets
+                        </li>
+                        <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                            <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                            Case Studies
+                        </li>
+                    </ul>
+                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Download →</a>
+                </div>
+            </div>    
+            <div class="resource-center" style="margin: 4rem auto; max-width: 1200px; padding: 2rem;">
+                <h3 style="text-align: center; color: #007bff; margin-bottom: 3rem; font-size: 2.5rem; text-transform: uppercase; font-weight: 700;">Resource Center</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                        <i class="fas fa-book fa-3x" style="color: #007bff; margin-bottom: 1rem;"></i>
+                        <h3 style="color: #007bff; margin-bottom: 1rem;">Learning Materials</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                                Design Guides
+                            </li>
+                            <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                                Video Tutorials
+                            </li>
+                            <li style="margin: 0.8rem 0; padding-left: 1.5rem; position: relative;">
+                                <span style="position: absolute; left: 0; color: #007bff;">▸</span>
+                                Documentation
+                            </li>
+                        </ul>
+                        <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Access Resources →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+
+    <section id="contact" class="section">
+        <h2 class="hero-title" style="text-align: left;">Get In Touch</h2>
+        <p class="contact-intro">Ready to bring your ideas to life? Our team is here to help you every step of the way.</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Visit Us</h3>
+                    <p>123 Tech Street<br>Innovation City, IC 12345</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>+1 (555) 123-4567<br>Mon-Fri: 9AM-6PM</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>info@swifttech.com<br>support@swifttech.com</p>
+                </div>
+                <div class="social-messaging-buttons">
+                    <a href="https://wa.me/15551234567" class="whatsapp-button" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Chat on WhatsApp
+                    </a>
+                    <a href="https://m.me/swifttech" class="messenger-button" target="_blank">
+                        <i class="fab fa-facebook-messenger"></i>
+                        Message on Messenger
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </div>        </div>
+
+        <style>
+            .social-messaging-buttons {
+                margin-top: 2rem;
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .whatsapp-button, .messenger-button {
+                display: flex;
+                align-items: center;
+                padding: 0.8rem 1.5rem;
+                border-radius: 25px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+            
+            .whatsapp-button {
+                background-color: #25D366;
+                color: white;
+            }
+            
+            .messenger-button {
+                background-color: #0084FF;
+                color: white;
+            }
+            
+            .whatsapp-button:hover, .messenger-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            }
+            
+            .whatsapp-button i, .messenger-button i {
+                margin-right: 8px;
+                font-size: 1.2rem;
+            }
+        </style>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About SwiftTech</h3>
+                <p>Leading the way in innovative 3D printing solutions since 2015. We're committed to quality, sustainability, and customer satisfaction.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'home\']').click()">Home</a></li>
+                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'services\']').click()">Services</a></li>
+                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'projects\']').click()">Projects</a></li>
+                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'contact\']').click()">Contact</a></li>                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <form class="newsletter-form" id="email" autocomplete="on">
+                    <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" autocomplete="email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 SwiftTech. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="cookie-banner" id="cookieBanner">
+        <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+        <button onclick="acceptCookies()">Accept</button>
+    </div>
+
+    <style>
+        .hero-text {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 1rem auto;
+            text-align: center;
+            color: #666;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4A90E2;
             display: block;
         }
 
-        .carousel-controls {
+        .process-section {
+            padding: 3rem 0 1rem 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .step {
             text-align: center;
-            margin-top: 20px;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
 
-        .prev-btn, .next-btn {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
+        .step:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .category {
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .material {
+            text-align: center;
+            padding: 1rem;
+            background: white;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .prev-btn:hover, .next-btn:hover {
-            background: #0056b3;
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
         }
-      </style>
-      <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3 style="margin-bottom: 20px;">SwiftTech</h3>
-                <p style="margin-bottom: 15px;"><i>Swift solutions, Seamless experiences..</i></p>
-                <p style="margin-bottom: 10px;">123 Tech Street, Suite 100</p>
-                <p style="margin-bottom: 25px;">Silicon Valley, CA 94025</p>
-                <p style="margin-bottom: 10px;">Email: support@swifttech.me</p>
-                <p style="margin-bottom: 5px;">Phone: (555) 123-4567</p>
-            </div>
-            <div class="footer-section">
-                <h3 style="margin-bottom: 20px;">Legal</h3>
-                <p style="margin-bottom: 10px;">Terms of Service</p>
-                <p style="margin-bottom: 10px;">Privacy Policy</p>
-                <p style="margin-bottom: 10px;">FAQs</p>
-                <p style="margin-bottom: 5px;">About Us</p>
-            </div>
-            <div class="footer-section">
-                <h3 style="margin-bottom: 20px;">Blog</h3>
-                <p style="margin-bottom: 10px;">Tech News</p>
-                <p style="margin-bottom: 10px;">Developer Stories</p>
-                <p style="margin-bottom: 10px;">Industry Insights</p>
-                <p style="margin-bottom: 5px;">Tutorials</p>
-            </div>
-            <div class="footer-section">
-                <h3 style="margin-bottom: 20px;">Follow Us</h3>
-                <div class="social-links" style="margin-bottom: 20px;">
-                    <a href="#" style="margin-right: 15px;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="margin-right: 15px;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="margin-right: 15px;"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" style="margin-right: 15px;"><i class="fab fa-github"></i></a>
-                </div>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email" style="margin-bottom: 40px;">
-                    <button class="cta-button primary-btn" style="margin-bottom: 40px;">Subscribe</button>
+
+        .contact-info {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .info-item {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .site-footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 4rem 2rem 1rem;
+            margin-top: 5px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: #4A90E2;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #4A90E2;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-form input {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #333;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+</html>
+
+    <script>
+        // Original navigation script
+        const navItems = document.querySelectorAll('.nav-item');
+        const sections = document.querySelectorAll('.section');
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const sectionId = item.dataset.section;
+              
+                navItems.forEach(nav => nav.classList.remove('active'));
+                item.classList.add('active');
+              
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === sectionId) {
+                        section.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Cookie handling
+        function acceptCookies() {
+            document.getElementById('cookieBanner').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        // Check if cookies were previously accepted
+        window.onload = function() {
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
