@@ -305,6 +305,8 @@
         </div>
     </header>
 
+    
+
     <section id="home" class="section active">
             <div class="hero-content">
                             <h1 class="hero-title">Innovative 3D Printing & Design Solutions</h1>
@@ -1807,5 +1809,22 @@
             }
         }
     </script>
+    <script>// Wait for the page to load
+        window.addEventListener('load', function () {
+            // Get the section from the query parameter
+            const params = new URLSearchParams(window.location.search);
+            const section = params.get('section');
+        
+            // If a section is specified, find and trigger its nav item
+            if (section) {
+                const navItem = document.querySelector(`.nav-item[data-section='${section}']`);
+                if (navItem) {
+                    navItem.click(); // Simulate a click to navigate
+                } else {
+                    console.warn(`Section "${section}" not found.`);
+                }
+            }
+        });
+        </script>
 </body>
 </html>
