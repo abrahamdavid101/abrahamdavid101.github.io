@@ -1,2 +1,0 @@
-(self.webpackChunkCometChatWidget=self.webpackChunkCometChatWidget||[]).push([[10],{9490:(e,a,s)=>{e.exports=s.p+"resources/incomingmessage-bcd6630e9e45069adffab7741f50bb7a.wav"}}]);
-//# sourceMappingURL=10.chunk.8305d7696c80f55cf734.js.map
