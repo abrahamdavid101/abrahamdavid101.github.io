@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwiftTech 3D Printing Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .logo {
+            font-family: 'Brittany Signature', cursive;
+        }
+        @media (max-width: 768px) {
+            nav {
+                width: 64px !important;
+            }
+            nav .logo-container {
+                display: none;
+            }
+            nav li span {
+                display: none;
+            }
+            nav li {
+                justify-content: center;
+                padding: 1rem 0 !important;
+            }
+            nav li svg {
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = ['dashboard', 'upload', 'viewer', 'marketplace', 'jobs', 'resources', 'billing', 'history'];
+            sections.forEach(section => {
+                const element = document.getElementById(section + '-section');
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId + '-section');
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        }
+    </script>
+    <div class="min-h-screen flex z-6">
+        <!-- Sidebar -->
+        <nav class="bg-gray-800 w-64 z-6" id="sidebar">
+            <div class="p-6 logo-container">
+                <h1 class="text-white text-2xl font-bold min-w-min logo">SwiftTech</h1>            
+            </div>             
+            <ul class="mt-6">
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('dashboard')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('upload')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                    </svg>
+                    <span>Upload Model</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('viewer')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                    </svg>
+                    <span>View Models</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('marketplace')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    <span>Marketplace</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('jobs')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                    <span>Print Jobs</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('resources')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>Resources</span>
+                </li>
+                <li class="px-6 py-3 text-white hover:bg-gray-700 cursor-pointer flex items-center" onclick="showSection('billing')">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>Billing</span>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-x-hidden overflow-y-auto">
+
+            
+            <!-- Dashboard Content -->
+            <main class="p-3">
+                
+                <div id="dashboard-section">
+                    <!-- Profile Section -->
+                <div class="bg-white rounded-lg shadow p-2 mb-6 flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <img src="images/default-avatar.jpg" alt="Profile" class="w-12 h-12 sm:w-12 sm:h-12 w-8 h-8 rounded-full">
+                        <div>
+                            <p class="font-medium text-sm sm:text-base" id="userEmail"></p>
+                            <script>
+                                document.getElementById('userEmail').textContent = localStorage.getItem('userEmail') || '...';
+                            </script>                            
+                            <p class="text-xs sm:text-sm text-gray-500">Swift Member</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 sm:space-x-2">
+                        <div class="relative">
+                            <button id="notification-btn" class="p-2 hover:bg-gray-100 rounded-full" onclick="showNotifications()">
+                                <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                </svg>
+                                <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                            </button>
+                            <div id="notificationsPanel" class="hidden absolute right-0 mt-2 w-56 sm:w-80 bg-white rounded-md shadow-lg py-1 z-10">
+                                <div class="px-4 py-2 border-b">
+                                    <h3 class="text-xs sm:text-sm font-semibold">Notifications</h3>
+                                </div>
+                                <div id="notificationsList" class="max-h-64 overflow-y-auto text-xs sm:text-base">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative">
+                            <button id="settings-btn" class="p-2 hover:bg-gray-100 rounded-full">
+                                <svg class="w-4 h-4 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                            </button>
+                            <div id="settings-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10">
+                                                            <a class="block px-4 py-2 text-sm text-gray-700">Account Settings</a>
+                                                            <a href="#" onclick="toggleSettingsModal()" class="block px-4 py-2 text-sm text-blue-700 hover:bg-gray-100">Set Preferences</a>                                                            
+                                                            <div id="settingsModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+                                                                <div class="bg-white p-6 rounded-lg shadow-xl">
+                                                                    <h2 class="text-lg font-semibold mb-4">Settings</h2>
+                                                                    
+                                                                    <div class="space-y-5">
+                                                                        <div class="flex items-center justify-between">
+                                                                            <span class="mr-10">Email Notifications</span>
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="emailNotif" checked>
+                                                                                <span class="slider round"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="flex items-center justify-between">
+                                                                            <span class="mr-10">Push Notifications</span>
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="pushNotif" checked>
+                                                                                <span class="slider round"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="flex items-center justify-between">
+                                                                            <span class="mr-10">Language (English)</span>
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="language" checked>
+                                                                                <span class="slider round"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                        
+                                                                        <div class="flex items-center justify-between">
+                                                                            <span class="mr-10">Theme (Light/Dark)</span>
+                                                                            <label class="switch">
+                                                                                <input type="checkbox" id="theme" checked>
+                                                                                <span class="slider round"></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>                                                                    
+                                                                    <div class="mt-6 flex justify-end space-x-3">
+                                                                        <button onclick="closeSettingsModal()" class="px-4 py-2 bg-gray-200 rounded">Cancel</button>
+                                                                        <button onclick="updateSettings()" class="px-4 py-2 bg-blue-500 text-white rounded">Save</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <style>
+                                                                .switch {
+                                                                    position: relative;
+                                                                    display: inline-block;
+                                                                    width: 60px;
+                                                                    height: 34px;
+                                                                }
+                                                                
+                                                                .switch input {
+                                                                    opacity: 0;
+                                                                    width: 0;
+                                                                    height: 0;
+                                                                }
+                                                                
+                                                                .slider {
+                                                                    position: absolute;
+                                                                    cursor: pointer;
+                                                                    top: 0;
+                                                                    left: 0;
+                                                                    right: 0;
+                                                                    bottom: 0;
+                                                                    background-color: #ccc;
+                                                                    transition: .4s;
+                                                                }
+                                                                
+                                                                .slider:before {
+                                                                    position: absolute;
+                                                                    content: "";
+                                                                    height: 26px;
+                                                                    width: 26px;
+                                                                    left: 4px;
+                                                                    bottom: 4px;
+                                                                    background-color: white;
+                                                                    transition: .4s;
+                                                                }
+                                                                
+                                                                input:checked + .slider {
+                                                                    background-color: #2196F3;
+                                                                }
+                                                                
+                                                                input:checked + .slider:before {
+                                                                    transform: translateX(26px);
+                                                                }
+                                                                
+                                                                .slider.round {
+                                                                    border-radius: 34px;
+                                                                }
+                                                                
+                                                                .slider.round:before {
+                                                                    border-radius: 50%;
+                                                                }
+                                                            </style>
+                                                            <!-- Update Preferences Script -->
+                                                            <script>
+                                                                function toggleSettingsModal() {
+                                                                    const modal = document.getElementById('settingsModal');
+                                                                    modal.classList.toggle('hidden');
+                                                                }
+
+                                                                function closeSettingsModal() {
+                                                                    const modal = document.getElementById('settingsModal');
+                                                                    modal.classList.add('hidden');
+                                                                }
+
+                                                                function updateSettings() {
+                                                                    const emailNotif = document.getElementById('emailNotif').checked;
+                                                                    const pushNotif = document.getElementById('pushNotif').checked;
+                                                                    const language = document.getElementById('language').checked ? "en" : "other";
+                                                                    const theme = document.getElementById('theme').checked ? "light" : "dark";
+
+                                                                    fetch('https://swifttech-server.onrender.com/settings', {
+                                                                        method: 'POST',
+                                                                        headers: {
+                                                                            'Content-Type': 'application/json'
+                                                                        },
+                                                                        body: JSON.stringify({
+                                                                            email: localStorage.getItem('userEmail'),
+                                                                            settings: {
+                                                                                notifications: {
+                                                                                    email: emailNotif,
+                                                                                    push: pushNotif
+                                                                                },
+                                                                                preferences: {
+                                                                                    language: language,
+                                                                                    theme: theme
+                                                                                }
+                                                                            }
+                                                                        })
+                                                                    })
+                                                                    .then(response => response.json())
+                                                                    .then(data => {
+                                                                        if(data.status === 'success') {
+                                                                            alert('Settings updated successfully');
+                                                                            closeSettingsModal();
+                                                                        }
+                                                                    })
+                                                                    .catch(error => {
+                                                                        console.error('Error updating settings:', error);
+                                                                    });
+                                                                }
+                                                            </script>                                                            
+                                <hr class="my-1">
+                                <a href="#" onclick="logout()" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Logout</a>
+                                <!-- Log out Script -->
+                                <script>
+                                                                function logout() {
+                                                                    fetch('https://swifttech-server.onrender.com/logout', {
+                                                                        method: 'POST',
+                                                                        headers: {
+                                                                            'Content-Type': 'application/json'
+                                                                        },
+                                                                        body: JSON.stringify({
+                                                                            email: localStorage.getItem('userEmail')
+                                                                        })
+                                                                    })
+                                                                    .then(response => response.json())
+                                                                    .then(data => {
+                                                                        if(data.status === 'success') {
+                                                                            localStorage.clear();
+                                                                            window.location.href = 'login.html';
+                                                                        }
+                                                                    })
+                                                                    .catch(error => {
+                                                                        console.error('Error during logout:', error);
+                                                                    });
+                                                                }
+                                </script>                            
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Notifications Script -->
+                    <script>
+                        function showNotifications() {
+                            const panel = document.getElementById('notificationsPanel');
+                            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+                            
+                            fetch('https://swifttech-server.onrender.com/notifications', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    email: localStorage.getItem('userEmail')
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(notifications => {
+                                const notificationsList = document.getElementById('notificationsList');
+                                if (!notifications || notifications.length === 0) {
+                                    notificationsList.innerHTML = `
+                                        <div class="notification-item" style="padding: 10px; text-align: center; color: #666;">
+                                            No notifications yet
+                                        </div>
+                                    `;
+                                    return;
+                                }
+                                notificationsList.innerHTML = notifications.map(notification => `
+                                    <div class="notification-item" style="padding: 10px; border-bottom: 1px solid #f5f5f5;">
+                                        <div style="font-weight: 500; color: #333;">${notification.message}</div>
+                                        <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">${new Date(notification.timestamp).toLocaleDateString()}</div>
+                                    </div>
+                                `).join('');
+                            })
+                            .catch(error => {
+                                console.error('Error fetching notifications:', error);
+                                const notificationsList = document.getElementById('notificationsList');
+                                notificationsList.innerHTML = `
+                                    <div class="notification-item" style="padding: 10px; text-align: center; color: #666;">
+                                        Error loading notifications. Please try again later.
+                                    </div>
+                                `;
+                            });
+                        }
+
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const settingsBtn = document.getElementById('settings-btn');
+                            const settingsMenu = document.getElementById('settings-menu');
+                            const notificationBtn = document.getElementById('notification-btn');
+                            const notificationMenu = document.getElementById('notification-menu');
+                            
+                            if (settingsBtn && settingsMenu) {
+                                settingsBtn.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    settingsMenu.classList.toggle('hidden');
+                                    if (notificationMenu) {
+                                        notificationMenu.classList.add('hidden');
+                                    }
+                                });
+                            }
+
+                            if (notificationBtn && notificationMenu) {
+                                notificationBtn.addEventListener('click', function(e) {
+                                    e.stopPropagation();
+                                    notificationMenu.classList.toggle('hidden');
+                                    if (settingsMenu) {
+                                        settingsMenu.classList.add('hidden');
+                                    }
+                                });
+                            }
+                        });
+                    </script>                
+                    </div>
+
+                    
+                
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="text-gray-500 text-sm font-medium">Balance</h3>
+                                    <p class="text-2xl font-bold" id="balance">...</p>
+                                </div>
+                                                            <button onclick="openTopUpModal()" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-600"><i class="fas fa-circle-plus"></i> Top Up</button>
+
+                                                            <!-- Top Up Modal -->
+                                                            <div id="topUpModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex items-center justify-center">
+                                                                <div class="bg-white rounded-lg p-8 max-w-md w-full">
+                                                                    <div class="flex justify-between items-center mb-6">
+                                                                        <h3 class="text-xl font-semibold">Top Up Balance</h3>
+                                                                        <button onclick="closeTopUpModal()" class="text-gray-500 hover:text-gray-700">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </button>
+                                                                    </div>
+                                                                    <form id="topUpForm" onsubmit="handleTopUp(event)">
+                                                                        <div class="mb-4">
+                                                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+                                                                                Email:
+                                                                            </label>
+                                                                            <input type="email" id="email" required placeholder="johndoe@mail.com" class="appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                                                        </div>
+                                                                        <div class="mb-4">
+                                                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="cardNumber">
+                                                                                <i class="fas fa-credit-card"></i><br>
+                                                                                Swift Card Number:
+                                                                            </label>
+                                                                            <input type="text" id="cardNumber" required placeholder="1234 - 5678 - 9012" class="appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                                                            <p class="mt-2 text-sm text-gray-600">Don't have a Swift card? <a href="https://swifttech-server.onrender.com/get-card" class="text-blue-500 hover:text-blue-700">Get one</a></p>
+                                                                        </div>
+                                                                        <div class="mb-6">
+                                                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                                                                                Amount:
+                                                                            </label>
+                                                                            <input type="number" id="amount" required min="0" step="0.01" placeholder="$ 0.00" class="appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                                                        </div>
+                                                                        <div class="flex justify-end gap-4">
+                                                                            <button type="button" onclick="closeTopUpModal()" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Cancel</button>
+                                                                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add Money</button>
+                                                                        </div>
+                                                                    </form>                                                                
+                                                                </div>
+                                                            </div>
+
+                                                            <script>
+                                                                function openTopUpModal() {
+                                                                    document.getElementById('topUpModal').classList.remove('hidden');
+                                                                }
+
+                                                                function closeTopUpModal() {
+                                                                    document.getElementById('topUpModal').classList.add('hidden');
+                                                                    document.getElementById('topUpForm').reset();
+                                                                }
+
+                                                                function handleTopUp(event) {
+                                                                    event.preventDefault();
+                                        
+                                                                    const formData = {
+                                                                        email: document.getElementById('email').value,
+                                                                        cardNumber: document.getElementById('cardNumber').value,
+                                                                        amount: parseFloat(document.getElementById('amount').value)
+                                                                    };
+
+                                                                    fetch('https://swifttech-server.onrender.com/top-up', {
+                                                                        method: 'POST',
+                                                                        headers: {
+                                                                            'Content-Type': 'application/json',
+                                                                        },
+                                                                        body: JSON.stringify(formData)
+                                                                    })
+                                                                    .then(response => response.json())
+                                                                    .then(data => {
+                                                                        if (data.success) {
+                                                                            alert('Top up successful!');
+                                                                            closeTopUpModal();
+                                                                            fetchQuickStats(); // Refresh the balance display
+                                                                        } else {
+                                                                            alert(data.message || 'Top up failed. Please try again.');
+                                                                        }
+                                                                    })
+                                                                    .catch(error => {
+                                                                        console.error('Error:', error);
+                                                                        alert('An error occurred. Please try again.');
+                                                                    });
+                                                                }
+                                                            </script>                            
+                                                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-gray-500 text-sm font-medium">Active Print Jobs</h3>
+                            <p class="text-2xl font-bold" id="active-jobs">...</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-gray-500 text-sm font-medium">Completed Jobs</h3>
+                            <p class="text-2xl font-bold" id="completed-jobs">...</p>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-6">
+                            <h3 class="text-gray-500 text-sm font-medium">Swift Points</h3>
+                            <p class="text-2xl font-bold" id="swift-points">...</p>
+                        </div>
+                    </div>
+                    <!-- Fetch Quick Stats Data -->
+                    <script>
+                        function fetchQuickStats() {
+                            fetch('https://swifttech-server.onrender.com/quick-stats')
+                                .then(response => response.json())
+                                .then(data => {
+                                    document.getElementById('balance').textContent = `$${data.balance.toFixed(2)}`;
+                                    document.getElementById('active-jobs').textContent = data.activeJobs;
+                                    document.getElementById('completed-jobs').textContent = data.completedJobs;
+                                    document.getElementById('swift-points').textContent = data.swiftPoints;
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching quick stats:', error);
+                                    document.getElementById('balance').textContent = 'Error';
+                                    document.getElementById('active-jobs').textContent = 'Error';
+                                    document.getElementById('completed-jobs').textContent = 'Error';
+                                    document.getElementById('swift-points').textContent = 'Error';
+                                });
+                        }
+
+                        // Fetch stats when page loads
+                        document.addEventListener('DOMContentLoaded', fetchQuickStats);
+                    </script>
+
+                    <!-- Projects Widget -->
+                    <div class="bg-white rounded-lg shadow p-6 mb-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h3 class="text-lg font-semibold">My Projects</h3>
+                                <p class="text-gray-500 text-sm">Manage your ongoing and completed projects</p>
+                            </div>
+
+                            <div class="space-x-4">
+                                <button onclick="showProjectForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                                    <i class="fas fa-plus mr-2"></i>New Project
+                                </button>
+
+                                <div id="projectFormModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden flex justify-center items-center">
+                                    <div class="bg-white rounded-lg p-6 max-h-[90vh] w-full max-w-3xl flex flex-col relative">
+                                        <button onclick="closeProjectForm()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                        <div class="overflow-y-auto flex-1" style="scrollbar-color: #CBD5E0 transparent; scrollbar-width: thin;">
+                                            <form id="projectForm" class="grid grid-cols-2 gap-3" style="margin: 0 auto; padding: 0.5rem;">
+                                                <div class="form-group col-span-2">
+                                                    <label for="project_name" class="block mb-1 font-medium">Project Name</label>
+                                                    <input type="text" id="project_name" name="project_name" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name" class="block mb-1 font-medium">Full Name</label>
+                                                    <input type="text" id="name" name="name" autocomplete="name" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="block mb-1 font-medium">Email</label>
+                                                    <input type="email" id="email" name="email" autocomplete="email" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                </div>
+                                                <div class="form-group col-span-2 grid grid-cols-3 gap-3">
+                                                    <div>
+                                                        <label for="project-type" class="block mb-1 font-medium">Project Type</label>
+                                                        <select id="project-type" name="project_type" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                            <option value="">Select Project Type</option>
+                                                            <option value="prototype">Prototyping</option>
+                                                            <option value="production">Production Run</option>
+                                                            <option value="custom">Custom Project</option>
+                                                            <option value="repair">3D Scanning & Repair</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label for="material" class="block mb-1 font-medium">Preferred Material</label>
+                                                        <select id="material" name="material" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                            <option value="">Select Material</option>
+                                                            <option value="pla">PLA</option>
+                                                            <option value="abs">ABS</option>
+                                                            <option value="petg">PETG</option>
+                                                            <option value="nylon">Nylon</option>
+                                                            <option value="resin">Resin</option>
+                                                            <option value="metal">Metal</option>
+                                                            <option value="unsure">Not Sure</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label for="quantity" class="block mb-1 font-medium">Estimated Quantity</label>
+                                                        <input type="number" id="quantity" name="quantity" min="1" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group grid grid-cols-3 col-span-2 gap-3">
+                                                    <div>
+                                                        <label for="deadline" class="block mb-1 font-medium">Completion Date</label>
+                                                        <input type="date" id="deadline" name="deadline" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                    </div>
+                                                    <div>
+                                                        <label for="service-type" class="block mb-1 font-medium">Service Type</label>
+                                                        <select id="service-type" name="service_type" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                            <option value="">Select Service</option>
+                                                            <option value="3d-design">3D Design</option>
+                                                            <option value="model-printing">Model Printing</option>
+                                                            <option value="both">Both Design & Print</option>
+                                                            <option value="consultation">Consultation Only</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label for="budget" class="block mb-1 font-medium">Budget Range</label>
+                                                        <select id="budget" name="budget" required class="w-full p-2 border border-gray-300 rounded-lg">
+                                                            <option value="">Select Budget</option>
+                                                            <option value="0-500">$0 - $500</option>
+                                                            <option value="501-2000">$501 - $2,000</option>
+                                                            <option value="2001-5000">$2,001 - $5,000</option>
+                                                            <option value="5000+">$5,000+</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-span-2">
+                                                    <label for="message" class="block mb-1 font-medium">Project Details</label>
+                                                    <textarea id="message" name="message" rows="3" placeholder="Please describe your project requirements, specifications, and any special considerations." required class="w-full p-2 border border-gray-300 rounded-lg"></textarea>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="sticky bottom-0 bg-white pt-4 mt-4 border-t">
+                                            <button type="submit" form="projectForm" class="w-full max-w-md mx-auto block py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                                <span id="submitText">Submit Project</span>
+                                                <span id="submitSpinner" class="hidden inline-block animate-spin">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="notification2" class="fixed bottom-5 right-5 p-4 rounded-lg text-white hidden z-50 transform transition-transform duration-300"></div>
+
+                                <script>
+                                    function showProjectForm() {
+                                        document.getElementById('projectFormModal').classList.remove('hidden');
+                                    }
+
+                                    function closeProjectForm() {
+                                        document.getElementById('projectFormModal').classList.add('hidden');
+                                    }
+
+                                    document.getElementById('projectForm').addEventListener('submit', async (e) => {
+                                        e.preventDefault();
+                                        
+                                        const submitText = document.getElementById('submitText');
+                                        const submitSpinner = document.getElementById('submitSpinner');
+                                        
+                                        submitText.classList.add('hidden');
+                                        submitSpinner.classList.remove('hidden');
+                                        
+                                        const formData = new FormData(e.target);
+                                        const jsonData = {};
+
+                                        formData.forEach((value, key) => {
+                                            jsonData[key] = value;
+                                        });
+
+                                        try {
+                                            const response = await fetch('https://swifttech-server.onrender.com/submit-project', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json'
+                                                },
+                                                body: JSON.stringify(jsonData)
+                                            });
+                                            
+                                            if (response.ok) {
+                                                showNotification('✓ Project request submitted successfully!', '#28a745');
+                                                e.target.reset();
+                                                closeProjectForm();
+                                            } else {
+                                                throw new Error('Failed to submit project request');
+                                            }
+                                        } catch (error) {
+                                            console.error('Error:', error);
+                                            showNotification('✕ Failed to submit project request. Please try again.', '#dc3545');
+                                        } finally {
+                                            submitText.classList.remove('hidden');
+                                            submitSpinner.classList.add('hidden');
+                                        }
+                                    });
+
+                                    function showNotification(message, backgroundColor) {
+                                        const notification = document.getElementById('notification2');
+                                        notification.textContent = message;
+                                        notification.style.backgroundColor = backgroundColor;
+                                        notification.classList.remove('hidden');
+                                        notification.classList.add('translate-y-0');
+                                        
+                                        setTimeout(() => {
+                                            notification.classList.add('translate-y-full');
+                                            setTimeout(() => {
+                                                notification.classList.add('hidden');
+                                                notification.classList.remove('translate-y-full');
+                                            }, 300);
+                                        }, 3000);
+                                    }
+                                </script>
+                                
+                                <button onclick="window.open('https://forms.gle/VcGcSPrHaHXvqmmS9', '_blank')" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition duration-300 mr-2">
+                                                                    <i class="fas fa-file-upload mr-2"></i>Upload Project Files</button>
+                                
+                                <button onclick="showSection('upload')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                                    <i class="fas fa-upload mr-2"></i>Upload Model
+                                </button>
+                                
+                            </div>
+                        </div>
+                    
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Project Type</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Budget</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submission Date</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200" id="projects-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        function getIconForServiceType(serviceType) {
+                            switch(serviceType) {
+                                case '3d-design':
+                                    return 'fa-solid fa-cube';
+                                case 'model-printing':
+                                    return 'fa-solid fa-print';
+                                case 'both':
+                                    return 'fa-solid fa-cubes';
+                                case 'consultation':
+                                    return 'fa-solid fa-comments';
+                                default:
+                                    return 'fa-solid fa-circle-question';
+                            }
+                        }
+
+                        function formatDate(dateString) {
+                            return new Date(dateString).toLocaleDateString();
+                        }
+
+                        function cancelProject(projectId) {
+                            console.log('Cancelling project:', projectId);
+                            const userEmail = localStorage.getItem('userEmail');
+                            
+                            fetch(`https://swifttech-server.onrender.com/cancel-project`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ projectId, email: userEmail })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                showNotification('Project cancelled successfully', '#10B981');
+                                fetchProjects();
+                            })
+                            .catch(error => {
+                                console.error('Error cancelling project:', error);
+                                showNotification('Error cancelling project', '#EF4444');
+                            });
+                        }
+
+                        function updateProjectsTable(projects) {
+                            const tableBody = document.getElementById('projects-table-body');
+                            tableBody.innerHTML = '';
+
+                            Object.entries(projects.formSubmissions || {}).forEach(([id, project]) => {
+                                const row = `
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center">
+                                                    <i class="${getIconForServiceType(project.service_type)} text-2xl text-gray-600"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">${project.project_name}</div>
+                                                    <div class="text-sm text-gray-500">${project.service_type}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">$${project.budget}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">${formatDate(project.submissionDate)}</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                project.status === 'active' ? 'bg-blue-100 text-blue-800' : 
+                                                project.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                                                project.status === 'cancelled' ? 'bg-red-100 text-red-800' :
+                                                project.status === 'completed' ? 'bg-green-100 text-green-800' : 
+                                                'bg-gray-100 text-gray-800'
+                                            }">
+                                                ${project.status}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            ${(project.status === 'pending') ? 
+                                                `<a href="#" onclick="cancelProject('${id}'); return false;" class="text-red-600 hover:text-red-900">Cancel</a>` : 
+                                                ''}
+                                        </td>                             
+                                    </tr>
+                                `;
+                                tableBody.insertAdjacentHTML('beforeend', row);
+                            });
+                        }
+
+                        function fetchProjects() {
+                            const userEmail = localStorage.getItem('userEmail');
+                            fetch(`https://swifttech-server.onrender.com/projects?email=${userEmail}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                    updateProjectsTable(data);
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching projects:', error);
+                                });
+                        }
+
+                        document.addEventListener('DOMContentLoaded', fetchProjects);
+                    </script> 
+                    
+                    <!--Project Chat Widget-->
+                    <!-- Project Messenger Widget -->
+                    <div class="bg-white rounded-lg shadow p-6 mb-6 flex flex-col">
+                        <!-- Chat Widget Container -->
+                        <div class="w-full mb-6">
+                            <h3 class="text-lg font-semibold mb-2">Project Messenger</h3>
+                            <p class="text-gray-500 text-sm mb-4">Powered by SwiftTech</p>
+                            <div id="cometchat-widget-container" style="height: 500px;">
+                                <div id="cometchat"></div>
+                            </div>
+                        </div>
+                    
+                        <!-- Info Panel -->
+                        <div class="w-full bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-medium mb-4 flex items-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                How It Works
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 mr-2 text-blue-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    <p class="text-sm">When a team member or SwiftTech expert reviews your pending project</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 mr-2 text-green-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <p class="text-sm">Your profile will be activated for direct communication</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 mr-2 text-purple-500 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                    </svg>
+                                    <p class="text-sm">Chat with the assigned expert throughout your project duration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script defer src="https://swifttech.me/widget/cometchatwidget.js"></script>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', (event) => {
+                            setTimeout(() => {
+                                CometChatWidget.init({
+                                    "appID": "2704072211258582",
+                                    "appRegion": "US",
+                                    "authKey": "a59b39c696a7c8cf532fa3ff2060a38a16ab5c04"
+                                }).then(response => {
+                                    console.log("Initialization completed successfully");
+                                    //You can now call login function.
+                                    CometChatWidget.login({
+                                        "uid": "cometchat-uid-1"
+                                    }).then(response => {
+                                        CometChatWidget.launch({
+                                            "widgetID": "60c78d1e-ed1f-4a8e-80f8-45233cee2bfe",
+                                            "target": "#cometchat",
+                                            "roundedCorners": "true",
+                                            "height": "500px",
+                                            "width": "100%",
+                                            "defaultID": 'cometchat-uid-1', //default UID (user) or GUID (group) to show,
+                                            "defaultType": 'user' //user or group
+                                        });
+                                    }, error => {
+                                        console.log("User login failed with error:", error);
+                                    });
+                                }, error => {
+                                    console.log("Initialization failed with error:", error);
+                                });
+                            }, 1000); // Wait for 1 second before initializing
+                        });
+                    </script>
+                    
+
+                      <!-- Top Products Widget -->
+                      <div class="bg-white rounded-lg shadow p-6 mb-6">
+                          <h3 class="text-lg font-semibold mb-4">Top Products</h3>
+                          <p class="text-gray-500 text-sm mb-4">These products are now available on the marketplace</p>
+                        
+                          <!-- Desktop View -->
+                          <div class="hidden md:grid md:grid-cols-3 gap-6">
+                              <div class="border rounded-lg p-4">
+                                  <img src="images/product1.jpg" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-4">
+                                  <h4 class="font-medium">Premium 3D Model</h4>
+                                  <p class="text-gray-500 text-sm mb-2">High-quality architectural model</p>
+                                  <p class="text-blue-600 font-bold">$29.99</p>
+                              </div>
+                              <div class="border rounded-lg p-4">
+                                  <img src="images/product2.jpg" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-4">
+                                  <h4 class="font-medium">Character Model</h4>
+                                  <p class="text-gray-500 text-sm mb-2">Detailed game character</p>
+                                  <p class="text-blue-600 font-bold">$19.99</p>
+                              </div>
+                              <div class="border rounded-lg p-4">
+                                  <img src="images/product3.jpg" alt="Product 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                                  <h4 class="font-medium">Mechanical Part</h4>
+                                  <p class="text-gray-500 text-sm mb-2">Industrial component</p>
+                                  <p class="text-blue-600 font-bold">$24.99</p>
+                              </div>
+                          </div>
+
+                          <!-- Mobile Carousel -->
+                          <div class="md:hidden relative">
+                              <div class="overflow-hidden">
+                                  <div id="carousel" class="flex transition-transform duration-500">
+                                      <div class="border rounded-lg p-4 w-full flex-shrink-0">
+                                          <img src="images/product1.jpg" alt="Product 1" class="w-full h-48 object-cover rounded-lg mb-4">
+                                          <h4 class="font-medium">Premium 3D Model</h4>
+                                          <p class="text-gray-500 text-sm mb-2">High-quality architectural model</p>
+                                          <p class="text-blue-600 font-bold">$29.99</p>
+                                      </div>
+                                      <div class="border rounded-lg p-4 w-full flex-shrink-0">
+                                          <img src="images/product2.jpg" alt="Product 2" class="w-full h-48 object-cover rounded-lg mb-4">
+                                          <h4 class="font-medium">Character Model</h4>
+                                          <p class="text-gray-500 text-sm mb-2">Detailed game character</p>
+                                          <p class="text-blue-600 font-bold">$19.99</p>
+                                      </div>
+                                      <div class="border rounded-lg p-4 w-full flex-shrink-0">
+                                          <img src="images/product3.jpg" alt="Product 3" class="w-full h-48 object-cover rounded-lg mb-4">
+                                          <h4 class="font-medium">Mechanical Part</h4>
+                                          <p class="text-gray-500 text-sm mb-2">Industrial component</p>
+                                          <p class="text-blue-600 font-bold">$24.99</p>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="flex justify-center mt-4 space-x-2">
+                                  <div class="h-2 w-2 rounded-full bg-white border border-blue-600" id="dot0"></div>
+                                  <div class="h-2 w-2 rounded-full bg-white border border-blue-600" id="dot1"></div>
+                                  <div class="h-2 w-2 rounded-full bg-white border border-blue-600" id="dot2"></div>
+                              </div>
+                          </div>
+
+                          <div class="flex justify-center mt-6">
+                              <button onclick="showSection('marketplace')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Open Marketplace</button>
+                          </div>
+                      </div>
+                    <!--carousel script-->
+                      <script>
+                          let currentSlide = 0;
+                          const carousel = document.getElementById('carousel');
+                          const dots = [
+                              document.getElementById('dot0'),
+                              document.getElementById('dot1'),
+                              document.getElementById('dot2')
+                          ];
+
+                          function updateCarousel() {
+                              carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                              dots.forEach((dot, index) => {
+                                  dot.classList.toggle('bg-blue-600', index === currentSlide);
+                              });
+                          }
+
+                          function nextSlide() {
+                              currentSlide = (currentSlide + 1) % 3;
+                              updateCarousel();
+                          }
+
+                          setInterval(nextSlide, 5000);
+                          updateCarousel();
+                      </script>
+                  </div>
+
+                <!-- Upload Section -->
+                <div id="upload-section" class="hidden">
+                    <div class="bg-white rounded-lg shadow p-6 mb-6">
+                        <h2 class="text-xl font-bold mb-4">Upload 3D Model</h2>
+                        <div class="border-dashed border-2 border-gray-300 rounded-lg p-12 text-center">
+                            <form id="uploadForm">
+                                <input type="file" id="fileInput" name="file" accept=".stl,.obj,.fbx" class="hidden">
+                                <label for="fileInput" class="cursor-pointer">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                    </svg>
+                                    <p class="mt-1 text-sm text-gray-600">Click to upload or drag and drop</p>
+                                    <p class="mt-1 text-xs text-gray-500">STL, OBJ, or FBX (MAX. 100MB)</p>
+                                </label>
+                                <div id="selectedFile" class="mt-4 hidden">
+                                    <p class="text-sm text-gray-700">Selected file: <span id="fileName"></span></p>
+                                </div>
+                                <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Upload</button>
+                            </form>
+                        </div>
+                        <div id="upload-progress" class="mt-4 hidden">
+                            <div class="bg-blue-100 h-2 rounded-full">
+                                <div class="bg-blue-500 h-2 rounded-full" id="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Uploaded Files Section -->
+                    <div class="bg-white rounded-lg shadow p-6 mt-6 mb-6">
+                        <h2 class="text-xl font-bold mb-4">Your Uploaded Files</h2>
+                        <div id="uploaded-files" class="space-y-4">
+                            <!-- Files will be populated here -->
+                        </div>
+                    </div>
+                    
+                    <script>
+                        async function fetchUploadedFiles() {
+                            try {
+                                const userEmail = localStorage.getItem("userEmail");
+                                const response = await fetch(`https://swifttech-server.onrender.com/files/${userEmail}`);
+                                const data = await response.json();
+                                
+                                const filesContainer = document.getElementById("uploaded-files");
+                                filesContainer.innerHTML = '';
+                                filesContainer.style.maxHeight = '400px';
+                                filesContainer.style.overflowY = 'auto';
+                    
+                                Object.entries(data).forEach(([key, file]) => {
+                                    const fileDate = new Date(file.timestamp).toLocaleDateString();
+                                    const fileElement = document.createElement('div');
+                                    fileElement.className = 'flex items-center justify-between p-4 bg-gray-50 rounded-lg';
+                                    fileElement.innerHTML = `
+                                        <div class="flex items-center space-x-4">
+                                            <svg class="h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="text-sm font-medium text-gray-900">${file.fileName}</h3>
+                                                <p class="text-sm text-gray-500">Uploaded on ${fileDate}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-2">
+                                            <button onclick="openPrintForm('${file.path}', '${file.fileName}')" class="text-sm text-blue-600 hover:text-blue-800">
+                                                Print
+                                            </button>
+                                            <button onclick="deleteFile('${key}')" class="text-sm text-red-600 hover:text-red-800">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    `;
+                                    filesContainer.appendChild(fileElement);
+                                });
+                            } catch (error) {
+                                console.error("Error fetching files:", error);
+                                showNotification("✕ Failed to load uploaded files", "#dc3545");
+                            }
+                        }
+                    
+                        async function downloadFile(path) {
+                            try {
+                                const response = await fetch(`https://swifttech-server.onrender.com/download${path}`);
+                                if (response.ok) {
+                                    const blob = await response.blob();
+                                    const url = window.URL.createObjectURL(blob);
+                                    const a = document.createElement('a');
+                                    a.href = url;
+                                    a.download = path.split('/').pop();
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    window.URL.revokeObjectURL(url);
+                                    a.remove();
+                                } else {
+                                    throw new Error("Download failed");
+                                }
+                            } catch (error) {
+                                console.error("Error downloading file:", error);
+                                showNotification("✕ Failed to download file", "#dc3545");
+                            }
+                        }
+                    
+                        async function deleteFile(fileId) {
+                            if (!confirm("Are you sure you want to delete this file?")) return;
+                            
+                            try {
+                                const response = await fetch(`https://swifttech-server.onrender.com/files/${fileId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        email: localStorage.getItem("userEmail")
+                                    })
+                                });
+                    
+                                if (response.ok) {
+                                    showNotification("✓ File deleted successfully!", "#28a745");
+                                    fetchUploadedFiles();
+                                } else {
+                                    throw new Error("Delete failed");
+                                }
+                            } catch (error) {
+                                console.error("Error deleting file:", error);
+                                showNotification("✕ Failed to delete file", "#dc3545");
+                            }
+                        }
+                    
+                        // Fetch files when page loads
+                        document.addEventListener('DOMContentLoaded', fetchUploadedFiles);
+                        
+                        // Refresh files list after successful upload
+                        const uploadForm = document.getElementById("uploadForm");
+                        uploadForm.addEventListener("submit", async (e) => {
+                            const originalSubmit = uploadForm.onsubmit;
+                            uploadForm.onsubmit = async (e) => {
+                                await originalSubmit(e);
+                                fetchUploadedFiles();
+                            };
+                        });
+                    </script>
+                    
+                </div>
+                <div id="notification" style="display: none; position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; border-radius: 5px; color: white; z-index: 1000; animation: slideIn 0.5s ease-out;"></div>
+                <style>
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); }
+                        to { transform: translateX(0); }
+                    }
+                </style>
+                <script>
+                    document.getElementById("fileInput").addEventListener("change", (e) => {
+                        const fileName = e.target.files[0]?.name;
+                        if (fileName) {
+                            document.getElementById("selectedFile").classList.remove("hidden");
+                            document.getElementById("fileName").textContent = fileName;
+                        }
+                    });
+
+                    document.getElementById("uploadForm").onsubmit = async (e) => {
+                        e.preventDefault();
+                        const fileInput = document.getElementById("fileInput");
+                        if (!fileInput.files[0]) {
+                            showNotification("✕ Please select a file to upload", "#dc3545");
+                            return;
+                        }
+
+                        const formData = new FormData();
+                        formData.append("file", fileInput.files[0]);
+                        formData.append("email", localStorage.getItem("userEmail"));
+
+                        try {
+                            document.getElementById("upload-progress").classList.remove("hidden");
+                            const response = await fetch("https://swifttech-server.onrender.com/upload", {
+                                method: "POST",
+                                body: formData,
+                            });
+
+                            if (response.ok) {
+                                showNotification("✓ File uploaded successfully!", "#28a745");
+                                document.getElementById("uploadForm").reset();
+                                document.getElementById("selectedFile").classList.add("hidden");
+                            } else {
+                                throw new Error("Upload failed");
+                            }
+                        } catch (error) {
+                            console.error("Error:", error);
+                            showNotification("✕ Failed to upload file. Please try again.", "#dc3545");
+                        } finally {
+                            document.getElementById("upload-progress").classList.add("hidden");
+                            document.getElementById("progress-bar").style.width = "0%";
+                        }
+                    };
+
+                    function showNotification(message, backgroundColor) {
+                        const notification = document.getElementById("notification");
+                        notification.textContent = message;
+                        notification.style.backgroundColor = backgroundColor;
+                        notification.style.display = "block";
+
+                        setTimeout(() => {
+                            notification.style.display = "none";
+                        }, 3000);
+                    }
+                </script>
+
+                <!-- 3D Model Viewer Section -->
+                <div id="viewer-section" class="hidden">
+                    <div class="bg-white rounded-lg shadow p-6 mb-6">
+                        <h2 class="text-xl font-bold mb-4">3D Model Viewer</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div id="model-list" class="border rounded p-4">
+                                <h3 class="text-lg font-semibold mb-3">Your Models</h3>
+                                <div id="models-container" class="space-y-2">
+                                    <!-- Models will be listed here dynamically -->
+                                </div>
+                            </div>
+                            <div id="model-viewer" class="border rounded p-4" style="height: 400px">
+                                <a-scene embedded>
+                                    <a-entity id="model-container"></a-entity>
+                                </a-scene>
+                            </div>
+                        </div>
+                    </div>
+                    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+                    <script>
+                        // Load models from server
+                        async function loadUserModels() {
+                            try {
+                                const response = await fetch('https://swifttech-server.onrender.com/get-models', {
+                                    method: 'GET',
+                                    headers: {
+                                        'email': localStorage.getItem('userEmail')
+                                    }
+                                });
+                                
+                                const models = await response.json();
+                                const container = document.getElementById('models-container');
+                                container.innerHTML = '';
+                                
+                                models.forEach(model => {
+                                    const modelDiv = document.createElement('div');
+                                    modelDiv.className = 'flex justify-between items-center p-2 hover:bg-gray-100 rounded';
+                                    modelDiv.innerHTML = `
+                                        <span>${model.filename}</span>
+                                        <button onclick="viewModel('${model.shareLink}')" 
+                                                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                                            View
+                                        </button>
+                                    `;
+                                    container.appendChild(modelDiv);
+                                });
+                            } catch (error) {
+                                console.error('Error loading models:', error);
+                            }
+                        }
+
+                        // Load models when section becomes visible
+                        document.getElementById('viewer-section').addEventListener('display', loadUserModels);
+
+                        // View specific model
+                        window.viewModel = function(shareLink) {
+                            const modelUrl = shareLink.replace('?dl=0', '?raw=1');
+                            const modelContainer = document.getElementById('model-container');
+                            
+                            // Clear existing model
+                            modelContainer.innerHTML = '';
+                            
+                            // Add new model
+                            const model = document.createElement('a-gltf-model');
+                            model.setAttribute('src', modelUrl);
+                            model.setAttribute('position', '0 0 -3');
+                            model.setAttribute('rotation', '0 0 0');
+                            model.setAttribute('animation', 'property: rotation; to: 0 360 0; loop: true; dur: 10000');
+                            
+                            modelContainer.appendChild(model);
+                        }
+                    </script>
+                </div>
+                
+                <!-- Marketplace -->
+            <div id="marketplace-section" class="hidden">
+                <h2 class="text-3xl font-bold mb-4 text-center text-gray-800">3D Printing Marketplace</h2>
+                <p class="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-8">Browse, buy, and download 3D printing products, services, and designs from our global community of creators and manufacturers.</p>
+                    <div class="marketplace-search bg-white rounded-lg shadow p-6 mb-6">
+                        <div class="search-container flex flex-wrap gap-4 mb-4">
+                            <span class="flex gap-4 w-full">
+                                <input type="text" id="searchInput" placeholder="Search products, services, or sellers..." class="flex-1 p-3 rounded-full border border-gray-300 text-lg">                                
+                                <button onclick="searchProducts()" class="bg-blue-500 text-white px-8 rounded-full cursor-pointer h-12 mt-1 hover:bg-blue-600">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </span>
+                            <select id="categorySelect" class="p-3 rounded-full border border-gray-300">
+                                <option value="all">All Categories</option>
+                                <option value="3d-models">3D Models</option>
+                                <option value="printing-services">Printing Services</option>
+                                <option value="materials">Materials</option>
+                                <option value="printers">Printers</option>
+                                <option value="accessories">Accessories</option>
+                            </select>
+                            <span>
+                                <div class="filter-tags flex flex-wrap gap-2 mt-1.5">                 
+                                    <span class="filter bg-gray-100 px-4 py-1.5 rounded-full text-sm cursor-pointer hover:bg-blue-500 hover:text-white transition-colors" onclick="toggleFilter(this)" data-filter="price">Price Range</span>                 
+                                    <span class="filter bg-gray-100 px-4 py-1.5 rounded-full text-sm cursor-pointer hover:bg-blue-500 hover:text-white transition-colors" onclick="toggleFilter(this)" data-filter="rating">Rating 4+</span>                 
+                                    <span class="filter bg-gray-100 px-4 py-1.5 rounded-full text-sm cursor-pointer hover:bg-blue-500 hover:text-white transition-colors" onclick="toggleFilter(this)" data-filter="shipping">Free Shipping</span>                 
+                                    <span class="filter bg-gray-100 px-4 py-1.5 rounded-full text-sm cursor-pointer hover:bg-blue-500 hover:text-white transition-colors" onclick="toggleFilter(this)" data-filter="stock">In Stock</span>             
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+            
+                    <div class="marketplace-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-category="printers" data-tags="price,stock">
+                            <div class="relative">
+                                <img src="images/medical-prototype.jpeg" alt="3D Printer" class="w-full h-48 object-cover">
+                                <span class="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 rounded-full text-sm">Hot Deal</span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Professional 3D Printer</h3>
+                                    <span class="text-blue-500 font-bold">$ 599.99</span>
+                                </div>                    
+                                <div class="text-yellow-400 my-2">★★★★★ (128)</div>
+                                <p class="text-gray-600 my-2">High-precision 3D printer with dual extruder and large build volume.</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-green-600"><i class="fas fa-check"></i> In Stock</span>
+                                    <button onclick="buyNow(1)" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Buy now</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-category="materials" data-tags="price,stock,shipping">
+                            <div class="relative">
+                                <img src="images/auto-parts.jpeg" alt="PLA Filament" class="w-full h-48 object-cover">
+                                <span class="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm">Best Seller</span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Premium PLA Filament</h3>
+                                    <span class="text-blue-500 font-bold">$ 24.99</span>
+                                </div>
+                                <div class="text-yellow-400 my-2">★★★★½ (256)</div>
+                                <p class="text-gray-600 my-2">1kg spool of high-quality PLA filament, multiple colors available.</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-green-600"><i class="fas fa-check"></i> In Stock</span>
+                                    <button onclick="buyNow(2)" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Buy now</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg" data-category="3d-models" data-tags="price,rating">
+                            <div class="relative">
+                                <img src="images/industrial.jpeg" alt="3D Model" class="w-full h-48 object-cover">
+                                <span class="absolute top-3 right-3 bg-cyan-500 text-white px-3 py-1 rounded-full text-sm">New</span>
+                            </div>
+                            <div class="p-4">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-lg font-semibold">Industrial Parts Pack</h3>
+                                    <span class="text-blue-500 font-bold">$ 49.99</span>
+                                </div>                    
+                                <div class="text-yellow-400 my-2">★★★★ (64)</div>
+                                <p class="text-gray-600 my-2">Collection of 50+ industrial-grade 3D models ready for printing.</p>
+                                <div class="flex justify-between items-center mt-4">
+                                    <span class="text-green-600"><i class="fas fa-check"></i> Digital Download</span>
+                                    <button onclick="buyNow(3)" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Buy Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="marketplace-footer text-center mt-12">
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button onclick="loadMoreProducts()" class="bg-blue-500 text-white px-8 py-3 rounded-full hover:bg-blue-600 transition-colors min-w-[150px]">Load More Products</button>
+                            <button onclick="openShop()" class="bg-white text-blue-500 border-2 border-blue-500 px-8 py-3 rounded-full hover:bg-blue-50 transition-colors min-w-[150px]">Buy Swift Card</button>
+                        </div>        
+                    </div>
+                    <!--MarketPlace Script-->
+                    <script>
+                        // ... (rest of the JavaScript code remains unchanged)
+        let activeFilters = new Set();
+        let page = 1;
+        let cart = [];
+        const productsPerPage = 3;
+        const allProducts = [
+            {
+                id: 4,
+                title: "Advanced 3D Scanner",
+                price: 799.99,
+                category: "accessories",
+                tags: ["price", "rating"],
+                image: "images/scanner.jpg",
+                description: "Professional-grade 3D scanner with high precision and accuracy for detailed object digitization.",
+                badge: "Premium",
+                halfStar: true,
+                reviews: 128
+            },
+            {
+                id: 5,
+                title: "Resin Printer Kit",
+                price: 349.99,
+                category: "printers",
+                tags: ["price", "stock", "shipping"],
+                image: "images/resin-printer.jpg",
+                description: "Complete resin 3D printer kit with LCD screen, perfect for high-detail miniatures and jewelry.",
+                badge: "Best Value",
+                halfStar: false,
+                reviews: 89
+            },
+            {
+                id: 6,
+                title: "Designer Models Bundle",
+                price: 79.99,
+                category: "3d-models",
+                tags: ["price", "rating"],
+                image: "images/models-bundle.jpg",
+                description: "Curated collection of premium 3D models from top designers, ready for immediate printing.",
+                badge: "Popular",
+                halfStar: true,
+                reviews: 156
+            },
+            {
+                id: 1,
+                title: "Professional 3D Printer",
+                price: 599.99,
+                category: "printers",
+                tags: ["price", "stock"],
+                image: "images/medical-prototype.jpeg",
+                description: "High-precision 3D printer with dual extruder and large build volume.",
+                badge: "Hot Deal",
+                halfStar: false,
+                reviews: 128
+            },
+            {
+                id: 2,
+                title: "Premium PLA Filament",
+                price: 24.99,
+                category: "materials",
+                tags: ["price", "stock", "shipping"],
+                image: "images/auto-parts.jpeg",
+                description: "1kg spool of high-quality PLA filament, multiple colors available.",
+                badge: "Best Seller",
+                halfStar: true,
+                reviews: 256
+            },
+            {
+                id: 3,
+                title: "Industrial Parts Pack",
+                price: 49.99,
+                category: "3d-models",
+                tags: ["price", "rating"],
+                image: "images/industrial.jpeg",
+                description: "Collection of 50+ industrial-grade 3D models ready for printing.",
+                badge: "New",
+                halfStar: false,
+                reviews: 64
+            }        
+        ];        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categorySelect').value;
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const title = product.querySelector('h3').textContent.toLowerCase();
+                const productCategory = product.dataset.category;
+                const matchesSearch = title.includes(searchTerm);
+                const matchesCategory = category === 'all' || productCategory === category;
+                
+                product.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
+            });
+        }
+
+        function toggleFilter(element) {
+            const filter = element.dataset.filter;
+            if (activeFilters.has(filter)) {
+                activeFilters.delete(filter);
+                element.classList.remove('bg-blue-500', 'text-white');
+                element.classList.add('bg-gray-100', 'text-gray-800');
+            } else {
+                activeFilters.add(filter);
+                element.classList.remove('bg-gray-100', 'text-gray-800');
+                element.classList.add('bg-blue-500', 'text-white');
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const productTags = product.dataset.tags.split(',');
+                const matchesFilters = activeFilters.size === 0 || 
+                    Array.from(activeFilters).every(filter => productTags.includes(filter));
+                
+                if (matchesFilters && product.style.display !== 'none') {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function createProductElement(product) {
+            const div = document.createElement('div');
+            div.className = 'product-card bg-white rounded-xl overflow-hidden shadow-lg';
+            div.dataset.category = product.category;
+            div.dataset.tags = product.tags.join(',');
+            
+            div.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-cover">
+                    <span class="absolute top-3 right-3 bg-green-500 text-white px-3 py-1 rounded-full text-sm">${product.badge || ''}</span>
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-semibold">${product.title}</h3>
+                        <span class="text-blue-500 font-bold">$ ${product.price}</span>
+                    </div>
+                    <div class="text-yellow-400 my-2">★★★★${product.halfStar ? '½' : ''} (${product.reviews})</div>
+                    <p class="text-gray-600 my-2">${product.description}</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-green-600"><i class="fas fa-check"></i> In Stock</span>
+                        <button onclick="buyNow(${product.id})" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors">Buy now</button>
+                    </div>
+                </div>`;
+            return div;
+        }
+
+        function loadMoreProducts() {
+            const marketplaceGrid = document.querySelector('.marketplace-grid');
+            const startIndex = (page - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const newProducts = allProducts.slice(startIndex, endIndex);
+            
+            if (newProducts.length > 0) {
+                newProducts.forEach(product => {
+                    const productElement = createProductElement(product);
+                    marketplaceGrid.appendChild(productElement);
+                });
+                page++;
+                applyFilters();
+            }
+            
+            if (endIndex >= allProducts.length) {
+                document.querySelector('.marketplace-footer button').style.display = 'none';
+            }
+        }
+
+        function buyNow(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            
+            if (!product) {
+                console.error('Product not found');
+                return;
+            }
+            
+            const popup = document.createElement('div');
+            popup.classList.add('popup', 'fixed', 'top-1/2', 'left-1/2', 'transform', '-translate-x-1/2', '-translate-y-1/2', 'bg-white', 'p-8', 'shadow-xl', 'z-50', 'w-11/12', 'max-w-2xl', 'rounded-xl');
+
+            popup.innerHTML = `
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex items-center gap-4">
+                        <img src="${product.image}" alt="${product.title}" class="w-16 h-16 object-cover rounded">
+                        <h3 class="text-xl font-semibold">${product.title}</h3>
+                    </div>
+                    <span class="text-blue-500">$ ${product.price}</span>
+                </div>
+                <form id="checkoutForm" class="space-y-4">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="Full Name" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                        <span class="error text-red-500 text-sm"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                        <span class="error text-red-500 text-sm"></span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Phone Number" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500" pattern="[+][0-9]{1,3}[0-9]{10}" title="Please enter valid phone number with country code">
+                            <span class="error text-red-500 text-sm"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="coupon" placeholder="Coupon Code" class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                            <span class="error text-red-500 text-sm"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="address" placeholder="Shipping Address" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
+                        <span class="error text-red-500 text-sm"></span>
+                    </div>
+                    <div class="form-group">
+                        <select id="deliveryType" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 bg-white">
+                            <option value="" disabled selected>Select Delivery Type</option>
+                            <option value="standard">Standard Delivery (3-5 days)</option>
+                            <option value="express">Express Delivery (1-2 days)</option>
+                            <option value="same-day">Same Day Delivery</option>
+                        </select>
+                        <span class="error text-red-500 text-sm"></span>
+                    </div>
+                    <h4 class="font-semibold mb-2">Payment Method:</h4>
+                    <div class="form-group">
+                        <input type="text" id="swiftCode" placeholder="Swift Card Code" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 mb-2">
+                        <span class="error text-red-500 text-sm"></span>
+                        <div class="text-sm">
+                            Don't have a swift card - <a href="https://swiftcard.com/buy" class="text-blue-500 hover:underline">Get one</a>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 mt-6">
+                        <button type="submit" class="flex-1 py-2 px-4 bg-white border-2 border-blue-500 text-blue-500 rounded-full hover:bg-blue-50 transition-colors">Complete Purchase</button>
+                        <button type="button" onclick="closePopup()" class="py-2 px-4 bg-white border-2 border-red-500 text-red-500 rounded-full hover:bg-red-50 transition-colors">Cancel</button>
+                    </div>
+                </form>
+            `;
+
+            document.body.appendChild(popup);
+
+            const overlay = document.createElement('div');
+            overlay.classList.add('popup-overlay', 'fixed', 'inset-0', 'bg-black', 'bg-opacity-50', 'z-40');
+            document.body.appendChild(overlay);
+
+            const form = popup.querySelector('#checkoutForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing';
+                submitBtn.disabled = true;
+                
+                const formData = {
+                    fullName: form.querySelector('#fullName').value,
+                    email: form.querySelector('#email').value,
+                    phone: form.querySelector('#phone').value,
+                    coupon: form.querySelector('#coupon').value,
+                    address: form.querySelector('#address').value,
+                    deliveryType: form.querySelector('#deliveryType').value,
+                    swiftCode: form.querySelector('#swiftCode').value,
+                    productId: productId,
+                    price: product.price,
+                    title: product.title
+                };
+                try {
+                    const response = await fetch('https://swifttech-server.onrender.com/checkout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        const notification = document.createElement('div');
+                        notification.className = 'fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50';
+                        notification.innerHTML = `
+                            <h4 class="font-bold mb-2">Purchase Successful!</h4>
+                            <p>Amount: ${result.transactionDetails.amount}</p>
+                            <p>Product: ${result.transactionDetails.productTitle}</p>
+                            <p>New Card Balance: ${result.newBalance}</p>
+                        `;
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.remove();
+                            popup.remove();
+                            overlay.remove();
+                        }, 5000);
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } catch (error) {
+                    form.reset();
+                    const errorMsg = document.createElement('div');
+                    errorMsg.className = 'text-red-500 text-center mb-4';
+                    errorMsg.textContent = error.message || 'An error occurred. Please try again.';
+                    form.insertBefore(errorMsg, form.firstChild);
+                } finally {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        function closePopup() {
+            const popup = document.querySelector('.popup');
+            const overlay = document.querySelector('.popup-overlay');
+            if (popup) popup.remove();
+            if (overlay) overlay.remove();
+        }     
+        </script>       
+                
+            </div>
+
+                <!-- Jobs -->
+                <div id="jobs-section" class="hidden">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-bold mb-4">Jobs</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Available Projects</h3>
+                            <div class="space-y-4">
+                                <div class="border-b pb-2">
+                                    <h4 class="font-medium">3D Character Modeling</h4>
+                                    <p class="text-sm text-gray-600">Budget: $500-1000</p>
+                                    <p class="text-sm text-gray-600">Duration: 2 weeks</p>
+                                </div>
+                                <div class="border-b pb-2">
+                                    <h4 class="font-medium">Architecture Visualization</h4>
+                                    <p class="text-sm text-gray-600">Budget: $1000-2000</p>
+                                    <p class="text-sm text-gray-600">Duration: 1 month</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Your Applications</h3>
+                            <div class="space-y-4">
+                                <div class="border-b pb-2">
+                                    <h4 class="font-medium">Product Rendering</h4>
+                                    <p class="text-sm text-gray-600">Status: Under Review</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+                <!-- Resources -->
+                <div id="resources-section" class="hidden">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-bold mb-4">Resources</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Tutorials</h3>
+                            <div class="space-y-2">
+                                <div class="text-blue-600 hover:underline">Beginner's Guide to 3D Modeling</div>
+                                <div class="text-blue-600 hover:underline">Advanced Texturing Techniques</div>
+                                <div class="text-blue-600 hover:underline">Animation Fundamentals</div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Documentation</h3>
+                            <div class="space-y-2">
+                                <div class="text-blue-600 hover:underline">API Reference</div>
+                                <div class="text-blue-600 hover:underline">Best Practices</div>
+                                <div class="text-blue-600 hover:underline">File Format Guide</div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Tools</h3>
+                            <div class="space-y-2">
+                                <div class="text-blue-600 hover:underline">Model Converter</div>
+                                <div class="text-blue-600 hover:underline">Texture Generator</div>
+                                <div class="text-blue-600 hover:underline">Scene Optimizer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Billing -->
+            <div id="billing-section" class="hidden">
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h2 class="text-xl font-bold mb-4">Billing</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Current Plan</h3>
+                            <div class="space-y-2">
+                                <p>Pro Subscription</p>
+                                <p class="text-gray-600">$29.99/month</p>
+                                <button class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Upgrade Plan</button>
+                            </div>
+                        </div>
+                        <div class="border rounded p-4">
+                            <h3 class="text-lg font-semibold mb-3">Payment History</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span>Last Payment</span>
+                                    <span>$29.99</span>
+                                </div>
+                                <div class="text-sm text-gray-600">Next billing date: July 1, 2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Recent Activity -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold mb-4">Recent Activity</h2>
+        <div class="overflow-x-auto">
+            <table class="min-w-full">
+                <thead>
+                    <tr>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Activity</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white" id="activity-table">
+                    <!-- Activity rows will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</main>
+        <script>
+            const API_URL = 'https://swifttech-server.onrender.com';
+   
+  
+                      // Check authentication state on page load and verify server connection
+                      async function checkAuthState() {
+                          const storedEmail = localStorage.getItem('userEmail');
+                          
+                          console.log('Stored email:', storedEmail);
+                          
+                          if (!storedEmail || storedEmail === 'null' || storedEmail === 'undefined' || !storedEmail.includes('@')) {
+                              console.log('Invalid email - redirecting to login');
+                              localStorage.clear();
+                              setTimeout(() => {
+                                  window.location.href = 'login.html';
+                              }, 70);
+                              return;
+                          }
+                          
+                          try {
+                              const response = await fetch(`${API_URL}/check-login-state`, {
+                                  method: 'POST',
+                                  headers: {
+                                      'Content-Type': 'application/json',
+                                      'Accept': 'application/json'
+                                  },
+                                  body: JSON.stringify({
+                                      email: storedEmail
+                                  })
+                              });              
+                              const data = await response.json();
+                              
+                              if (data.loginState === true) {
+                                  console.log(true);
+                              } else {
+                                  window.location.href = 'login.html';
+                              }
+                              
+                              } catch (error) {
+                                  console.error('Error checking login state:', error);
+                                  localStorage.clear();
+                                  window.location.replace('login.html');
+                              }
+                          }
+  
+                      checkAuthState();
+            </script>
+</body>
+</html>
+        
