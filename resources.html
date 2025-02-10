@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- [Previous head content remains the same until style section] -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SwiftTech - Innovative 3D Printing & Design Solutions for Custom Parts and Prototypes">
+    <meta name="keywords" content="3D printing, custom parts, prototypes, design solutions, manufacturing, rapid prototyping">
+    <meta name="author" content="SwiftTech">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="SwiftTech - 3D Printing Solutions">
+    <meta property="og:description" content="Professional 3D printing services for custom parts, prototypes, and design solutions">
+    <meta property="og:url" content="https://www.swifttech.me">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#4A90E2">
+    <link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="images/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <title>SwiftTech Resources</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* [Previous styles remain the same] */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: #f8f9ff;
+            color: #2C3E50;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #4A90E2;
+            padding: 1rem 0;
+            color: white;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
+        }
+
+        .resource-section {
+            background: white;
+            margin: 30px 0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .resource-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #4A90E2;
+        }
+
+        .resource-section2 {
+            background: white;
+            margin: 30px 0;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .resource-section2:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #4A90E2;
+        }
+
+        .resource-section3 {
+            background: white;
+            margin: 30px 0;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+
+        .resource-section3:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border-color: #4A90E2;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #4A90E2;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #2C3E50;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resource-list li {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .resource-list li a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .resource-list li a:hover {
+            color: #4A90E2;
+        }
+
+        .resource-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #4A90E2;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+
+        footer {
+            background: #2C3E50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                margin-top: 15px;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
+            
+            main {
+                padding: 20px 10px;
+            }
+            
+            .resource-section {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* New styles for search and show more functionality */
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #4A90E2;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
+        }
+
+        .show-more-btn {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .show-more-btn:hover {
+            background: #357ABD;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Webinar carousel styles */
+        .webinar-carousel {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .webinar-slide {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .webinar-details {
+            margin-top: 15px;
+        }
+
+        .webinar-date {
+            color: #4A90E2;
+            font-weight: 600;
+        }
+
+        /* Technical resources library styles */
+        .resource-library {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .resource-icon {
+            font-size: 40px;
+            color: #4A90E2;
+            margin-bottom: 15px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>SwiftTech Resources</h1>
+            <nav>
+                <a href="https://www.swifttech.me/index.html?section=home">Home</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="https://www.swifttech.me/index.html?section=services">Services</a>
+                <a href="https://www.swifttech.me/index.html?section=contact">Contact</a>
+            </nav>
+        </div>    </header>
+    <main>
+        <div class="resource-section">
+            <h2 class="section-title">Latest Blog Posts</h2>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Search blog posts...">
+            </div>
+            <div class="blog-grid">
+                <!-- [Previous blog cards remain the same] -->
+                <div class="blog-card">
+                    <img src="https://www.swifttech.me/images/metal-printing.jpeg" alt="3D Printing Trends" class="blog-image">
+                    <div class="blog-content">
+                        <h3 class="blog-title">Latest 3D Printing Trends</h3>
+                        <p class="blog-excerpt">Discover the newest innovations in 3D printing technology and how they're shaping the future of manufacturing.</p>
+                        <a href="Latest 3D Printing Trends and Innovations - Comprehensive Guide to Future Manufacturing.html" class="cta-button">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="images/blog2.jpeg" alt="Material Guides" class="blog-image">
+                    <div class="blog-content">
+                        <h3 class="blog-title">Complete Material Guide</h3>
+                        <p class="blog-excerpt">Everything you need to know about choosing the right materials for your 3D printing projects.</p>
+                        <a href="blog/material-guides.html" class="cta-button">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <img src="images/blog3.jpeg" alt="Design Tips" class="blog-image">
+                    <div class="blog-content">
+                        <h3 class="blog-title">Design Tips & Tricks</h3>
+                        <p class="blog-excerpt">Expert tips to optimize your designs for successful 3D printing outcomes.</p>
+                        <a href="blog/design-tips.html" class="cta-button">Read More →</a>
+                    </div>
+                </div>
+                <div class="blog-card hidden">
+                    <img src="images/blog4.jpg" alt="Advanced Techniques" class="blog-image">
+                    <div class="blog-content">
+                        <h3 class="blog-title">Advanced 3D Printing Techniques</h3>
+                        <p class="blog-excerpt">Master advanced techniques for professional 3D printing results.</p>
+                        <a href="blog/advanced-techniques.html" class="cta-button">Read More →</a>
+                    </div>
+                </div>
+                <!-- [Add more hidden blog cards as needed] -->
+            </div>
+            <button class="show-more-btn">Show More</button>
+        </div>
+        
+
+        <div class="resource-section2">
+            <h2 class="section-title">Swift Card - Balance Check</h2>
+                    <div class="input-group">
+                    <div class="card-image-container">
+                                            <img src="images/swiftcard.png" alt="Sample Swift Card" class="sample-card-image">
+                                        </div>
+                                        <style>
+                                            .card-image-container {
+                                                width: 100%;
+                                                max-width: 400px;
+                                                margin: 0 auto 20px;
+                                            }
+                                            .sample-card-image {
+                                                width: 100%;
+                                                height: auto;
+                                                border-radius: 12px;
+                                                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                                            }
+                                        </style>
+                    
+                    <input type="text" id="cardNumber" placeholder="Enter Card Number" maxlength="16" required>
+                    <input type="email" id="email" placeholder="Enter Email" required>
+                    <button class="submit-btn" onclick="validateCard()">
+                        <i class="fas fa-search"></i> Check Balance
+                    </button>
+                </div>
+          
+                <div class="card-info">
+                    <h2><i class="fas fa-credit-card"></i> Card Information</h2>
+                    <p>Card Number: <span id="maskedCardNumber"></span></p>
+                    <p>Date Activated: <span id="activationDate"></span></p>
+                    <p>Status: <span class="status-active"><i class="fas fa-check-circle"></i> Active</span></p>
+                </div>
+          
+                <div class="balance-section">
+                    <h2><i class="fas fa-wallet"></i> Current Balance</h2>
+                    <h2 id="currentBalance"></h2>
+                </div>
+          
+                <div class="transaction-list">
+                    <h2><i class="fas fa-history"></i> Recent Transactions</h2>
+                    <div id="transactionContainer"></div>
+                </div>
+          
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Montserrat', sans-serif;
+                }
+          
+                .input-group {
+                    margin: 30px 0;
+                    padding: 30px;
+                    background: #ffffff;
+                    border-radius: 15px;
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                }
+          
+                .input-group input {
+                    width: 100%;
+                    padding: 15px;
+                    margin: 12px 0;
+                    border: 2px solid #4A90E2;
+                    border-radius: 12px;
+                    font-size: 16px;
+                    font-family: 'Montserrat', sans-serif;
+                    transition: all 0.3s ease;
+                }
+
+                .input-group input:focus {
+                    border-color: #357ABD;
+                    box-shadow: 0 0 10px rgba(74,144,226,0.2);
+                    outline: none;
+                }
+          
+                .submit-btn {
+                    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+                    color: white;
+                    padding: 15px 30px;
+                    border: none;
+                    border-radius: 12px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 16px;
+                    width: 100%;
+                    font-family: 'Montserrat', sans-serif;
+                    transition: transform 0.2s ease;
+                    margin-top: 10px;
+                }
+          
+                .submit-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(74,144,226,0.3);
+                }
+          
+                .card-info, .balance-section, .transaction-list {
+                    display: none;
+                    padding: 25px;
+                    margin: 20px 0;
+                    background: #ffffff;
+                    border-radius: 15px;
+                    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+                }
+          
+                .card-info.visible, .balance-section.visible, .transaction-list.visible {
+                    display: block;
+                    animation: fadeIn 0.5s ease;
+                }
+          
+                .balance-section {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background: linear-gradient(135deg, #f8f9ff 0%, #f1f4ff 100%);
+                }
+          
+                .transaction-item {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 20px;
+                    margin: 10px 0;
+                    border-bottom: 1px solid #eee;
+                    transition: background-color 0.3s ease;
+                }
+
+                .transaction-item:hover {
+                    background-color: #f8f9ff;
+                    border-radius: 8px;
+                }
+
+                @media screen and (max-width: 768px) {
+                    .transaction-item {
+                        padding: 8px 8px;
+                        margin: 15px 0;
+                        font-size: 12px;
+                    }
+                }          
+                .status-active {
+                    color: #27ae60;
+                    font-weight: bold;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 5px;
+                }
+          
+                .amount-positive {
+                    color: #27ae60;
+                    font-weight: 600;
+                }
+          
+                .amount-negative {
+                    color: #e74c3c;
+                    font-weight: 600;
+                }
+
+                h2 {
+                    margin-bottom: 20px;
+                    color: #2c3e50;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+
+                .fas {
+                    margin-right: 5px;
+                }
+
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+            </style>
+          
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    if(window.location.href.includes('?card-validate')) {
+                        const section = document.querySelector('.resource-section2');
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+
+                function validateCard() {
+                    const cardNumber = document.getElementById('cardNumber').value;
+                    const email = document.getElementById('email').value;
+          
+                    // API call to validate card
+                    fetch('https://swifttech-server.onrender.com/validate-card', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            cardNumber: cardNumber,
+                            email: email
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.success) {
+                            showCardInfo(data);
+                        } else {
+                            alert('Invalid card details. Please try again.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred. Please try again later.');
+                    });
+                }
+          
+          function showCardInfo(data) {
+              document.querySelector('.card-info').classList.add('visible');
+              document.querySelector('.balance-section').classList.add('visible');
+              document.querySelector('.transaction-list').classList.add('visible');
+          
+              document.getElementById('maskedCardNumber').textContent = maskCardNumber(data.cardNumber);
+              document.getElementById('activationDate').textContent = data.activationDate.replace(/(\d{2})\/(\d{2})/, '20$2-$1');
+              document.getElementById('currentBalance').textContent = formatCurrency(data.balance);
+              displayTransactions(data.transactions);
+          }
+          
+                function maskCardNumber(number) {
+                    return '**** **** ' + number.slice(-4);
+                }
+          
+                function formatCurrency(amount) {
+                    return new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD'
+                    }).format(amount);
+                }
+          
+                function displayTransactions(transactions) {
+                    const container = document.getElementById('transactionContainer');
+                    container.innerHTML = transactions.map(transaction => `
+                        <div class="transaction-item">
+                            <span>${transaction.description}</span>
+                            <span class="amount-${transaction.amount > 0 ? 'positive' : 'negative'}">
+                                ${formatCurrency(transaction.amount)}
+                            </span>
+                            <span>${new Date(transaction.date).toLocaleDateString()}</span>
+                        </div>
+                    `).join('');
+                }
+            </script>
+        </div>
+
+        <div class="resource-section3">
+            <h2 class="section-title">Technical Resources</h2>
+            <div class="resource-library">
+                <div class="resource-card">
+                    <i class="fas fa-book resource-icon"></i>
+                    <h3>Design Guidelines</h3>
+                    <p>Comprehensive guide for optimal design practices</p>
+                    <a href="resources/design-guidelines.pdf" class="cta-button">Download PDF</a>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-file-alt resource-icon"></i>
+                    <h3>Material Datasheets</h3>
+                    <p>Detailed specifications for all materials</p>
+                    <a href="resources/material-datasheets.pdf" class="cta-button">Download PDF</a>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-chart-line resource-icon"></i>
+                    <h3>Case Studies</h3>
+                    <p>Real-world success stories and applications</p>
+                    <a href="resources/case-studies.pdf" class="cta-button">View Cases</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                if(window.location.href.includes('?resource-section')) {
+                    const section = document.querySelector('.resource-section3');
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        </script>    
+        </main>
+
+    <!-- [Footer remains the same] -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@swifttech.me</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="privacy.html">Privacy Policy</a></p>
+                <p><a href="terms.html">Terms of Service</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <p><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></p>
+                <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+        // Search functionality
+        const searchBar = document.querySelector('.search-bar');
+        const blogCards = document.querySelectorAll('.blog-card');
+        
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Show more functionality
+        const showMoreBtn = document.querySelector('.show-more-btn');
+        let visibleCards = 4;
+
+        function updateVisibility() {
+            blogCards.forEach((card, index) => {
+                if (index < visibleCards) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+            
+            if (visibleCards >= blogCards.length) {
+                showMoreBtn.style.display = 'none';
+            }
+        }
+
+        showMoreBtn.addEventListener('click', () => {
+            visibleCards += 4;
+            updateVisibility();
+        });
+
+        // Initialize webinar carousel
+        $(document).ready(function(){
+            $('.webinar-carousel').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                adaptiveHeight: true
+            });
+        });
+    </script>
+</body>
+</html>

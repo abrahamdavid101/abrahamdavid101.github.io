@@ -11,15 +11,21 @@
 <meta property="og:url" content="https://www.swifttech.me">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#4A90E2">
-<link rel="icon" type="image/x-icon" href="favicon.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/x-icon" href="images/icons/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
 <title>SwiftTech - 3D Printing & Design Solutions</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<style>        /* Previous styles remain the same until .section */
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</noscript>
+<style>        
+/* Previous styles remain the same until .section */
         * {
             margin: 0;
             padding: 0;
@@ -47,6 +53,16 @@
             font-weight: normal;
             color: #fff;
             text-decoration: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .logo {
+                font-size: 1.25rem;
+                margin-right: auto;
+                display: flex;
+                justify-content: flex-start;
+                align-items: right;
+            }
         }
 
         .nav-container {
@@ -280,6 +296,34 @@
             }
         }
     </style>
+    <!-- Start of Async Drift Code -->
+<script>
+    "use strict";
+    
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+        t.factory = function(e) {
+          return function() {
+            var n = Array.prototype.slice.call(arguments);
+            return n.unshift(e), t.push(n), t;
+          };
+        }, t.methods.forEach(function(e) {
+          t[e] = t.factory(e);
+        }), t.load = function(t) {
+          var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+          o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+          var i = document.getElementsByTagName("script")[0];
+          i.parentNode.insertBefore(o, i);
+        };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('teitr4vi599r');
+    </script>
+    <!-- End of Async Drift Code -->
 </head>
 <body>
     <header>
@@ -292,9 +336,9 @@
                 <div class="nav-item" data-section="services">
                     <i class="fas fa-cogs"></i> Services
                 </div>
-                <div class="nav-item" data-section="projects">
-                    <i class="fas fa-project-diagram"></i> Projects
-                </div>
+                <div class="nav-item" data-section="marketplace">
+                    <i class="fas fa-store"></i> Marketplace
+                </div>                
                 <div class="nav-item" data-section="resources">
                     <i class="fas fa-book"></i> Resources
                 </div>
@@ -312,13 +356,13 @@
                             <h1 class="hero-title">Innovative 3D Printing & Design Solutions</h1>
                             <p class="subtitle-text">Delivering excellence in additive manufacturing and custom design services</p>
                             <div class="illustration-container">
-                                <div class="feature-card">
-                                    <img src="images/img1.jpg" alt="3D Printing Process" class="feature-img">
+                                <div class="feature-card card-1">
+                                    <img src="images/img1.png" alt="3D Printing Process" class="feature-img">
                                 </div>
-                                <div class="feature-card">
-                                    <img src="images/img2.jpg" alt="Design Solutions" class="feature-img">
+                                <div class="feature-card card-2">
+                                    <img src="images/img2.png" alt="Design Solutions" class="feature-img">
                                 </div>
-                                <div class="feature-card">
+                                <div class="feature-card card-3">
                                     <img src="images/img3.png" alt="Custom Manufacturing" class="feature-img">
                                 </div>
                             </div>
@@ -334,10 +378,11 @@
                                     justify-content: center;
                                     gap: 2rem;
                                     margin: 5rem 0;
+                                    padding: 0 2px;
                                 }
                                 .feature-card {
-                                    width: 270px;
-                                    height: 200px;
+                                    width: 300px;
+                                    height: 230px;
                                     border-radius: 12px;
                                     overflow: hidden;
                                     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -352,14 +397,31 @@
                                     height: 100%;
                                     object-fit: cover;
                                 }
-                            </style>                
+                                @media (max-width: 768px) {
+                                    .illustration-container {
+                                        gap: 10px;
+                                        padding: 0 20px;
+                                    }
+                                    .feature-card:hover {
+                                        transform: none;
+                                    }
+                                    .feature-card.card-1,
+                                    .feature-card.card-3 {
+                                        display: none;
+                                    }
+                                    .feature-card.card-2 {
+                                        width: 100%;
+                                    }
+                                }
+                            </style> 
+                                           
                             <div class="content-row">
                     <div class="text-content">
                         <h2 class="section-heading" style="margin-bottom: 0.5rem; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Professional 3D Printing & Manufacturing Services</h2>
                         <p class="hero-subtext" style="margin-bottom: 0.5rem;">Experience the future of manufacturing with our advanced 3D printing solutions, where innovation meets precision engineering.</p>
                         <p class="hero-subtext" style="margin-bottom: 0.5rem;">From rapid prototyping to full-scale production, we specialize in crafting high-quality parts using premium materials including aluminum, rubber, and engineering-grade plastics.</p>
                         <p class="hero-subtext" style="margin-bottom: 0.5rem;">Backed by cutting-edge technology and industry expertise, we deliver exceptional quality with quick turnaround times at competitive market rates.</p>
-                        <button class="get-started-btn" onclick="scrollToSection('contact')"><i class="fas fa-rocket"></i> Get Started</button>
+                        <button class="get-started-btn" onclick="window.location.href='login.html'"><i class="fas fa-rocket"></i> Upload your Model</button>
                     </div>                    <div class="hero-animation">
                         <div class="printer-animation">
                             <video autoplay loop muted playsinline class="printer-gif">
@@ -488,25 +550,72 @@
                 <div class="step">
                     <i class="fas fa-pencil-ruler"></i>
                     <h3>1. Design Consultation</h3>
-                    <p>Share your ideas with our expert designers</p>
+                    <p>Share your ideas with our expert designers who will help refine and optimize your concept for 3D printing</p>
+                    <a href="#" class="learn-more" onclick="document.querySelector('.nav-item[data-section=\'services\']').click(); setTimeout(() => document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' }), 1400);">Learn More</a>
                 </div>
                 <div class="step">
                     <i class="fas fa-code"></i>
                     <h3>2. 3D Modeling</h3>
-                    <p>We create precise 3D models of your design</p>
+                    <p>We create precise 3D models of your design using industry-leading CAD software for maximum accuracy</p>
+                    <a href="#" class="learn-more" onclick="document.querySelector('.nav-item[data-section=\'services\']').click(); setTimeout(() => document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' }), 1400);">Learn More</a>                
                 </div>
                 <div class="step">
                     <i class="fas fa-print"></i>
                     <h3>3. Printing & Production</h3>
-                    <p>Using advanced 3D printing technology</p>
+                    <p>Using advanced 3D printing technology with high-grade materials for superior quality results</p>
+                    <a href="#" class="learn-more" onclick="document.querySelector('.nav-item[data-section=\'services\']').click(); setTimeout(() => document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' }), 1400);">Learn More</a>
                 </div>
                 <div class="step">
                     <i class="fas fa-check-circle"></i>
                     <h3>4. Quality Assurance</h3>
-                    <p>Rigorous testing and verification</p>
+                    <p>Rigorous testing and verification process ensuring your product meets exact specifications</p>
+                    <a href="#" class="learn-more" onclick="document.querySelector('.nav-item[data-section=\'services\']').click(); setTimeout(() => document.querySelector('.workflow-section').scrollIntoView({ behavior: 'smooth' }), 1400);">Learn More</a>
                 </div>
-            </div>
-            
+            </div>            
+            <style>
+                .process-steps {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 2rem;
+                    padding: 2rem 0;
+                }
+                .step {
+                    background: #ffffff;
+                    padding: 2rem;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    transition: transform 0.3s ease;
+                }
+                .step:hover {
+                    transform: translateY(-5px);
+                }
+                .step i {
+                    font-size: 2.5rem;
+                    color: #2196F3;
+                    margin-bottom: 1rem;
+                }
+                .step h3 {
+                    color: #333;
+                    margin-bottom: 1rem;
+                    font-size: 1.5rem;
+                }
+                .step p {
+                    color: #666;
+                    line-height: 1.6;
+                    margin-bottom: 1rem;
+                }
+                .learn-more {
+                    display: inline-block;
+                    color: #2196F3;
+                    text-decoration: none;
+                    font-weight: 600;
+                    margin-top: 1rem;
+                    transition: color 0.3s ease;
+                }
+                .learn-more:hover {
+                    color: #1976D2;
+                }
+            </style>            
                         <div class="demo-section">
                                                     <h2 class="section-title">Experience SwiftTech in Action</h2>
                                                     <p class="section-description">Explore how SwiftTech revolutionizes 3D printing with advanced technology and exceptional service with this self-guided demo.</p>
@@ -769,21 +878,25 @@
                 <div class="blog-card">
                     <img src="images/1.jpg" alt="3D Printing Trends" class="blog-image">
                     <div class="blog-content">
-                        <span class="blog-date">March 15, 2024</span>
-                        <h3>Latest Trends in 3D Printing</h3>
-                        <p>Discover the newest innovations shaping the future of additive manufacturing...</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                        <span class="blog-date" style="margin-bottom: 10px;">March 15, 2024</span>
+                        <h3 style="margin-bottom: 10px;">Latest Trends in 3D Printing</h3>
+                        <p style="margin-bottom: 10px;">Discover the newest innovations shaping the future of additive manufacturing...</p>
+                        <a href="resources.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>                
                 </div>
+
+                
                 <div class="blog-card">
                     <img src="images/2.webp" alt="Material Science" class="blog-image">
                     <div class="blog-content">
-                        <span class="blog-date">March 10, 2024</span>
-                        <h3>Advances in Material Science</h3>
-                        <p>Exploring new materials revolutionizing the 3D printing industry...</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        <span class="blog-date" style="margin-bottom: 10px;">March 10, 2024</span>
+                        <h3 style="margin-bottom: 10px;">Advances in Material Science</h3>
+                        <p style="margin-bottom: 10px;">Exploring new materials revolutionizing the 3D printing industry...</p>
+                        <a href="resources.html" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+
+
             </div>
         </div>
 
@@ -793,17 +906,17 @@
             <div class="industry-grid">
                 <div class="industry-card">
                     <i class="fas fa-hospital"></i>
-                    <h3>Healthcare</h3>
+                    <h3 style="margin-bottom: 10px;">Healthcare</h3>
                     <p>Medical devices, prosthetics, and anatomical models</p>
                 </div>
                 <div class="industry-card">
                     <i class="fas fa-rocket"></i>
-                    <h3>Aerospace</h3>
+                    <h3 style="margin-bottom: 10px;">Aerospace</h3>
                     <p>Lightweight components and complex assemblies</p>
                 </div>
                 <div class="industry-card">
                     <i class="fas fa-cogs"></i>
-                    <h3>Manufacturing</h3>
+                    <h3 style="margin-bottom: 10px;">Manufacturing</h3>
                     <p>Tools, fixtures, and end-use parts</p>
                 </div>
             </div>
@@ -811,21 +924,22 @@
 
         <!-- Shipping Information Section -->
         <div class="shipping-section">
-            <h2 class="section-title">Shipping Information</h2>
+            <h2 class="section-title">Fast & Reliable Shipping</h2>
+            <p class="section-subtitle" style="text-align: center;">We deliver your 3D printed products safely and efficiently, with tracking available for every order.</p>
             <div class="shipping-grid">
                 <div class="shipping-card">
                     <i class="fas fa-truck"></i>
-                    <h3>Fast Delivery</h3>
+                    <h3 style="margin-bottom: 10px;">Fast Delivery</h3>
                     <p>2-5 business days standard shipping</p>
                 </div>
                 <div class="shipping-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>Africa-Based Shipping</h3>
-                    <p>International delivery to 10+ countries</p>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3 style="margin-bottom: 10px;">Package Tracking</h3>
+                    <p>Real-time tracking for all shipments</p>
                 </div>
                 <div class="shipping-card">
                     <i class="fas fa-box"></i>
-                    <h3>Secure Packaging</h3>
+                    <h3 style="margin-bottom: 10px;">Secure Packaging</h3>
                     <p>Custom protective packaging for safe delivery</p>
                 </div>
             </div>
@@ -835,7 +949,7 @@
         <div class="cta-section">
             <h2>Ready to Start Your Project?</h2>
             <p>Let's turn your ideas into reality with our cutting-edge 3D printing solutions</p>
-            <a href="#contact" class="cta-button">Get Started Now</a>
+            <a href="login.html" class="cta-button">Get Started Now</a>
         </div>
 
         <style>
@@ -976,11 +1090,13 @@
             .cta-section {
                 text-align: center;
                 padding: 4rem 0;
-                background-image: url('images/cta1.jpg');
+                background-image: url('images/cta1.png');
+                filter: grayscale(100%);                
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
                 color: white;
+                text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.8);
             }
 
             .cta-button {
@@ -993,6 +1109,7 @@
                 font-weight: bold;
                 margin-top: 1.5rem;
                 transition: transform 0.3s ease;
+                text-shadow: none !important;
             }
 
             .cta-button:hover {
@@ -1022,8 +1139,12 @@
     </section>
 
     <section id="services" class="section">
-        <h2 class="hero-title" style="text-align: center;">Our Comprehensive Services</h2>
-        <p class="section-intro" style="font-size: 1.1rem; color: #666; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.6;">We offer end-to-end solutions for all your 3D printing and manufacturing needs, backed by years of expertise and cutting-edge technology.</p>
+        <div style="position: relative; margin-bottom: -150px;">
+            <img src="images/cta3.png" alt="3D Printing Services" style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px 15px 0 0; filter: grayscale(100%);">
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: linear-gradient(to bottom, rgba(248, 249, 255, 0), rgba(248, 249, 255, 0.901), rgba(248, 249, 255, 1));"></div>
+        </div>
+        <h2 class="hero-title" style="text-align: center; margin-top: -100px; position: relative; z-index: 1; color: #007bff;">Our Comprehensive Services</h2>
+        <p class="section-intro" style="font-size: 1.1rem; color: #666; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.6; position: relative; z-index: 1;">We offer end-to-end solutions for all your 3D printing and manufacturing needs, backed by years of expertise and cutting-edge technology.</p>
         
         <div class="service-categories" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem auto; max-width: 1200px; padding: 0 1rem;">
             <div class="category" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; height: 100%;">
@@ -1068,178 +1189,120 @@
         </div>
        
 
-        <div class="material-section" style="margin-bottom: 7.3rem;">
-            <h3 class="materials-title" style="text-align: center; margin-bottom: 2rem; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2em;">Materials We Work With</h3>
+<div class="workflow-section" style="max-width: 1200px; margin: 4rem auto; padding: 0 1rem;">
+            <h2 style="text-align: center; color: #007bff; font-size: 2.5rem; margin-bottom: 3rem;">Our Work Process</h2>
+            <div class="workflow-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div class="workflow-item" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; text-align: center; transition: transform 0.3s ease;">
+                    <div class="step-number" style="background: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">1</div>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Design Consultation</h3>
+                    <p style="color: #444; line-height: 1.6;">Share your ideas with our expert designers who will help refine and optimize your concept for 3D printing. We offer comprehensive design reviews, material selection guidance, and cost optimization strategies. Our team will work closely with you to understand your requirements and provide tailored solutions.</p>
+                </div>
+                <div class="workflow-item" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; text-align: center; transition: transform 0.3s ease;">
+                    <div class="step-number" style="background: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">2</div>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">3D Modeling</h3>
+                    <p style="color: #444; line-height: 1.6;">We create precise 3D models of your design using industry-leading CAD software for maximum accuracy. Our services include reverse engineering, design optimization, technical documentation, and complete 3D modeling solutions to bring your ideas to life.</p>
+                </div>
+                <div class="workflow-item" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; text-align: center; transition: transform 0.3s ease;">
+                    <div class="step-number" style="background: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">3</div>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Printing & Production</h3>
+                    <p style="color: #444; line-height: 1.6;">Using advanced 3D printing technology with high-grade materials for superior quality results. We specialize in rapid prototyping, tool making, and custom manufacturing solutions using materials like PLA, ABS, Aluminium, Polycarbonate, and Nylon. Our production planning ensures efficient and cost-effective manufacturing.</p>
+                </div>
+                <div class="workflow-item" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; text-align: center; transition: transform 0.3s ease;">
+                    <div class="step-number" style="background: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">4</div>
+                    <h3 style="color: #007bff; margin-bottom: 1rem;">Quality Assurance</h3>
+                    <p style="color: #444; line-height: 1.6;">Rigorous testing and verification process ensuring your product meets exact specifications. We perform comprehensive quality checks, dimensional accuracy verification, material testing, and functional validation to guarantee the highest quality standards for your projects.</p>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="material-section" style="margin-bottom: 1.7rem;">
+                <h3 class="materials-title" style="text-align: center; margin-bottom: 1rem; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-size: 2em;">Our Main Materials</h3>
+                <p style="text-align: center; color: #666; margin-bottom: 2rem;">We work with various other materials based on specific project requirements. Contact us to discuss your custom material needs.</p>
             <div class="materials-grid">
-                <div class="material active" onclick="showDetails(this, 'pla')">
-                    <i class="fas fa-cube"></i>
+                <div class="material active" onclick="showMaterial(this, 'pla')">
                     <span>PLA</span>
                 </div>
-                <div class="material" onclick="showDetails(this, 'abs')">
-                    <i class="fas fa-cube"></i>
+                <div class="material" onclick="showMaterial(this, 'aluminium')">
+                    <span class="desktop-only">ALUMINIUM</span>
+                    <span class="mobile-only">AL</span>
+                </div>
+                <div class="material" onclick="showMaterial(this, 'abs')">
                     <span>ABS</span>
                 </div>
-                <div class="material" onclick="showDetails(this, 'petg')">
-                    <i class="fas fa-cube"></i>
-                    <span>PETG</span>
+                <div class="material" onclick="showMaterial(this, 'polycarbonate')">
+                    <span class="desktop-only">POLYCARBONATE</span>
+                    <span class="mobile-only">PC</span>
                 </div>
-                <div class="material" onclick="showDetails(this, 'tpu')">
-                    <i class="fas fa-cube"></i>
-                    <span>TPU</span>
+                <div class="material" onclick="showMaterial(this, 'nylon')">
+                    <span>NYLON</span>
                 </div>
-                <div class="material" onclick="showDetails(this, 'nylon')">
-                    <i class="fas fa-cube"></i>
-                    <span>Nylon</span>
-                </div>
-            </div>
-            <div class="material-details" id="materialDetails">
-                <div class="detail-circle">
-                    <img src="" alt="" class="material-image">
-                    <div class="detail-tag tag1">
-                        <span class="tag-content">Strength: <span class="strength-value">High</span></span>
-                    </div>
-                    <div class="detail-tag tag2">
-                        <span class="tag-content">Temperature: <span class="temp-value">220°C</span></span>
-                    </div>
-                    <div class="detail-tag tag3">
-                        <span class="tag-content">Uses: <span class="uses-value">Prototypes</span></span>
-                    </div>
-                </div>
+                <style>
+                    .mobile-only { display: none; }
+                    @media (max-width: 768px) {
+                        .desktop-only { display: none; }
+                        .mobile-only { display: inline; }
+                    }
+                </style>            </div>
+            <div class="material-card" id="materialCard">
+                <img src="" alt="" class="material-image">
             </div>
             <style>
-                .material { cursor: pointer; transition: all 0.3s ease; }
-                .material.active { color: #007bff; transform: scale(1.1); }
-                .material-details { display: none; margin-top: 2rem; }
-                .detail-circle { position: relative; width: 200px; height: 200px; margin: 0 auto; }
-                .material-image { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-                .detail-tag { 
-                    position: absolute; 
-                    background: rgba(0,123,255,0.9); 
-                    color: white; 
-                    padding: 0.5rem 1rem; 
-                    border-radius: 20px;
+                .material { 
+                    cursor: pointer; 
+                    transition: all 0.3s ease;
+                    padding: 10px;
+                    margin: 5px;
                 }
-                .detail-tag::before {
-                    content: '';
-                    position: absolute;
-                    width: 50px;
-                    height: 2px;
-                    background: rgba(0,123,255,0.9);
+                .material.active { 
+                    color: #007bff; 
+                    transform: scale(1.1); 
                 }
-                .detail-tag::after {
-                    content: '';
-                    position: absolute;
-                    width: 6px;
-                    height: 6px;
-                    border-radius: 50%;
-                    background: rgba(0,123,255,0.9);
+                .material-card { 
+                    max-width: 500px;
+                    max-height: 350px;
+                    margin: 0.2rem auto;
+                    border: 2px solid #007bff;
+                    border-radius: 10px;
+                    padding: 10px;
+                    display: none;
+                    background-color: white;
+                    overflow: hidden;
                 }
-                .tag1 { 
-                    left: -240px; 
-                    top: 50%; 
-                    transform: translateY(-50%);
-                }
-                .tag1::before {
-                    left: 100%;
-                    top: 50%;
-                }
-                .tag1::after {
-                    left: calc(100% + 50px);
-                    top: 50%;
-                    transform: translateY(-50%);
-                }
-                .tag2 { 
-                    right: -280px; 
-                    top: 50%; 
-                    transform: translateY(-50%);
-                }
-                .tag2::before {
-                    right: 100%;
-                    top: 50%;
-                }
-                .tag2::after {
-                    right: calc(100% + 50px);
-                    top: 50%;
-                    transform: translateY(-50%);
-                }
-                .tag3 { 
-                    bottom: -100px; 
-                    left: 50%; 
-                    transform: translateX(-50%);
-                    white-space: nowrap;
-                }
-                .tag3::before {
-                    left: 50%;
-                    bottom: 100%;
-                    width: 2px;
-                    height: 50px;
-                    transform: translateX(-50%);
-                    transform-origin: bottom;
-                }
-                .tag3::after {
-                    left: 50%;
-                    bottom: calc(100% + 50px);
-                    transform: translateX(-50%);
-                }                .detail-circle { animation: fadeIn 0.5s ease-out; }
-                @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-            </style>
+                .material-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    max-width: 500px;
+                    max-height: 300px;
+                    display: block;
+                    margin: auto;
+                }            
+                </style>
             <script>
-                function showDetails(element, material) {
-                    // Remove active class from all materials
+                function showMaterial(element, material) {
                     document.querySelectorAll('.material').forEach(m => m.classList.remove('active'));
-                    // Add active class to clicked material
                     element.classList.add('active');
                     
-                    const details = document.getElementById('materialDetails');
-                    details.style.display = 'block';
+                    const card = document.getElementById('materialCard');
+                    card.style.display = 'block';
                     
-                    // Material specific data
-                    const materialData = {
-                        pla: {
-                            image: 'images/pla-material.jpg',
-                            strength: 'Medium',
-                            temp: '180-220°C',
-                            uses: 'Prototypes, Toys'
-                        },
-                        abs: {
-                            image: 'images/abs-material.jpg',
-                            strength: 'High',
-                            temp: '220-250°C',
-                            uses: 'Functional Parts'
-                        },
-                        petg: {
-                            image: 'images/petg-material.jpg',
-                            strength: 'High',
-                            temp: '230-250°C',
-                            uses: 'Food Safe Parts'
-                        },
-                        tpu: {
-                            image: 'images/tpu-material.jpg',
-                            strength: 'Flexible',
-                            temp: '210-230°C',
-                            uses: 'Flexible Parts'
-                        },
-                        nylon: {
-                            image: 'images/nylon-material.jpg',
-                            strength: 'Very High',
-                            temp: '240-260°C',
-                            uses: 'Engineering Parts'
-                        }
-                    };
+                    const materialImages = {
+                        pla: 'images/pla-material.png',
+                        aluminium: 'images/aluminium-material.png',
+                        abs: 'images/abs-material.png',
+                        polycarbonate: 'images/polycarbonate-material.png',
+                        nylon: 'images/nylon-material.png'                    };
                     
-                    // Update content
-                    const data = materialData[material];
-                    details.querySelector('.material-image').src = data.image;
-                    details.querySelector('.strength-value').textContent = data.strength;
-                    details.querySelector('.temp-value').textContent = data.temp;
-                    details.querySelector('.uses-value').textContent = data.uses;
+                    card.querySelector('.material-image').src = materialImages[material];
                 }
                 
-                // Set first material as active by default
                 document.querySelector('.material').click();
             </script>
         </div>
 
+        <h2 class="hero-title" style="text-align: center;">Service Highlights</h2>
+        <p class="hero-subtitle" style="text-align: center; color: #666; max-width: 800px; margin: 1rem auto; font-size: 1.1rem;">Our most popular services based on our extensive customer base, delivering excellence in 3D printing solutions.</p>
         <div class="service-grid" style="margin-bottom: 1.5rem;">
 
             <div class="service-card">
@@ -1258,94 +1321,686 @@
                 <p>3D printing training and educational sessions</p>
             </div>
         </div>
-          
+        <div class="cta-container" style="text-align: center; padding: 4rem 0;">
+            <h3 style="color: #007bff; margin-bottom: 2rem; font-size: 1.5em;">Ready to Start Your Project?</h3>
+            <p style="color: #666; margin-bottom: 1.5rem; font-size: 1.5em;">Get a <a href="#contact" style="color: #007bff; text-decoration: none; font-size: 1.5rem;">free consultation</a> and quote within 24 hours</p>
+            <p style="color: #666; margin-bottom: 1rem; font-size: 1.5em;">- or -</p>
+            <button class="cta-button" onclick="window.location.href='login.html'" style="background: rgb(82, 78, 78); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; margin-right: 20px;">Sign Up</button>
+            <button class="cta-button" onclick="window.location.href='login.html'" style="background: #007bff; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">Login</button>        
+        </div>          
     </section>
 
 
-    <section id="projects" class="section">
-        <h2 class="hero-title" style="text-align: center;">Featured Projects</h2>
-        <p class="hero-subtitle" style="text-align: center; color: #666; max-width: 800px; margin: 1rem auto; font-size: 1.1rem;">Explore our portfolio of successful projects showcasing our expertise in 3D printing across various industries and applications.</p>
-        <div class="project-grid">
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/medical-prototype.jpeg" alt="Medical Prototype" class="project-image">
-                    <i class="fas fa-heartbeat fa-2x"></i>
-                    <h3>Healthcare Solutions</h3>
-                    <p>Custom medical device prototypes and parts for leading healthcare providers. Specialized in orthopedic fixtures and surgical tools.</p>
-                    <div class="project-tag">Medical Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-clock"></i> 2 weeks delivery</span>
-                        <span><i class="fas fa-check-circle"></i> FDA Approved</span>
+    <section id="marketplace" class="section">
+        <h2 class="hero-title" style="text-align: center;">3D Printing Marketplace</h2>
+        <p class="hero-subtitle" style="text-align: center; color: #666; max-width: 800px; margin: 1rem auto; font-size: 1.1rem;">Browse, buy, and download 3D printing products, services, and designs from our global community of creators and manufacturers.</p>
+        <div class="marketplace-search" style="max-width: 800px; margin: 2rem auto; pointer-events: none; opacity: 0.5;">
+
+
+
+    <div class="search-container" style="display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <span style="display: flex; gap: 1rem; width: 100%;">
+                                <input type="text" id="searchInput" placeholder="Search products, services, or sellers..." style="flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ddd; font-size: 20px;">                                
+                                <button onclick="searchProducts()" style="background: #007bff; color: white; border: none; padding: 0 30px; border-radius: 25px; cursor: pointer; flex: 0 0 auto; height: 50px; margin-top: 5px;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </span>
+                <select id="categorySelect" style="padding: 10px; border-radius: 25px; border: 1px solid #ddd; flex: 0 0 auto;">
+                    <option value="all">All Categories</option>
+                    <option value="3d-models">3D Models</option>
+                    <option value="printing-services">Printing Services</option>
+                    <option value="materials">Materials</option>
+                    <option value="printers">Printers</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+                <span>
+                    <div class="filter-tags" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 6px;">                 
+                        <span class="filter" onclick="toggleFilter(this)" data-filter="price" style="background: #f0f0f0; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">Price Range</span>                 
+                        <span class="filter" onclick="toggleFilter(this)" data-filter="rating" style="background: #f0f0f0; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">Rating 4+</span>                 
+                        <span class="filter" onclick="toggleFilter(this)" data-filter="shipping" style="background: #f0f0f0; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">Free Shipping</span>                 
+                        <span class="filter" onclick="toggleFilter(this)" data-filter="stock" style="background: #f0f0f0; padding: 5px 15px; border-radius: 15px; font-size: 0.9rem; cursor: pointer;">In Stock</span>             
+                    </div>
+                </span>
+            </div>
+                    
+        </div>
+
+        <div class="marketplace-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; margin: 2rem auto; pointer-events: none; opacity: 0.5;">
+            <div class="product-card" data-category="printers" data-tags="price,stock" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="position: relative;">
+                    <img src="images/medical-prototype.jpeg" alt="3D Printer" style="width: 100%; height: 200px; object-fit: cover;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #ff4444; color: white; padding: 5px 10px; border-radius: 15px;">Hot Deal</span>
+                </div>
+                <div style="padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">Professional 3D Printer</h3>
+                        <span style="color: #007bff; font-weight: bold;"><img src="images/icons/swift32x32.svg" width="16" height="16" style="vertical-align: middle;"> 599.99</span>
+                    </div>                    
+                    <div style="color: #ffd700; margin: 0.5rem 0;">★★★★★ (128)</div>
+                    <p style="color: #666; margin: 0.5rem 0;">High-precision 3D printer with dual extruder and large build volume.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span style="color: #28a745;"><i class="fas fa-check"></i> In Stock</span>
+                        <button onclick="buyNow(1)" style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer;">Buy now</button>
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/auto-parts.jpeg" alt="Automotive Parts" class="project-image">
-                    <i class="fas fa-car fa-2x"></i>
-                    <h3>Automotive Parts</h3>
-                    <p>Precision-engineered replacement components for vintage and modern vehicles. Custom interior parts and mechanical components.</p>
-                    <div class="project-tag">Automotive Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-cog"></i> Custom Fitting</span>
-                        <span><i class="fas fa-shield-alt"></i> Warranty</span>
+
+            <div class="product-card" data-category="materials" data-tags="price,stock,shipping" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="position: relative;">
+                    <img src="images/auto-parts.jpeg" alt="PLA Filament" style="width: 100%; height: 200px; object-fit: cover;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #28a745; color: white; padding: 5px 10px; border-radius: 15px;">Best Seller</span>
+                </div>
+                <div style="padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">Premium PLA Filament</h3>
+                        <span style="color: #007bff; font-weight: bold;"><img src="images/icons/swift32x32.svg" width="16" height="16" style="vertical-align: middle;"> 24.99</span>
+                    </div>
+                    <div style="color: #ffd700; margin: 0.5rem 0;">★★★★½ (256)</div>
+                    <p style="color: #666; margin: 0.5rem 0;">1kg spool of high-quality PLA filament, multiple colors available.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span style="color: #28a745;"><i class="fas fa-check"></i> In Stock</span>
+                        <button onclick="buyNow(2)" style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer;">Buy now</button>
                     </div>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/industrial.jpeg" alt="Industrial Solutions" class="project-image">
-                    <i class="fas fa-industry fa-2x"></i>
-                    <h3>Industrial Solutions</h3>
-                    <p>Heavy-duty manufacturing tools and fixtures designed for industrial applications. Includes jigs, molds, and assembly line components.</p>
-                    <div class="project-tag">Industrial Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-hammer"></i> Durability Tested</span>
-                        <span><i class="fas fa-certificate"></i> ISO Certified</span>
-                    </div>
+
+            <div class="product-card" data-category="3d-models" data-tags="price,rating" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="position: relative;">
+                    <img src="images/industrial.jpeg" alt="3D Model" style="width: 100%; height: 200px; object-fit: cover;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #17a2b8; color: white; padding: 5px 10px; border-radius: 15px;">New</span>
                 </div>
-            </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/consumer.jpeg" alt="Consumer Products" class="project-image">
-                    <i class="fas fa-shopping-bag fa-2x"></i>
-                    <h3>Consumer Products</h3>
-                    <p>Innovative consumer product prototypes and custom accessories. From phone cases to household items.</p>
-                    <div class="project-tag">Consumer Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-users"></i> Mass Production</span>
-                        <span><i class="fas fa-star"></i> Top Rated</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/aerospace.jpeg" alt="Aerospace Components" class="project-image">
-                    <i class="fas fa-plane fa-2x"></i>
-                    <h3>Aerospace Components</h3>
-                    <p>High-precision aerospace parts and prototypes. Specialized in lightweight components and testing models.</p>
-                    <div class="project-tag">Aerospace Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-microscope"></i> Precision Testing</span>
-                        <span><i class="fas fa-award"></i> Certified</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <img src="images/robotics.jpeg" alt="Robotics" class="project-image">
-                    <i class="fas fa-robot fa-2x"></i>
-                    <h3>Robotics & Automation</h3>
-                    <p>Custom robotics components and automation solutions. Includes servo mounts, chassis designs, and control interfaces.</p>
-                    <div class="project-tag">Robotics Grade</div>
-                    <div class="project-stats">
-                        <span><i class="fas fa-bolt"></i> Quick Assembly</span>
-                        <span><i class="fas fa-microchip"></i> Smart Ready</span>
+                <div style="padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">Industrial Parts Pack</h3>
+                        <span style="color: #007bff; font-weight: bold;"><img src="images/icons/swift32x32.svg" width="16" height="16" style="vertical-align: middle;"> 49.99</span>
+                    </div>                    
+                    <div style="color: #ffd700; margin: 0.5rem 0;">★★★★ (64)</div>
+                    <p style="color: #666; margin: 0.5rem 0;">Collection of 50+ industrial-grade 3D models ready for printing.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span style="color: #28a745;"><i class="fas fa-check"></i> Digital Download</span>
+                        <button onclick="buyNow(3)" style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer;">Buy Now</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="marketplace-footer" style="text-align: center; margin-top: 3rem;">
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                        <button onclick="loadMoreProducts()" style="background: #007bff; color: white; border: none; padding: 12px 30px; border-radius: 25px; cursor: not-allowed; min-width: 150px; flex: 0 1 auto; opacity: 0.6;" disabled>Load More Products</button>
+                        <button onclick="window.location.href='login.html'" style="background: white; color: #007bff; border: 2px solid #007bff; padding: 12px 30px; border-radius: 25px; cursor: pointer; min-width: 150px; flex: 0 1 auto;">Visit Marketplace</button>
+    </div>        
+</div>
+
+        
+        
+        
+        
+                <div class="swift-card-section" style="padding: 0rem; background: #f8f9fa; margin: 2rem 0;">
+                        <div class="swift-card-info" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 1.5rem;">Swift Cards - Your Gateway to Faster Transactions</h2>
+                            <p style="color: #666; text-align: center; line-height: 1.6; margin-bottom: 1.5rem;">
+                                Swift cards are exclusively designed for use on the SwiftTech marketplace. These cards provide secure payments for all purchases and services available on our platform. Each card comes with unique features for maximum flexibility and security within the SwiftTech ecosystem.
+                            </p>
+                            <div style="text-align: center; margin: 2rem 0;">
+                                <img src="images/swift-card-sample.png" alt="Sample Swift Card" style="max-width: 100%; width: 400px; height: auto; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.15);">
+                            </div>
+                            <style>
+                                @media screen and (max-width: 768px) {
+                                    img[src="images/swift-card-sample.png"] {
+                                        width: 90%;
+                                        transition: all 0.3s ease;
+                                    }
+                                }
+                            </style>                            
+                            <div class="card-actions" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                                                            <button onclick="window.location.href='resources.html?card-validate'" style="text-decoration: none; display: flex; align-items: center; background: #aeb0b3; padding: 12px 24px; border-radius: 15px; color: white; transition: all 0.3s ease;">
+                                                                <i class="fas fa-check-circle" style="font-size: 24px; margin-right: 8px;"></i>
+                                                                <span>Validate Your Card</span>                                                            
+                                                            </button>
+                                                            <button onclick="window.location.href='resources.html?card-validate'" style="display: flex; align-items: center; background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 15px; cursor: pointer; transition: all 0.3s ease;">
+                                                                <i class="fas fa-wallet" style="margin-right: 8px;"></i>
+                                                                Check Card Balance
+                                                            </button>                                                        
+                                                        </div>
+                            
+                            <div class="marketplace-platforms" style="margin-top: 2rem; text-align: center;">
+                                                            <h3 style="color: #2c3e50; margin-bottom: 1rem;">Available on Major Marketplaces</h3>
+                                                            <div class="platform-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fab fa-amazon" style="font-size: 24px; color: #ff9900;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Amazon</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fab fa-etsy" style="font-size: 24px; color: #f45800;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Etsy</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fab fa-ebay" style="font-size: 24px; color: #e53238;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">eBay</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-shopping-cart" style="font-size: 24px; color: #007dc6;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Walmart</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-microchip" style="font-size: 24px; color: #ff9933;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Newegg</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-shopping-bag" style="font-size: 24px; color: #263238;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Jumia</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-store" style="font-size: 24px; color: #ed017f;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Konga</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-tags" style="font-size: 24px; color: #72ef36;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">Gumtree</div>
+                                                                </div>
+                                                                <div class="platform" style="background: #f8f9fa; padding: 1rem; border-radius: 10px;">
+                                                                    <i class="fas fa-globe" style="font-size: 24px; color: #002f34;"></i>
+                                                                    <div class="platform-name" style="margin-top: 0.5rem;">OLX</div>
+                                                                </div>
+                                                            </div>
+                                                            <p style="color: #666; margin-top: 1.5rem; font-size: 0.9rem;">
+                                                                <i class="fas fa-info-circle"></i> Various Swift Card denominations available for purchase on these platforms                                                            </p>
+                                                            <style>
+                                                                @media screen and (max-width: 768px) {
+                                                                    .platform-name {
+                                                                        display: none;
+                                                                    }
+                                                                    .platform {
+                                                                        padding: 0.5rem !important;
+                                                                    }
+                                                                    .platform i {
+                                                                        font-size: 28px !important;
+                                                                    }
+                                                                    .platform-grid {
+                                                                        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)) !important;
+                                                                        gap: 0.5rem !important;
+                                                                    }
+                                                                }
+                                                            </style>
+                                                        </div>
+                            
+                        </div>        
+                                            <div class="verified-vendors" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                                                                            <h3 style="color: #2c3e50;" class="section-title">Verified Swift Card Vendors</h3>
+                                                                                            <style>
+                                                                                                @media screen and (max-width: 768px) {
+                                                                                                    .section-title {
+                                                                                                        font-size: 1.5em;
+                                                                                                    }
+                                                                                                }
+                                                                                            </style>                                                <p style="color: #666; text-align: center; font-size: 1.1rem; margin-bottom: 1.5rem;">All vendors are thoroughly verified and part of our trusted network</p>                                                <div style="text-align: center; margin-bottom: 2rem;">
+                                                    <div class="profile-stack" style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+                                                        <img src="images/avatar1.jpeg" alt="Community Member" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; margin-right: -15px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                                        <img src="images/avatar2.jpg" alt="Community Member" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; margin-right: -15px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                                        <img src="images/3.webp" alt="Community Member" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; margin-right: -15px; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                                        <img src="images/avatar4.jpg" alt="Community Member" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; object-fit: cover; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                                    </div>
+                                                    <style>
+                                                        @media screen and (max-width: 768px) {
+                                                            .profile-stack img {
+                                                                width: 50px !important;
+                                                                height: 50px !important;
+                                                            }
+                                                        }
+                                                    </style>                                                    
+                                                    <p style="color: #666; font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                                                        Our Swift community has grown into a trusted family of verified vendors, carefully selected through rigorous vetting and community recommendations. Each vendor has demonstrated exceptional reliability, customer service, and commitment to our values. Join thousands of satisfied customers who've found their perfect vendor match through our supportive community.
+                                                    </p>
+                                
+                                <div style="display: inline-block; background: #28a745; color: white; padding: 8px 15px; border-radius: 15px; margin: 1rem 0;">
+                                    <i class="fas fa-shield-alt"></i> 100% Verified Vendors
+                                </div>
+                            </div>
+        
+                            <div class="vendors-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                                <!-- Combined Vendor Card for Mobile -->
+                                <style>
+                                    @media screen and (max-width: 768px) {
+                                        .vendors-grid {
+                                            display: block !important;
+                                        }
+                                        .vendor-card {
+                                            margin-bottom: 1rem;
+                                            display: none;
+                                        }
+                                        .vendor-card.mobile {
+                                            display: block !important;
+                                        }
+                                    }
+                                </style>
+                                
+                                <div class="vendor-card mobile" style="display: none; background: #f8f9fa; border-radius: 15px; padding: 1.5rem; text-align: center;">
+                                    <img src="images/vendor-verified.png" alt="Verified Badge" style="width: 50px; margin-bottom: 1rem;">
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">SwiftCard USA</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">United States</p>
+                                    <a href="https://wa.me/1234567890" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                    <hr style="margin: 1.5rem 0; border-top: 1px solid #ddd;">
+                                    
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">EuroSwift</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">European Union</p>
+                                    <a href="https://wa.me/1234567891" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                    <hr style="margin: 1.5rem 0; border-top: 1px solid #ddd;">
+                                    
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">AsiaSwift</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">Asia Pacific</p>
+                                    <a href="https://wa.me/1234567892" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                </div>
+
+                                <!-- Desktop Vendor Cards -->
+                                <div class="vendor-card" style="background: #f8f9fa; border-radius: 15px; padding: 1.5rem; text-align: center;">
+                                    <img src="images/vendor-verified.png" alt="Verified Badge" style="width: 50px; margin-bottom: 1rem;">
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">SwiftCard USA</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">United States</p>
+                                    <a href="https://wa.me/1234567890" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                </div>
+        
+                                <div class="vendor-card" style="background: #f8f9fa; border-radius: 15px; padding: 1.5rem; text-align: center;">
+                                    <img src="images/vendor-verified.png" alt="Verified Badge" style="width: 50px; margin-bottom: 1rem;">
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">EuroSwift</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">European Union</p>
+                                    <a href="https://wa.me/1234567891" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                </div>
+        
+                                <div class="vendor-card" style="background: #f8f9fa; border-radius: 15px; padding: 1.5rem; text-align: center;">
+                                    <img src="images/vendor-verified.png" alt="Verified Badge" style="width: 50px; margin-bottom: 1rem;">
+                                    <h4 style="color: #2c3e50; margin-bottom: 0.5rem;">AsiaSwift</h4>
+                                    <p style="color: #666; margin-bottom: 1rem;">Asia Pacific</p>
+                                    <a href="https://wa.me/1234567892" target="_blank" style="background: #25D366; color: white; text-decoration: none; padding: 8px 20px; border-radius: 25px; display: inline-block;">
+                                        <i class="fab fa-whatsapp"></i> Contact Vendor
+                                    </a>
+                                </div>
+                            </div>        
+                            <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #fff3cd; border-radius: 15px;">
+                                <p style="color: #856404; margin: 0;">
+                                    <i class="fas fa-info-circle"></i> Contact vendors directly through WhatsApp for current prices and availability. All transactions are secured through our verified vendor system.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        
     </section>
+
+    <script>
+        let activeFilters = new Set();
+        let page = 1;
+        let cart = [];
+        const productsPerPage = 3;
+        const allProducts = [
+            {
+                id: 4,
+                title: "Advanced 3D Scanner",
+                price: 799.99,
+                category: "accessories",
+                tags: ["price", "rating"],
+                image: "images/scanner.jpg",
+                description: "Professional-grade 3D scanner with high precision and accuracy for detailed object digitization.",
+                badge: "Premium",
+                halfStar: true,
+                reviews: 128
+            },
+            {
+                id: 5,
+                title: "Resin Printer Kit",
+                price: 349.99,
+                category: "printers",
+                tags: ["price", "stock", "shipping"],
+                image: "images/resin-printer.jpg",
+                description: "Complete resin 3D printer kit with LCD screen, perfect for high-detail miniatures and jewelry.",
+                badge: "Best Value",
+                halfStar: false,
+                reviews: 89
+            },
+            {
+                id: 6,
+                title: "Designer Models Bundle",
+                price: 79.99,
+                category: "3d-models",
+                tags: ["price", "rating"],
+                image: "images/models-bundle.jpg",
+                description: "Curated collection of premium 3D models from top designers, ready for immediate printing.",
+                badge: "Popular",
+                halfStar: true,
+                reviews: 156
+            },
+            {
+                id: 1,
+                title: "Professional 3D Printer",
+                price: 599.99,
+                category: "printers",
+                tags: ["price", "stock"],
+                image: "images/medical-prototype.jpeg",
+                description: "High-precision 3D printer with dual extruder and large build volume.",
+                badge: "Hot Deal",
+                halfStar: false,
+                reviews: 128
+            },
+            {
+                id: 2,
+                title: "Premium PLA Filament",
+                price: 24.99,
+                category: "materials",
+                tags: ["price", "stock", "shipping"],
+                image: "images/auto-parts.jpeg",
+                description: "1kg spool of high-quality PLA filament, multiple colors available.",
+                badge: "Best Seller",
+                halfStar: true,
+                reviews: 256
+            },
+            {
+                id: 3,
+                title: "Industrial Parts Pack",
+                price: 49.99,
+                category: "3d-models",
+                tags: ["price", "rating"],
+                image: "images/industrial.jpeg",
+                description: "Collection of 50+ industrial-grade 3D models ready for printing.",
+                badge: "New",
+                halfStar: false,
+                reviews: 64
+            }        
+        ];        function searchProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categorySelect').value;
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const title = product.querySelector('h3').textContent.toLowerCase();
+                const productCategory = product.dataset.category;
+                const matchesSearch = title.includes(searchTerm);
+                const matchesCategory = category === 'all' || productCategory === category;
+                
+                product.style.display = (matchesSearch && matchesCategory) ? 'block' : 'none';
+            });
+        }
+
+        function toggleFilter(element) {
+            const filter = element.dataset.filter;
+            if (activeFilters.has(filter)) {
+                activeFilters.delete(filter);
+                element.style.background = '#f0f0f0';
+                element.style.color = 'black';
+            } else {
+                activeFilters.add(filter);
+                element.style.background = '#007bff';
+                element.style.color = 'white';
+            }
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const productTags = product.dataset.tags.split(',');
+                const matchesFilters = activeFilters.size === 0 || 
+                    Array.from(activeFilters).every(filter => productTags.includes(filter));
+                
+                if (matchesFilters && product.style.display !== 'none') {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function createProductElement(product) {
+            const div = document.createElement('div');
+            div.className = 'product-card';
+            div.dataset.category = product.category;
+            div.dataset.tags = product.tags.join(',');
+            div.style = "background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);";
+            
+            div.innerHTML = `
+                <div style="position: relative;">
+                    <img src="${product.image}" alt="${product.title}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #28a745; color: white; padding: 5px 10px; border-radius: 15px;">${product.badge || ''}</span>
+                </div>
+                <div style="padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0;">${product.title}</h3>
+                        <span style="color: #007bff; font-weight: bold;"><img src="images/icons/swift32x32.svg" width="16" height="16" style="vertical-align: middle;"> ${product.price}</span>
+                    </div>
+                    <div style="color: #ffd700; margin: 0.5rem 0;">★★★★${product.halfStar ? '½' : ''} (${product.reviews})</div>
+                    <p style="color: #666; margin: 0.5rem 0;">${product.description}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span style="color: #28a745;"><i class="fas fa-check"></i> In Stock</span>
+                        <button onclick="buyNow(${product.id})" style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 15px; cursor: pointer;">Buy now</button>
+                    </div>
+                </div>                            `;
+            return div;
+        }
+
+        function loadMoreProducts() {
+            const marketplaceGrid = document.querySelector('.marketplace-grid');
+            const startIndex = (page - 1) * productsPerPage;
+            const endIndex = startIndex + productsPerPage;
+            const newProducts = allProducts.slice(startIndex, endIndex);
+            
+            if (newProducts.length > 0) {
+                newProducts.forEach(product => {
+                    const productElement = createProductElement(product);
+                    marketplaceGrid.appendChild(productElement);
+                });
+                page++;
+                applyFilters();
+            }
+            
+            if (endIndex >= allProducts.length) {
+                document.querySelector('.marketplace-footer button').style.display = 'none';
+            }
+        }
+
+        function buyNow(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            
+            if (!product) {
+                console.error('Product not found');
+                return;
+            }
+            
+            const popup = document.createElement('div');
+            popup.classList.add('popup');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 2rem;
+                box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                width: 90%;
+                max-width: 500px;
+                border-radius: 10px;
+            `;
+
+            popup.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <img src="${product.image}" alt="${product.title}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                        <h3 style="margin: 0;">${product.title}</h3>
+                    </div>
+                    <span style="color: #007bff;"><img src="images/icons/swift32x32.svg" width="16" height="16" style="vertical-align: middle;"> ${product.price}</span>
+                </div>
+                <form id="checkoutForm" style="display: flex; flex-direction: column; gap: 0rem;">
+                    <div class="form-group">
+                        <input type="text" id="fullName" placeholder="Full Name" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd;">
+                        <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd;">
+                        <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="form-group" style="flex: 1;">
+                            <input type="tel" id="phone" placeholder="Phone Number" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd;" pattern="[+][0-9]{1,3}[0-9]{10}" title="Please enter valid phone number with country code">
+                            <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <input type="text" id="coupon" placeholder="Coupon Code" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd;">
+                            <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="address" placeholder="Shipping Address" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd;">
+                        <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                    </div>
+                    <div class="form-group">
+                        <select id="deliveryType" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; background: white;">
+                            <option value="" disabled selected>Select Delivery Type</option>
+                            <option value="standard">Standard Delivery (3-5 days)</option>
+                            <option value="express">Express Delivery (1-2 days)</option>
+                            <option value="same-day">Same Day Delivery</option>
+                        </select>
+                        <span class="error" style="color: red; font-size: 0.8rem;"></span>
+                    </div>
+                    <h4 style="margin-bottom: 0.4rem;">Payment Method:</h4>
+                    <div class="form-group">
+                        <input type="text" id="swiftCode" placeholder="Swift Card Code" required style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; margin-bottom: 5px;">
+                        <span class="error" style="color: red; font-size: 0.8rem;"></span>                        
+                        <a style="color: black; font-size: 1rem; text-decoration: none;">Don't have a swift card - <a href="https://swiftcard.com/buy" style="color: #007bff; font-size: 1rem; text-decoration: none;">Get one</a></a>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 0.2rem;">
+                        <button type="submit" style="flex: 1; padding: 0.5rem; background: white; border: 2px solid #007bff; color: #007bff; cursor: pointer;">Complete Purchase</button>
+                        <button type="button" onclick="closePopup()" style="padding: 0.5rem; background: white; border: 2px solid #dc3545; color: #dc3545; cursor: pointer;">Cancel</button>
+                    </div>
+                </form>
+            `;
+
+            document.body.appendChild(popup);
+
+            const overlay = document.createElement('div');
+            overlay.classList.add('popup-overlay');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            `;
+            document.body.appendChild(overlay);
+
+            const form = popup.querySelector('#checkoutForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalBtnText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing';
+                submitBtn.disabled = true;
+                
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                    .fa-spin {
+                        animation: spin 1s linear infinite;
+                    }
+                `;
+                document.head.appendChild(style);
+
+                const formData = {
+                    fullName: form.querySelector('#fullName').value,
+                    email: form.querySelector('#email').value,
+                    phone: form.querySelector('#phone').value,
+                    coupon: form.querySelector('#coupon').value,
+                    address: form.querySelector('#address').value,
+                    deliveryType: form.querySelector('#deliveryType').value,
+                    swiftCode: form.querySelector('#swiftCode').value,
+                    productId: productId,
+                    price: product.price,
+                    title: product.title
+                };
+                try {
+                    const response = await fetch('https://swifttech-server.onrender.com/checkout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.status === 'success') {
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background: #28a745;
+                            color: white;
+                            padding: 1rem;
+                            border-radius: 4px;
+                            z-index: 1001;
+                        `;
+                        notification.innerHTML = `
+                            <h4>Purchase Successful!</h4>
+                            <p>Amount: ${result.transactionDetails.amount}</p>
+                            <p>Product: ${result.transactionDetails.productTitle}</p>
+                            <p>New Card Balance: ${result.newBalance}</p>
+                        `;
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.remove();
+                            popup.remove();
+                            overlay.remove();
+                            style.remove();
+                        }, 5000);
+                    } else {
+                        throw new Error(result.message);
+                    }
+                } catch (error) {
+                    form.reset();
+                    const errorMsg = document.createElement('div');
+                    errorMsg.style.cssText = `
+                        color: #dc3545;
+                        margin-bottom: 1rem;
+                        text-align: center;
+                    `;
+                    errorMsg.textContent = error.message || 'An error occurred. Please try again.';
+                    form.insertBefore(errorMsg, form.firstChild);
+                } finally {
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        function closePopup() {
+            const popup = document.querySelector('.popup');
+            const overlay = document.querySelector('.popup-overlay');
+            if (popup) popup.remove();
+            if (overlay) overlay.remove();
+        }            
+        
+        function openShop() {
+            alert('Opening shop dashboard...');
+        }    
+        
+    </script>
+
+    
 
     <section id="resources" class="section">
             <h2 class="hero-title" style="text-align: center;">Learning Resources</h2>
@@ -1371,7 +2026,7 @@
                             Design Tips & Tricks
                         </li>
                     </ul>
-                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Read More →</a>
+                    <a href="resources.html" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Read More →</a>
                 </div>
     
                 <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
@@ -1391,7 +2046,7 @@
                             Live Q&A Sessions
                         </li>
                     </ul>
-                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Watch Now →</a>
+                    <a href="resources.html" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Watch Now →</a>
                 </div>
     
                 <div class="resource-card" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 2rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
@@ -1411,7 +2066,7 @@
                             Case Studies
                         </li>
                     </ul>
-                    <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Download →</a>
+                    <a href="resources.html?resource-section" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Download →</a>
                 </div>
             </div>    
             <div class="resource-center" style="margin: 4rem auto; max-width: 1200px; padding: 2rem;">
@@ -1434,7 +2089,7 @@
                                 Documentation
                             </li>
                         </ul>
-                        <a href="#" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Access Resources →</a>
+                        <a href="resources.html?resource-section" class="resource-link" style="color: #007bff; text-decoration: none; display: inline-block; margin-top: 1rem;">Access Resources →</a>
                     </div>
                 </div>
             </div>
@@ -1442,54 +2097,142 @@
     
 
     <section id="contact" class="section">
-        <h2 class="hero-title" style="text-align: left;">Get In Touch</h2>
-        <p class="contact-intro">Ready to bring your ideas to life? Our team is here to help you every step of the way.</p>
+        <h2 class="hero-title" style="text-align: left; margin-bottom: 1rem;">Get In Touch</h2>
+        <p class="contact-intro" style="margin-bottom: 2rem;">Ready to bring your ideas to life? Our team is here to help you every step of the way.</p>
         
         <div class="contact-container">
-            <div class="contact-info">
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Visit Us</h3>
-                    <p>123 Tech Street<br>Innovation City, IC 12345</p>
+            <div class="contact-info" style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+                <div class="info-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; height: auto; flex: 1; min-width: 250px;">
+                    <i class="fas fa-map-marker-alt" style="color: #007bff; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Visit Us</h3>
+                    <p style="margin: 0;">123 Tech Street<br>Innovation City, IC 12345</p>
+                    <img src="images/location.png" alt="Office Location" style="width: 100px; height: 100px; object-fit: cover; margin: 1rem auto 0; display: block; border-radius: 50%;">
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-phone"></i>
-                    <h3>Call Us</h3>
-                    <p>+1 (555) 123-4567<br>Mon-Fri: 9AM-6PM</p>
+                <div class="info-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; height: auto; flex: 1; min-width: 250px;">
+                    <i class="fas fa-phone" style="color: #007bff; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Call Us</h3>
+                    <p style="margin: 0;"><a href="tel:+15551234567" style="color: #007bff; text-decoration: none;">+1 (555) 123-4567</a><br>Mon-Fri: 9AM-6PM</p>
+                    <img src="images/phone.png" alt="Phone Support" style="width: 100px; height: 100px; object-fit: cover; margin: 1rem auto 0; display: block; border-radius: 50%;">
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email Us</h3>
-                    <p>info@swifttech.com<br>support@swifttech.com</p>
+                <div class="info-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; height: auto; flex: 1; min-width: 250px;">
+                    <i class="fas fa-envelope" style="color: #007bff; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Email Us</h3>
+                                    <p style="margin: 0;">
+                                        <a href="mailto:info@swifttech.com?subject=General%20Inquiry&body=Hello%2C%0D%0A%0D%0AI%20would%20like%20to%20learn%20more%20about%20your%20services.%0D%0A%0D%0AThank%20you." style="color: #007bff; text-decoration: none;">info@swifttech.com</a><br>
+                                        <a href="mailto:support@swifttech.com?subject=Support%20Request&body=Hello%2C%0D%0A%0D%0AI%20need%20assistance%20with%20the%20following%20issue%3A%0D%0A%0D%0AThank%20you." style="color: inherit; text-decoration: none;">support@swifttech.com</a>
+                                    </p>                    
+                                    <img src="images/mailbox.png" alt="Email Support" style="width: 100px; height: 100px; object-fit: cover; margin: 1rem auto 0; display: block; border-radius: 50%;">
+                </div>                
+                <div class="info-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; text-align: center; height: auto; flex: 1; min-width: 250px;">
+                    <i class="fas fa-clock" style="color: #007bff; font-size: 1.5rem; margin-bottom: 0.5rem;"></i>
+                    <h3 style="font-size: 1.2rem; margin: 0.5rem 0;">Book a Consultation</h3>
+                    <p style="margin: 0 0 1rem;">Schedule a free 30-minute consultation<br>with our 3D printing experts</p>
+                    <a href="https://calendly.com/abraham-swifttech/30min" class="schedule-button" style="display: inline-block; padding: 0.5rem 1rem; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">Book Now</a>
                 </div>
-                <div class="social-messaging-buttons">
-                    <a href="https://wa.me/15551234567" class="whatsapp-button" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        Chat on WhatsApp
+                
+            </div>
+                 
+        </div>
+        
+        <div class="social-messaging-buttons" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem;">
+            <a href="https://wa.me/15551234567" class="whatsapp-button" target="_blank" style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background: #25D366; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
+                <i class="fab fa-whatsapp" style="margin-right: 0.5rem;"></i>
+                Chat on WhatsApp
+            </a>
+            <a href="https://m.me/swifttech" class="messenger-button" target="_blank" style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background: #0084FF; color: white; text-decoration: none; border-radius: 4px; font-size: 0.9rem;">
+                <i class="fab fa-facebook-messenger" style="margin-right: 0.5rem;"></i>
+                Message on Messenger
+            </a>
+        </div>
+
+        <h2 class="section-title" style="text-align: center; margin-bottom: 2rem; color: transparent; background: linear-gradient(45deg, #2196F3, #00BCD4); -webkit-background-clip: text; background-clip: text; font-size: 2.5rem;">Start Your Project</h2>
+        <p style="text-align: center; color: #666; font-size: 1.1rem; max-width: 800px; margin: 0 auto 2rem; line-height: 1.6;">
+            To start your project, simply log in or sign up for an account. Once logged in, click on "New Project" to begin. You'll be guided through our easy project setup process where you can upload your files, select materials, and specify your requirements. Our team will review your submission and provide a detailed quote within 24 hours.
+        </p> 
+
+        <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto 2rem;">
+                    <img src="images/rocket1.png" alt="3D Printing Services" style="width: 500px; height: 500px; border-radius: 12px;">
+                    <a href="login.html" class="auth-button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0, 123, 255, 0.9); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-size: 1.2rem; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        Sign Up or Login
                     </a>
-                    <a href="https://m.me/swifttech" class="messenger-button" target="_blank">
-                        <i class="fab fa-facebook-messenger"></i>
-                        Message on Messenger
-                    </a>
+                </div>
+        
+        <div class="faq-section" style="margin-top: 2rem; width: 100%;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Frequently Asked Questions</h3>
+            <div class="faq-accordion">
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">What are your payment terms?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>We only accept Swift card payments. These cards can be obtained from all major online stores worldwide and also from our vendors on our website.</p>                    </div>
+                </div>
+
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">What file formats do you accept?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>We accept most common 3D file formats including STL, OBJ, 3MF, STEP, and STP files. If you have a different file format, please contact us to discuss compatibility. We can also help convert your files if needed.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">Do you offer design services?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>Yes, we offer comprehensive design services. Our team of experienced designers can help bring your ideas to life, optimize existing designs for 3D printing, or create custom solutions for your specific needs. Contact us for a design consultation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">What is your quality assurance process?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>Every print undergoes rigorous quality control checks throughout the production process. We inspect for dimensional accuracy, surface finish, and structural integrity. If a print doesn't meet our quality standards, we'll reprint it at no additional cost to ensure your complete satisfaction.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">How long does delivery take?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>Delivery times vary depending on project complexity, material choice, and quantity. Standard projects typically take 5-7 business days, while rush orders can be completed in 2-3 business days for an additional fee. We'll provide you with a specific timeline during the quote process.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" style="margin-bottom: 1rem; border: 1px solid #dee2e6; border-radius: 8px; overflow: hidden;">
+                    <button class="faq-question" style="width: 100%; text-align: left; padding: 1rem; background: #f8f9fa; border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: #007bff;">How do I get a quote for 3D printing services?</span>
+                        <i class="fas fa-chevron-down" style="color: #007bff;"></i>
+                    </button>
+                    <div class="faq-answer" style="padding: 1rem; display: none;">
+                        <p>To get a quote, simply upload your 3D model files through our online form or contact us directly. Our team will review your requirements and provide a detailed quote within 24 hours. For complex projects, we recommend scheduling a consultation to discuss your needs in detail.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" autocomplete="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" autocomplete="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Send Message</button>
-            </div>        </div>
-
+                        
+            <script>
+                document.querySelectorAll('.faq-question').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const answer = button.nextElementSibling;
+                        const icon = button.querySelector('.fas');
+                        
+                        answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+                        icon.style.transform = answer.style.display === 'none' ? 'rotate(0deg)' : 'rotate(180deg)';
+                    });
+                });
+            </script>
+        </div>
         <style>
             .social-messaging-buttons {
                 margin-top: 2rem;
@@ -1498,7 +2241,7 @@
                 flex-wrap: wrap;
             }
             
-            .whatsapp-button, .messenger-button {
+            .whatsapp-button, .messenger-button, .schedule-button {
                 display: flex;
                 align-items: center;
                 padding: 0.8rem 1.5rem;
@@ -1518,7 +2261,13 @@
                 color: white;
             }
             
-            .whatsapp-button:hover, .messenger-button:hover {
+            .schedule-button {
+                background-color: #007bff;
+                color: white;
+                margin-top: 1rem;
+            }
+            
+            .whatsapp-button:hover, .messenger-button:hover, .schedule-button:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             }
@@ -1527,22 +2276,50 @@
                 margin-right: 8px;
                 font-size: 1.2rem;
             }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-weight: 500;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 0.8rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                background-color: #fff;
+            }
+
+            .form-group input[type="file"] {
+                padding: 0.5rem 0;
+            }
         </style>
     </section>
 
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>About SwiftTech</h3>
-                <p>Leading the way in innovative 3D printing solutions since 2015. We're committed to quality, sustainability, and customer satisfaction.</p>
-            </div>
+                <h3>SwiftTech</h3>
+                <p style="margin-bottom: 15px;">Leading the way in innovative 3D printing solutions since 2015</p>
+                <p style="margin-bottom: 5px;"><span><i style="margin-right: 10px; color: #00a8e8;" class="fas fa-envelope"></i><a href="mailto:support@swifttech.me?subject=SwiftTech%20Support%20Inquiry&body=Dear%20SwiftTech%20Support%20Team%2C%0A%0AI%20am%20writing%20regarding%3A%0A%0A-%20Technical%20Support%0A-%20Product%20Information%0A-%20Pricing%20and%20Quotes%0A-%20General%20Inquiry%0A%0APlease%20provide%20details%20about%20your%20inquiry%20here.%0A%0ABest%20regards%2C%0A[Your%20Name]" style="color: #00a8e8;">support@swifttech.me</a></span></p>
+                <p><span><i style="margin-right: 10px; color: #00a8e8;" class="fas fa-phone"></i><a href="tel:+15556789567" style="color: #00a8e8;">+1 (555) 6789 567</a></span></p>            </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'home\']').click()">Home</a></li>
-                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'services\']').click()">Services</a></li>
-                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'projects\']').click()">Projects</a></li>
-                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'contact\']').click()">Contact</a></li>                </ul>
+                    <li><span><a href="#" onclick="document.querySelector('.nav-item[data-section=\'home\']').click()">Home</a><a href="privacy-policy.html" style="margin-left: 80px;">Privacy Policy</a></span></li>
+                    <li><span><a href="#" onclick="document.querySelector('.nav-item[data-section=\'services\']').click()">Services</a><a href="terms-of-service.html" style="margin-left: 64px;">Terms of Service</a></span></li>
+                    <li><span><a href="#" onclick="document.querySelector('.nav-item[data-section=\'marketplace\']').click()">Marketplace</a><a href="#" onclick="document.querySelector('.nav-item[data-section=\'contact\']').click(); setTimeout(() => document.querySelector('.faq-section').scrollIntoView({ behavior: 'smooth' }), 1400);" style="margin-left: 32px;">FAQ</a></span></li>                    
+                    <li><span><a href="#" onclick="document.querySelector('.nav-item[data-section=\'resources\']').click()">Resources</a><a href="resources.html" style="margin-left: 49px;">Blog</a></span></li>
+                    <li><a href="#" onclick="document.querySelector('.nav-item[data-section=\'contact\']').click()">Contact</a></li>
+                                    
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Connect With Us</h3>
@@ -1550,16 +2327,58 @@
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>                </div>
+                    <a href="#"><i class="fab fa-instagram"></i></a>                
+                </div>
             </div>
             <div class="footer-section">
                 <h3>Newsletter</h3>
-                <form class="newsletter-form" id="email" autocomplete="on">
+                <form class="newsletter-form" id="newsletterForm" autocomplete="on" onsubmit="handleNewsletterSubmit(event)">
                     <input type="email" name="email" id="newsletter-email" placeholder="Enter your email" autocomplete="email">
                     <button type="submit">Subscribe</button>
                 </form>
             </div>
-        </div>
+
+            <div id="notification" style="display: none; position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; border-radius: 5px; color: white; z-index: 1000; animation: slideIn 0.5s ease-out;">
+            </div>
+
+            <script>
+                async function handleNewsletterSubmit(event) {
+                    event.preventDefault();
+                    const email = document.getElementById('newsletter-email').value;
+                    const notification = document.getElementById('notification');
+
+                    try {
+                        const response = await fetch('https://swifttech-server.onrender.com/newsletter-subscribe', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ email })
+                        });
+
+                        if (response.ok) {
+                            showNotification('✓ Successfully subscribed to newsletter!', '#28a745');
+                            document.getElementById('newsletterForm').reset();
+                        } else {
+                            throw new Error('Subscription failed');
+                        }
+                    } catch (error) {
+                        showNotification('✕ Something went wrong. Please try again.', '#dc3545');
+                    }
+                }
+
+                function showNotification(message, backgroundColor) {
+                    const notification = document.getElementById('notification');
+                    notification.textContent = message;
+                    notification.style.backgroundColor = backgroundColor;
+                    notification.style.display = 'block';
+
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 3000);
+                }
+            </script>        
+            </div>
         <div class="footer-bottom">
             <p>© 2025 SwiftTech. All rights reserved.</p>
         </div>
@@ -1666,7 +2485,7 @@
         }
 
         .contact-container {
-            display: grid;
+            display: flex;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             margin: 3rem 0;
@@ -1696,7 +2515,7 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
             max-width: 1200px;
-            margin: 0 auto;
+            
         }
 
         .footer-section h3 {
