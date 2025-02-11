@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+      body {
+          font-family: 'Montserrat', sans-serif;
+          overflow: hidden;
+      }
+  </style>
+        
+<div class="bg-white dark:bg-gray-800 p-4 max-w-4xl mx-auto my-4">
+        <!-- Header with back button -->
+        <div class="flex items-center mb-3">
+            <button onclick="window.history.back()" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <div>
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">3D Print Job Request</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Fill in the details below to submit your 3D printing request</p>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Info card -->
+            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg mb-3">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-blue-600 dark:text-blue-400 mr-3"></i>
+                    <p class="text-xs text-blue-800 dark:text-blue-200">
+                        Please ensure your model is ready for printing. We support STL, OBJ, and 3MF file formats.
+                    </p>
+                </div>
+            </div>
+            <div class="border rounded p-2 bg-gray-50 overflow-y-auto" id="dynamicHeightDiv">
+                <script>
+                    function updateHeight() {
+                        const div = document.getElementById('dynamicHeightDiv');
+                        div.style.height = `${window.innerHeight - 210}px`;
+                    }
+                    window.addEventListener('resize', updateHeight);
+                    updateHeight();
+                </script>        
+                <h3 class="text-lg font-semibold mb-3">New Print Job</h3>
+                        <form id="printJobForm" class="space-y-6 mb-1" autocomplete="on">
+                                <div class="mb-4 grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="modelSelect" class="block text-sm font-medium text-gray-700">Select Model</label>
+                                        <select name="model" id="modelSelect" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
+                                            <option value="">Choose model..</option>
+                                            </select>
+                                    </div>
+                                    <div>
+                                        <label for="colorSelect" class="block text-sm font-medium text-gray-700">Print Color</label>
+                                        <select name="color" id="colorSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
+                                            <option value="">Select color..</option>
+                                            <option value="black">Black</option>
+                                            <option value="white">White</option>
+                                            <option value="gray">Gray</option>
+                                            <option value="red">Red</option>
+                                            <option value="blue">Blue</option>
+                                            <option value="green">Green</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-4 grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="printerSelect" class="block text-sm font-medium text-gray-700">Select Printer</label>
+                                        <select name="printer" id="printerSelect" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
+                                            <option value="">Choose printer..</option>
+                                            <option value="prime300">SwiftTech Prime 300 (300x300x400mm) (Default)</option>
+                                            <option value="forgeXL600">SwiftTech Forge XL 600 (600x600x600mm)</option>
+                                            <option value="delta360">SwiftTech Delta 360 Pro (360Øx500mm)</option>
+                                            <option value="metalcraft450">SwiftTech MetalCraft 450 (450x450x450mm)</option>
+                                            <option value="resinPro1000">SwiftTech ResinPro 1000 (250x150x300mm)</option>
+                                            <option value="industrialX1">SwiftTech Industrial X1 (1000x1000x1000mm)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="postProcessingSelect" class="block text-sm font-medium text-gray-700">Post-Processing</label>
+                                        <select name="postProcessing" id="postProcessingSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
+                                            <option value="none">None</option>
+                                            <option value="smoothing">Smoothing</option>
+                                            <option value="painting">Painting</option>
+                                            <option value="assembly">Assembly Assistance</option>
+                                        </select>
+                                    </div>                                
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700">Print Quality</label>
+                                    <div class="grid grid-cols-3 gap-3 mt-2">
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-draft">
+                                            <input type="radio" id="quality-draft" name="quality" value="draft" required class="hidden peer" checked>
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="font-medium">Draft</span>
+                                                    <span class="text-yellow-500">☆</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-1">0.3mm layer height</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-standard">
+                                            <input type="radio" id="quality-standard" name="quality" value="standard" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="font-medium">Default</span>
+                                                    <span class="text-yellow-500">★</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-1">0.2mm layer height</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-ultra">
+                                            <input type="radio" id="quality-ultra" name="quality" value="ultra" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <div class="flex items-center justify-between">
+                                                    <span class="font-medium">Ultra</span>
+                                                    <span class="text-yellow-500">★★</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500 mt-1">0.10mm layer height</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                                                
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700">Material Type</label>
+                                    <div class="grid grid-cols-3 gap-1 mt-2" id="materialContainer">
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-pla">
+                                            <input type="radio" id="material-pla" name="material" value="PLA" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">PLA</span>
+                                                <p class="text-xs text-gray-500 mt-1">Easy to print, eco-friendly</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-petg">
+                                            <input type="radio" id="material-petg" name="material" value="PETG" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">PETG</span>
+                                                <p class="text-xs text-gray-500 mt-1">Strong and chemical-resistant</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-abs">
+                                            <input type="radio" id="material-abs" name="material" value="ABS" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">ABS</span>
+                                                <p class="text-xs text-gray-500 mt-1">High impact resistance</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-tpu">
+                                            <input type="radio" id="material-tpu" name="material" value="TPU" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">TPU</span>
+                                                <p class="text-xs text-gray-500 mt-1">Flexible and durable</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-nyl">
+                                            <input type="radio" id="material-nyl" name="material" value="NYL" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">Nylon</span>
+                                                <p class="text-xs text-gray-500 mt-1">Tough and wear-resistant</p>
+                                            </div>
+                                        </label>
+                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-cf">
+                                            <input type="radio" id="material-cf" name="material" value="CARBON FIBRE" required class="hidden peer">
+                                            <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
+                                                <span class="font-medium">Carbon F.</span>
+                                                <p class="text-xs text-gray-500 mt-1">Lightweight but very strong</p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="infill-range" class="block text-sm font-medium text-gray-700">Infill Percentage</label>
+                                    <input type="range" id="infill-range" name="infill" min="10" max="100" step="5" class="w-full mt-2" value="20">
+                                    <div class="flex justify-between text-xs text-gray-500">
+                                        <span>10%</span>
+                                        <span>50%</span>
+                                        <span>100%</span>
+                                    </div>
+                                </div>                              
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="mb-4">
+                                        <label for="copies-input" class="block text-sm font-medium text-gray-700">Number of Copies</label>
+                                        <input type="number" id="copies-input" name="copies" min="1" max="100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1" autocomplete="off">
+                                    </div>
+                                    <!-- Project Category -->
+                                    <div class="mb-4">
+                                        <label for="category-select" class="block text-sm font-medium text-gray-700">Project Category</label>
+                                        <select id="category-select" name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
+                                            <option value="">Select Category</option>
+                                            <option value="prototyping">Prototyping</option>
+                                            <option value="consumer">Consumer Product</option>
+                                            <option value="education">Education Model</option>
+                                            <option value="art">Art & Decoration</option>
+                                            <option value="mechanical">Mechanical Parts</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                                                                                               
+                                                                        <!-- Support Structures -->
+                                                                        <div class="mb-4">
+                                                                            <label class="block text-sm font-medium text-gray-700">Support Structures</label>
+                                                                            <div class="mt-2 space-y-2">
+                                                                                <label class="inline-flex items-center" for="support-none">
+                                                                                    <input type="radio" id="support-none" name="supports" value="none" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                                                    <span class="ml-2 text-sm text-gray-600">No Supports</span>
+                                                                                </label>
+                                                                                <label class="inline-flex items-center" for="support-minimal">
+                                                                                    <input type="radio" id="support-minimal" name="supports" value="minimal" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                                                    <span class="ml-2 text-sm text-gray-600">Minimal Supports</span>
+                                                                                </label>
+                                                                                <label class="inline-flex items-center" for="support-dense">
+                                                                                    <input type="radio" id="support-dense" name="supports" value="dense" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                                                    <span class="ml-2 text-sm text-gray-600">Dense Supports</span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                        
+                                                            <div class="mb-4">
+                                                                    <label class="block text-sm font-medium text-gray-700">Delivery Method</label>
+                                                                    <div class="mt-2 space-y-2">
+                                                                        <label class="inline-flex items-center" for="delivery-shipping">
+                                                                            <input type="radio" id="delivery-shipping" name="deliveryMethod" value="shipping" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="toggleDeliveryOptions()">
+                                                                            <span class="ml-2 text-sm text-gray-600">Shipping Address</span>
+                                                                        </label>
+                                                                        <label class="inline-flex items-center" for="delivery-pickup">
+                                                                            <input type="radio" id="delivery-pickup" name="deliveryMethod" value="pickup" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="toggleDeliveryOptions()">
+                                                                            <span class="ml-2 text-sm text-gray-600">Pickup Station</span>
+                                                                        </label>
+                                                                    </div>
+                                                            </div>
+
+                                                            <div id="shippingAddress" class="mb-4 hidden">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label for="region-select" class="block text-sm font-medium text-gray-700">Region</label>
+                                                                        <select id="region-select" name="country" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="updateStates()" autocomplete="country">
+                                                                            <option value="">Select Region</option>
+                                                                            <option value="northAmerica">North America</option>
+                                                                            <option value="Africa">Africa</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="state-select" class="block text-sm font-medium text-gray-700">Country/State</label>
+                                                                        <select id="state-select" name="state" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="address-level1">
+                                                                            <option value="">Select Country/State</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <label for="street-input" class="block text-sm font-medium text-gray-700">Street Address</label>
+                                                                    <input type="text" id="street-input" name="street" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="street-address">
+                                                                </div>
+                                                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                                    <div>
+                                                                        <label for="city-input" class="block text-sm font-medium text-gray-700">City</label>
+                                                                        <input type="text" id="city-input" name="city" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="address-level2">
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="zip-input" class="block text-sm font-medium text-gray-700">ZIP/Postal Code</label>
+                                                                        <input type="text" id="zip-input" name="zip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="postal-code">
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="phone-code-select" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                                                                        <div class="flex">
+                                                                            <select id="phone-code-select" name="phoneCode" class="mt-1 w-24 rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="tel-country-code">
+                                                                                <!-- North America -->
+                                                                                <option value="+1">+1 (USA)</option>
+                                                                                <option value="+1">+1 (Canada)</option>
+                                                                                <option value="+52">+52 (Mexico)</option>
+                                                                                
+                                                                                <!-- Africa -->
+                                                                                <option value="+234">+234 (Nigeria)</option>
+                                                                                <option value="+254">+254 (Kenya)</option>
+                                                                                <option value="+27">+27 (South Africa)</option>
+                                                                                <option value="+233">+233 (Ghana)</option>
+                                                                                <option value="+251">+251 (Ethiopia)</option>
+                                                                                <option value="+255">+255 (Tanzania)</option>
+                                                                                <option value="+256">+256 (Uganda)</option>
+                                                                                <option value="+250">+250 (Rwanda)</option>
+                                                                                <option value="+20">+20 (Egypt)</option>
+                                                                                <option value="+212">+212 (Morocco)</option>
+                                                                            </select>
+                                                                            <input type="tel" id="phone-input" name="phone" placeholder="Enter phone number" class="mt-1 block w-full rounded-r-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" pattern="[0-9]{10}" autocomplete="tel">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                            
+                                                            <div id="pickupStation" class="mb-4 hidden">
+                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    <div>
+                                                                        <label for="pickup-country-select" class="block text-sm font-medium text-gray-700">Country</label>
+                                                                        <select id="pickup-country-select" name="pickupCountry" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="updatePickupLocations()" disabled autocomplete="country">
+                                                                            <option value="">Select Country</option>
+                                                                            <option value="northAmerica">North America</option>
+                                                                            <option value="Africa">Africa</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label for="pickup-state-select" class="block text-sm font-medium text-gray-700">State/Region</label>
+                                                                        <select id="pickup-state-select" name="pickupState" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="updatePickupLocations()" disabled autocomplete="address-level1">
+                                                                            <option value="">Select State/Region</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <label for="pickup-location-select" class="block text-sm font-medium text-gray-700">Pickup Station</label>
+                                                                    <select id="pickup-location-select" name="pickupLocation" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" disabled>
+                                                                        <option value="">Select Pickup Station</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                            
+                            
+                                            <div class="mb-4">
+                                                <label for="instructions-textarea" class="block text-sm font-medium text-gray-700">Special Instructions</label>
+                                                <textarea id="instructions-textarea" name="instructions" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                            </div>
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700">Notification Preferences</label>
+                                <div class="mt-2 space-y-2">
+                                    <label for="email-notif" class="inline-flex items-center">
+                                        <input type="checkbox" id="email-notif" name="emailNotif" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm text-gray-600">Email notifications</span>
+                                    </label>
+                                    <label for="sms-notif" class="inline-flex items-center">
+                                        <input type="checkbox" id="sms-notif" name="smsNotif" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <span class="ml-2 text-sm text-gray-600">SMS notifications</span>
+                                    </label>
+                                </div>
+                            </div>
+                                                                    <!-- Legal Agreement -->
+                                                                    <div class="mb-4">
+                                                                        <div class="flex items-start">
+                                                                            <div class="flex items-center h-5">
+                                                                                <input type="checkbox" id="legal-agreement" name="legal" required class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                                                            </div>
+                                                                            <div class="ml-3 text-sm">
+                                                                                <label for="legal-agreement" class="font-medium text-gray-700">Legal Agreement</label>
+                                                                                <p class="text-gray-500">I confirm that I own or have the rights to use the 3D model uploaded and accept the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a>.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                    
+                            <button type="submit" class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
+                                Submit Print Job
+                            </button>
+                        </form>
+        </div>
+                            
+                            <script>
+                                // Form submission
+                                document.getElementById('printJobForm').addEventListener('submit', async (e) => {
+                                    e.preventDefault();
+                                    const formData = new FormData(e.target);
+                                    const data = Object.fromEntries(formData);
+                                    data.email = localStorage.getItem('userEmail');
+                                    
+                                    try {
+                                        const submitButton = e.target.querySelector('button[type="submit"]');
+                                        submitButton.disabled = true;
+                                        submitButton.innerHTML = '<span class="spinner"></span> Processing...';
+
+                                        const response = await fetch('https://swifttech-server.onrender.com/submit-print-job', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json',
+                                                'email': localStorage.getItem('userEmail')
+                                            },
+                                            body: JSON.stringify(data)
+                                        });
+                                        
+                                        const result = await response.json();
+                                        if (result.success) {
+                                            const notification = document.createElement('div');
+                                            notification.className = 'fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg z-50';
+                                            notification.innerHTML = `
+                                                <div class="flex items-center">
+                                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                    </svg>
+                                                    <div>
+                                                        <h4 class="font-bold">Print Job Submitted!</h4>
+                                                        <p class="text-sm">Your job has been added to the queue.</p>
+                                                    </div>
+                                                </div>
+                                            `;
+                                            document.body.appendChild(notification);
+                                            setTimeout(() => notification.remove(), 5000);
+                                            e.target.reset();
+                                        } else {
+                                            throw new Error(result.message);
+                                        }
+                                    } catch (error) {
+                                        const errorNotification = document.createElement('div');
+                                        errorNotification.className = 'fixed top-5 right-5 bg-red-500 text-white p-4 rounded-lg shadow-lg z-50';
+                                        errorNotification.textContent = 'Error: ' + error.message;
+                                        document.body.appendChild(errorNotification);
+                                        setTimeout(() => errorNotification.remove(), 5000);
+                                    } finally {
+                                        const submitButton = e.target.querySelector('button[type="submit"]');
+                                        submitButton.disabled = false;
+                                        submitButton.textContent = 'Submit Print Job';
+                                    }
+                                });
+                            </script>
+                            <script>
+                            async function loadModels() {
+                                try {
+                                    const response = await fetch('https://swifttech-server.onrender.com/get-models', {
+                                        method: 'GET',
+                                        headers: {
+                                            'email': localStorage.getItem('userEmail'),
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json'
+                                        }
+                                    });
+
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+
+                                    const models = await response.json();
+                                    const select = document.getElementById('modelSelect');
+
+                                    if (Array.isArray(models)) {
+                                        models.reverse().forEach(model => {
+                                            const option = document.createElement('option');
+                                            option.value = model.path;
+                                            option.textContent = model.filename;
+                                            select.appendChild(option);
+                                        });
+                                    }
+                                } catch (error) {
+                                    console.error('Error loading models:', error);
+                                }
+                            }
+                            loadModels();
+                            </script>
+
+                            <script>
+                            const usStates = [
+                                "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
+                                "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
+                                "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey",
+                                "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
+                                "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
+                            ];
+
+                            const africanCountries = [
+                                "Nigeria", "Kenya", "South Africa", "Ghana", "Ethiopia", "Tanzania", "Uganda", "Rwanda", "Egypt", "Morocco"
+                            ];
+
+                            function toggleDeliveryOptions() {
+                                const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
+                                document.getElementById('shippingAddress').classList.toggle('hidden', deliveryMethod !== 'shipping');
+                                document.getElementById('pickupStation').classList.toggle('hidden', deliveryMethod !== 'pickup');
+                            }
+
+                            function updateStates() {
+                                const country = document.querySelector('select[name="country"]').value;
+                                const stateSelect = document.querySelector('select[name="state"]');
+                                stateSelect.innerHTML = '<option value="">Select State/Region</option>';
+                                
+                                const states = country === 'northAmerica' ? usStates : africanCountries;
+                                states.forEach(state => {
+                                    const option = document.createElement('option');
+                                    option.value = state;
+                                    option.textContent = state;
+                                    stateSelect.appendChild(option);
+                                });
+                            }
+
+                            function updatePickupLocations() {
+                                const country = document.querySelector('select[name="pickupCountry"]').value;
+                                const stateSelect = document.querySelector('select[name="pickupState"]');
+                                const locationSelect = document.querySelector('select[name="pickupLocation"]');
+                                
+                                // Update states first
+                                stateSelect.innerHTML = '<option value="">Select State/Region</option>';
+                                const states = country === 'northAmerica' ? usStates : africanCountries;
+                                states.forEach(state => {
+                                    const option = document.createElement('option');
+                                    option.value = state;
+                                    option.textContent = state;
+                                    stateSelect.appendChild(option);
+                                });
+
+                                // Clear pickup locations
+                                locationSelect.innerHTML = '<option value="">Select Pickup Station</option>';
+                                
+                                // In a real application, you would fetch pickup locations based on country and state
+                                // This is just a placeholder
+                                if (country && stateSelect.value) {
+                                    ['Station 1', 'Station 2', 'Station 3'].forEach(station => {
+                                        const option = document.createElement('option');
+                                        option.value = station;
+                                        option.textContent = `${station} - ${stateSelect.value}`;
+                                        locationSelect.appendChild(option);
+                                    });
+                                }
+                            }
+                            </script>
+
+                            <script>
+                            document.querySelectorAll('input[name="material"]').forEach(radio => {
+                                radio.addEventListener('change', function() {
+                                    document.querySelectorAll('input[name="material"]').forEach(r => {
+                                        r.closest('label').classList.remove('border-blue-500', 'bg-blue-50');
+                                    });
+                                    if (this.checked) {
+                                        this.closest('label').classList.add('border-blue-500', 'bg-blue-50');
+                                    }
+                                });
+                            });
+                            </script>
+                            
+                            <script>
+                                    // Initial setup to ensure checked radio is styled correctly
+                                    window.addEventListener('load', function() {
+                                        const checkedRadio = document.querySelector('input[name="quality"]:checked');
+                                        if (checkedRadio) {
+                                            checkedRadio.closest('label').classList.add('border-blue-500', 'bg-blue-50');
+                                        }
+                                    });
+
+                                    document.querySelectorAll('input[name="quality"]').forEach(radio => {
+                                        radio.addEventListener('change', function() {
+                                            document.querySelectorAll('input[name="quality"]').forEach(r => {
+                                                r.closest('label').classList.remove('border-blue-500', 'bg-blue-50');
+                                            });
+                                            if (this.checked) {
+                                                this.closest('label').classList.add('border-blue-500', 'bg-blue-50');
+                                            }
+                                        });
+                                    });
+                            </script>
