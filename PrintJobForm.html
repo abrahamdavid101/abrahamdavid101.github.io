@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -12,11 +14,11 @@
           overflow: hidden;
       }
   </style>
-        
+</head>        
 <div class="bg-white dark:bg-gray-800 p-4 max-w-4xl mx-auto my-4">
         <!-- Header with back button -->
         <div class="flex items-center mb-3">
-            <button onclick="window.history.back()" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
+            <button @click="closeModal" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
                 <i class="fas fa-arrow-left text-xl"></i>
             </button>
             <div>
@@ -540,3 +542,4 @@
                                         });
                                     });
                             </script>
+</html>
