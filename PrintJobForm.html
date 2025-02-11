@@ -18,26 +18,9 @@
 <div class="bg-white dark:bg-gray-800 p-4 max-w-4xl mx-auto my-4">
         <!-- Header with back button -->
         <div class="flex items-center mb-3">
-            <div id="modal-container">
-                <button id="close-modal" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
-                    <i class="fas fa-arrow-left text-xl"></i>
-                </button>
-            </div>
-            <script>
-                document.getElementById('close-modal').addEventListener('click', function () {
-                    closeModal();
-                });
-
-                function closeModal() {
-                    this.isModalOpen = false;
-                    document.getElementById('modal-content').innerHTML = '';
-                    const modalContainer = document.getElementById('modal-container');
-                    if (modalContainer) {
-                        modalContainer.style.display = 'none';
-                    }
-                }
-            </script>
-            
+            <button @click="localStorage.setItem('closeModal', 'true')" class="mr-4 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
             <div>
                 <h2 class="text-xl font-bold text-gray-800 dark:text-white">3D Print Job Request</h2>
                 <p class="text-sm text-gray-500 dark:text-gray-400">Fill in the details below to submit your 3D printing request</p>
@@ -560,4 +543,3 @@
                                     });
                             </script>
 </html>
-          
