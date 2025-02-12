@@ -8,83 +8,80 @@
       <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+      <style>
+        .notifications-grid {
+            display: grid;
+            gap: 1rem;
+            padding: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .notification-card {
+            padding: 1rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .light-mode .notification-card {
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .dark-mode .notification-card {
+            background: #2d2d2d;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            border: 1px solid #3d3d3d;
+        }
+
+        .light-mode {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .dark-mode {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .notification-header {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification-divider {
+            height: 1px;
+            background: rgba(0,0,0,0.1);
+            margin: 0.5rem 0;
+        }
+
+        .dark-mode .notification-divider {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .notification-content {
+            font-weight: 400;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0.5rem 0;
+        }
+
+        .notification-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+    </style>
   </head>
-  <body>
       <div id="notificationsContainer">
           <div id="notificationsList" class="notifications-grid"></div>
       </div>
 
-      <style>
-          .notifications-grid {
-              display: grid;
-              gap: 1rem;
-              padding: 0.5rem;
-              font-family: 'Montserrat', sans-serif;
-          }
-          .notification-card {
-              padding: 1rem;
-              border-radius: 6px;
-              transition: all 0.2s ease;
-          }
-
-          .light-mode .notification-card {
-              background: #fff;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-              border: 1px solid #eee;
-          }
-
-          .dark-mode .notification-card {
-              background: #2d2d2d;
-              box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-              border: 1px solid #3d3d3d;
-          }
-
-          .light-mode {
-              background: #f8f9fa;
-              color: #333;
-          }
-
-          .dark-mode {
-              background: #1a1a1a;
-              color: #fff;
-          }
-
-          .notification-header {
-              font-weight: 600;
-              font-size: 1rem;
-              margin-bottom: 0.5rem;
-              display: flex;
-              align-items: center;
-              gap: 0.5rem;
-          }
-
-          .notification-divider {
-              height: 1px;
-              background: rgba(0,0,0,0.1);
-              margin: 0.5rem 0;
-          }
-
-          .dark-mode .notification-divider {
-              background: rgba(255,255,255,0.1);
-          }
-
-          .notification-content {
-              font-weight: 400;
-              font-size: 0.9rem;
-              line-height: 1.4;
-              margin: 0.5rem 0;
-          }
-
-          .notification-time {
-              font-size: 0.75rem;
-              opacity: 0.7;
-          }
-      </style>
+      
 
       <script>
-          let retryCount = 0;
-          const MAX_RETRIES = 5;
-
           function getNotificationIcon(message) {
               if (message.toLowerCase().includes('welcome')) return '👋';
               if (message.toLowerCase().includes('congratulations')) return '🎉';
@@ -98,7 +95,7 @@
               const notificationsList = document.getElementById('notificationsList');
               const email = localStorage.getItem('userEmail');
               const isDarkMode = localStorage.getItem('darkMode') === 'true';
-        
+      
               document.body.className = isDarkMode ? 'dark-mode' : 'light-mode';
 
               try {
@@ -123,7 +120,7 @@
 
                   notificationsList.innerHTML = notifications.map(notification => `
                       <div class="notification-card">
-                          <div class="notification-header">${getNotificationIcon(notification.message)} ${['Swift Notify', 'Morphiq Notify', 'Status Notify', 'System Notify', 'Update Notify'][Math.floor(Math.random() * 5)]}</div>
+                          <div class="notification-header">${getNotificationIcon(notification.message)} Morphiq Status</div>
                           <div class="notification-divider"></div>
                           <div class="notification-content">${notification.message}</div>
                           <div class="notification-divider"></div>
@@ -141,26 +138,20 @@
                   });
                   document.getElementById('notification-badge')?.classList.add('hidden');
               } catch (error) {
-                  console.error('Error:', error);
-                  if (retryCount < MAX_RETRIES) {
-                      retryCount++;
-                      setTimeout(fetchNotifications, 3000);
-                  } else {
-                      notificationsList.innerHTML = `
-                          <div class="notification-card">
-                              <div class="notification-header">⚠️ Error</div>
-                              <div class="notification-divider"></div>
-                              <div class="notification-content">Error loading notifications</div>
-                              <div class="notification-divider"></div>
-                              <div class="notification-time">Please refresh</div>
-                          </div>
-                      `;
-                  }
+                  notificationsList.innerHTML = `
+                      <div class="notification-card">
+                          <div class="notification-header">⚠️ Error</div>
+                          <div class="notification-divider"></div>
+                          <div class="notification-content">Error loading notifications</div>
+                          <div class="notification-divider"></div>
+                          <div class="notification-time">Please refresh</div>
+                      </div>
+                  `;
               }
           }
 
           document.addEventListener('DOMContentLoaded', fetchNotifications);
-          setInterval(fetchNotifications, 30000);
+          setInterval(fetchNotifications, 1000);
       </script>
-  </body>
+
   </html>
