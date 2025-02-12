@@ -26,21 +26,20 @@
                     </p>
                 </div>
             </div>
-            <div class="border rounded p-2 bg-gray-50 overflow-y-auto" id="dynamicHeightDiv">
-                <h3 class="text-lg font-semibold mb-3">New Print Job</h3>
+            <div class="border rounded p-2 bg-gray-100 overflow-y-auto" id="dynamicHeightDiv">
+                <h3 class="text-base font-medium mb-3">New Print Job</h3>
                         <form id="printJobForm" class="space-y-6 mb-1" autocomplete="on">
                                 <div class="mb-4 grid grid-cols-2 gap-4">
                                     <div>
                                         <label for="modelSelect" class="block text-sm font-medium text-gray-700">Select Model</label>
-                                        <select name="model" id="modelSelect" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
-                                            <option value="">Choose model..</option>
-                                            </select>
+                                        <select name="model" id="modelSelect" required class="mt-1 text-xs font-base block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-white dark:bg-gray-700 cursor-pointer p-1" autocomplete="off">
+                                            <option value="">Choose model</option>                                            
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="colorSelect" class="block text-sm font-medium text-gray-700">Print Color</label>
-                                        <select name="color" id="colorSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
-                                            <option value="">Select color..</option>
-                                            <option value="black">Black</option>
+                                        <select name="color" id="colorSelect" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-white dark:bg-gray-700 cursor-pointer" autocomplete="off">
+                                            <option value="">Select color</option>                                            <option value="black">Black</option>
                                             <option value="white">White</option>
                                             <option value="gray">Gray</option>
                                             <option value="red">Red</option>
@@ -52,8 +51,8 @@
                                 <div class="mb-4 grid grid-cols-2 gap-4">
                                     <div>
                                         <label for="printerSelect" class="block text-sm font-medium text-gray-700">Select Printer</label>
-                                        <select name="printer" id="printerSelect" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
-                                            <option value="">Choose printer..</option>
+                                        <select name="printer" id="printerSelect" required class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-white dark:bg-gray-700 cursor-pointer px-2" autocomplete="off">
+                                            <option value="">Choose printer</option>
                                             <option value="prime300">SwiftTech Prime 300 (300x300x400mm) (Default)</option>
                                             <option value="forgeXL600">SwiftTech Forge XL 600 (600x600x600mm)</option>
                                             <option value="delta360">SwiftTech Delta 360 Pro (360Øx500mm)</option>
@@ -64,8 +63,8 @@
                                     </div>
                                     <div>
                                         <label for="postProcessingSelect" class="block text-sm font-medium text-gray-700">Post-Processing</label>
-                                        <select name="postProcessing" id="postProcessingSelect" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
-                                            <option value="none">None</option>
+                                        <select name="postProcessing" id="postProcessingSelect" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-white dark:bg-gray-700 cursor-pointer" autocomplete="off">
+                                            <option value="none">None</option>                                            
                                             <option value="smoothing">Smoothing</option>
                                             <option value="painting">Painting</option>
                                             <option value="assembly">Assembly Assistance</option>
@@ -75,7 +74,7 @@
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700">Print Quality</label>
                                     <div class="grid grid-cols-3 gap-3 mt-2">
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-draft">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-draft">
                                             <input type="radio" id="quality-draft" name="quality" value="draft" required class="hidden peer" checked>
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <div class="flex items-center justify-between">
@@ -85,7 +84,7 @@
                                                 <p class="text-xs text-gray-500 mt-1">0.3mm layer height</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-standard">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-standard">
                                             <input type="radio" id="quality-standard" name="quality" value="standard" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <div class="flex items-center justify-between">
@@ -95,7 +94,7 @@
                                                 <p class="text-xs text-gray-500 mt-1">0.2mm layer height</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-ultra">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="quality-ultra">
                                             <input type="radio" id="quality-ultra" name="quality" value="ultra" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <div class="flex items-center justify-between">
@@ -111,45 +110,45 @@
                                 <div class="mb-4">
                                     <label class="block text-sm font-medium text-gray-700">Material Type</label>
                                     <div class="grid grid-cols-3 gap-1 mt-2" id="materialContainer">
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-pla">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-pla">
                                             <input type="radio" id="material-pla" name="material" value="PLA" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <span class="font-medium">PLA</span>
                                                 <p class="text-xs text-gray-500 mt-1">Easy to print, eco-friendly</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-petg">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-petg">
                                             <input type="radio" id="material-petg" name="material" value="PETG" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <span class="font-medium">PETG</span>
                                                 <p class="text-xs text-gray-500 mt-1">Strong and chemical-resistant</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-abs">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-abs">
                                             <input type="radio" id="material-abs" name="material" value="ABS" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <span class="font-medium">ABS</span>
                                                 <p class="text-xs text-gray-500 mt-1">High impact resistance</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-tpu">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-tpu">
                                             <input type="radio" id="material-tpu" name="material" value="TPU" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <span class="font-medium">TPU</span>
                                                 <p class="text-xs text-gray-500 mt-1">Flexible and durable</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-nyl">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-nyl">
                                             <input type="radio" id="material-nyl" name="material" value="NYL" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
                                                 <span class="font-medium">Nylon</span>
                                                 <p class="text-xs text-gray-500 mt-1">Tough and wear-resistant</p>
                                             </div>
                                         </label>
-                                        <label class="border rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-cf">
+                                        <label class="border bg-white rounded-lg p-3 cursor-pointer hover:border-blue-500" for="material-cf">
                                             <input type="radio" id="material-cf" name="material" value="CARBON FIBRE" required class="hidden peer">
                                             <div class="peer-checked:border-blue-500 peer-checked:bg-blue-50">
-                                                <span class="font-medium">Carbon F.</span>
+                                                <span class="font-medium">C Fibre</span>
                                                 <p class="text-xs text-gray-500 mt-1">Lightweight but very strong</p>
                                             </div>
                                         </label>
@@ -167,14 +166,13 @@
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="mb-4">
                                         <label for="copies-input" class="block text-sm font-medium text-gray-700">Number of Copies</label>
-                                        <input type="number" id="copies-input" name="copies" min="1" max="100" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1" autocomplete="off">
+                                        <input type="number" id="copies-input" name="copies" min="1" max="100" class=" px-3 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" value="1" autocomplete="off">
                                     </div>
                                     <!-- Project Category -->
-                                    <div class="mb-4">
+                                    <div class="mb-2">
                                         <label for="category-select" class="block text-sm font-medium text-gray-700">Project Category</label>
-                                        <select id="category-select" name="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="off">
-                                            <option value="">Select Category</option>
-                                            <option value="prototyping">Prototyping</option>
+                                        <select id="category-select" name="category" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-none" autocomplete="off">
+                                            <option value="">Select Category</option>                                            <option value="prototyping">Prototyping</option>
                                             <option value="consumer">Consumer Product</option>
                                             <option value="education">Education Model</option>
                                             <option value="art">Art & Decoration</option>
@@ -221,7 +219,7 @@
                                                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                                     <div>
                                                                         <label for="region-select" class="block text-sm font-medium text-gray-700">Region</label>
-                                                                        <select id="region-select" name="country" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="updateStates()" autocomplete="country">
+                                                                        <select id="region-select" name="country" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-none" onchange="updateStates()" autocomplete="country">
                                                                             <option value="">Select Region</option>
                                                                             <option value="northAmerica">North America</option>
                                                                             <option value="Africa">Africa</option>
@@ -229,28 +227,28 @@
                                                                     </div>
                                                                     <div>
                                                                         <label for="state-select" class="block text-sm font-medium text-gray-700">Country/State</label>
-                                                                        <select id="state-select" name="state" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="address-level1">
+                                                                        <select id="state-select" name="state" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-none" autocomplete="address-level1">
                                                                             <option value="">Select Country/State</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mt-4">
                                                                     <label for="street-input" class="block text-sm font-medium text-gray-700">Street Address</label>
-                                                                    <input type="text" id="street-input" name="street" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="street-address">
+                                                                    <input type="text" id="street-input" name="street" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="street-address">
                                                                 </div>
                                                                 <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                                                                     <div>
                                                                         <label for="city-input" class="block text-sm font-medium text-gray-700">City</label>
-                                                                        <input type="text" id="city-input" name="city" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="address-level2">
+                                                                        <input type="text" id="city-input" name="city" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="address-level2">
                                                                     </div>
                                                                     <div>
                                                                         <label for="zip-input" class="block text-sm font-medium text-gray-700">ZIP/Postal Code</label>
-                                                                        <input type="text" id="zip-input" name="zip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="postal-code">
+                                                                        <input type="text" id="zip-input" name="zip" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="postal-code">
                                                                     </div>
                                                                     <div>
                                                                         <label for="phone-code-select" class="block text-sm font-medium text-gray-700">Phone Number</label>
                                                                         <div class="flex">
-                                                                            <select id="phone-code-select" name="phoneCode" class="mt-1 w-24 rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" autocomplete="tel-country-code">
+                                                                            <select id="phone-code-select" name="phoneCode" class="mt-1 text-xs font-base p-1 w-24 rounded-l-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-none" autocomplete="tel-country-code">
                                                                                 <!-- North America -->
                                                                                 <option value="+1">+1 (USA)</option>
                                                                                 <option value="+1">+1 (Canada)</option>
@@ -268,7 +266,7 @@
                                                                                 <option value="+20">+20 (Egypt)</option>
                                                                                 <option value="+212">+212 (Morocco)</option>
                                                                             </select>
-                                                                            <input type="tel" id="phone-input" name="phone" placeholder="Enter phone number" class="mt-1 block w-full rounded-r-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" pattern="[0-9]{10}" autocomplete="tel">
+                                                                            <input type="tel" id="phone-input" name="phone" placeholder="Enter phone number" class="mt-1 text-xs font-base p-1 block w-full rounded-r-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" pattern="[0-9]{10}" autocomplete="tel">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -278,7 +276,7 @@
                                                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                                     <div>
                                                                         <label for="pickup-country-select" class="block text-sm font-medium text-gray-700">Country</label>
-                                                                        <select id="pickup-country-select" name="pickupCountry" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" onchange="updatePickupLocations()" disabled autocomplete="country">
+                                                                        <select id="pickup-country-select" name="pickupCountry" class="mt-1 text-xs font-base p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 appearance-none bg-none" onchange="updatePickupLocations()" disabled autocomplete="country">
                                                                             <option value="">Select Country</option>
                                                                             <option value="northAmerica">North America</option>
                                                                             <option value="Africa">Africa</option>
