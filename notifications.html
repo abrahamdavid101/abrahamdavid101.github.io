@@ -31,9 +31,9 @@
       async function fetchNotifications() {
           const notificationsList = document.getElementById('notificationsList');
           const email = localStorage.getItem('userEmail');
-          const isDarkMode = localStorage.getItem('darkMode') === 'true';
+          const isDarkModes = localStorage.getItem('darkMode') === 'true';
 
-          document.body.className = isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800';
+          document.body.className = isDarkModes ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-800';
 
           try {
               const response = await fetch('https://swifttech-server.onrender.com/notifications', {
@@ -46,9 +46,9 @@
 
               if (!notifications || notifications.length === 0) {
                   notificationsList.innerHTML = `
-                      <div class="${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
+                      <div class="${isDarkModes ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
                           <div class="font-semibold text-base flex items-center gap-2">📭 No Notifications</div>
-                          <div class="${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
+                          <div class="${isDarkModes ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
                           <div class="text-sm leading-relaxed">Check back later</div>
                       </div>
                   `;
@@ -56,11 +56,11 @@
               }
 
               notificationsList.innerHTML = notifications.map(notification => `
-                  <div class="${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
+                  <div class="${isDarkModes ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
                       <div class="font-semibold text-base flex items-center gap-2">${getNotificationIcon(notification.message)} Morphiq Status</div>
-                      <div class="${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
+                      <div class="${isDarkModes ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
                       <div class="text-sm leading-relaxed">${notification.message}</div>
-                      <div class="${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
+                      <div class="${isDarkModes ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
                       <div class="text-xs opacity-70">${new Date(notification.timestamp).toLocaleString('en-US', {
                           dateStyle: 'medium',
                           timeStyle: 'short'
@@ -76,11 +76,11 @@
               document.getElementById('notification-badge')?.classList.add('hidden');
           } catch (error) {
               notificationsList.innerHTML = `
-                  <div class="${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
+                  <div class="${isDarkModes ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-4 rounded-lg shadow-sm border transition-all duration-200">
                       <div class="font-semibold text-base flex items-center gap-2">⚠️ Error</div>
-                      <div class="${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
+                      <div class="${isDarkModes ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
                       <div class="text-sm leading-relaxed">Error loading notifications</div>
-                      <div class="${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
+                      <div class="${isDarkModes ? 'bg-gray-700' : 'bg-gray-200'} h-px my-2"></div>
                       <div class="text-xs opacity-70">Please refresh</div>
                   </div>
               `;
